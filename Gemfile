@@ -65,6 +65,9 @@ gem "logstop"
 # Security
 gem 'rack-attack'
 
+# Log in
+gem 'devise'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
