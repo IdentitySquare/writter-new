@@ -82,8 +82,12 @@ gem "haml-rails", "~> 2.0"
 # SEO
 gem "meta-tags"
 
-# Strong Migrations
+# Safer Migrations
 gem "strong_migrations"
+
+gem 'awesome_print'
+
+gem 'annotate'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
