@@ -48,6 +48,13 @@ gem "bootsnap", require: false
 # Postgres
 gem 'pg'
 
+
+# Omniauth
+
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2', "~> 1.0"
+
 # Sidekiq
 gem 'sidekiq'
 
