@@ -62,6 +62,9 @@ gem 'lograge-sql'
 
 gem "logstop"
 
+# Security
+gem 'rack-attack'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

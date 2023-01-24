@@ -149,6 +149,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.2)
+    rack-attack (6.6.1)
+      rack (>= 1.0, < 3)
     rack-canonical-host (1.1.0)
       addressable (> 0, < 3)
       rack (>= 1.0.0, < 3)
@@ -252,6 +254,7 @@ DEPENDENCIES
   pg
   postmark-rails
   puma (~> 5.0)
+  rack-attack
   rack-canonical-host
   rails (~> 7.0.4, >= 7.0.4.1)
   redis (~> 4.0)
