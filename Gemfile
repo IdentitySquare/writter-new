@@ -126,4 +126,15 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  
+  # Automated testing
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'shoulda-callback-matchers', '~> 1.1.1'
+  gem 'shoulda-matchers'
+
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
+
+gem "factory_bot", "~> 6.2"
