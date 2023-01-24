@@ -79,6 +79,9 @@ gem "hashid-rails", "~> 1.0"
 # Haml
 gem "haml-rails", "~> 2.0"
 
+# SEO
+gem "meta-tags"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
