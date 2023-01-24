@@ -75,6 +75,7 @@ gem 'rack-attack'
 # Log in
 gem 'devise'
 
+
 # Checking email format
 gem "valid_email2"
 
@@ -83,8 +84,6 @@ gem 'strong_password', '~> 0.0.9'
 # Hashid 
 gem "hashid-rails", "~> 1.0"
 
-# Haml
-gem "haml-rails", "~> 2.0"
 
 # SEO
 gem "meta-tags"
@@ -97,8 +96,6 @@ gem 'awesome_print'
 gem 'annotate'
 
 gem 'high_voltage', '~> 3.1'
-
-gem "erb2haml", :group => :development
 
 # Use Sass to process CSS
 # gem "sassc-rails"
@@ -126,10 +123,6 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
-  # erb to haml
-  gem "erb2haml"
-  
 end
 
 group :test do
