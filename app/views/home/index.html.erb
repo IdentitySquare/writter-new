@@ -1,9 +1,0 @@
-<div class="underline font-bold">
-  Home page
-</div>
-<% if current_user %>
-  You have logged in #{current_user.name}
-  <%= link_to destroy_user_session_path, method: :delete, class: 'mx-auto' do %>
-    Log Out
-  <% end %>
-<% end %>

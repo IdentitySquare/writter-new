@@ -97,6 +97,8 @@ gem 'annotate'
 
 gem 'high_voltage', '~> 3.1'
 
+gem 'haml-rails'
+gem 'html2haml'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
