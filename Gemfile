@@ -51,6 +51,10 @@ gem 'pg'
 # Sidekiq
 gem 'sidekiq'
 
+gem 'rack-canonical-host'
+
+gem 'postmark-rails'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
