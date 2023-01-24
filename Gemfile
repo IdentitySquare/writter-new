@@ -47,6 +47,10 @@ gem "bootsnap", require: false
   
 # Postgres
 gem 'pg'
+
+# Sidekiq
+gem 'sidekiq'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
