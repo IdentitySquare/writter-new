@@ -137,6 +137,7 @@ GEM
       activerecord (>= 4.0)
       hashids (~> 1.0)
     hashids (1.0.6)
+    high_voltage (3.1.2)
     html2haml (2.3.0)
       erubis (~> 2.7.0)
       haml (>= 4.0)
@@ -354,6 +355,7 @@ DEPENDENCIES
   faker
   haml-rails (~> 2.0)
   hashid-rails (~> 1.0)
+  high_voltage (~> 3.1)
   importmap-rails
   jbuilder
   letter_opener

@@ -89,6 +89,10 @@ gem 'awesome_print'
 
 gem 'annotate'
 
+gem 'high_voltage', '~> 3.1'
+
+gem "erb2haml", :group => :development
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
