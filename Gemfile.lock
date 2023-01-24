@@ -249,6 +249,8 @@ GEM
     sqlite3 (1.6.0-arm64-darwin)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    strong_migrations (1.4.1)
+      activerecord (>= 5.2)
     strong_password (0.0.10)
     tailwindcss-rails (2.0.21-arm64-darwin)
       railties (>= 6.0.0)
@@ -313,6 +315,7 @@ DEPENDENCIES
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
+  strong_migrations
   strong_password (~> 0.0.9)
   tailwindcss-rails
   turbo-rails
