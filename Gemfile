@@ -55,6 +55,13 @@ gem 'rack-canonical-host'
 
 gem 'postmark-rails'
 
+# Better Logs
+gem "lograge"
+
+gem 'lograge-sql'
+
+gem "logstop"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
