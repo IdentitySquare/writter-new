@@ -68,6 +68,17 @@ gem 'rack-attack'
 # Log in
 gem 'devise'
 
+# Checking email format
+gem "valid_email2"
+
+gem 'strong_password', '~> 0.0.9'
+
+# Hashid 
+gem "hashid-rails", "~> 1.0"
+
+# Haml
+gem "haml-rails", "~> 2.0"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -88,6 +99,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "erb2haml", :group => :development
 end
 
 group :test do
