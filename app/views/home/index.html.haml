@@ -6,5 +6,12 @@
   You have logged in #{current_user.name}
 
   = link_to destroy_user_session_path, method: :delete, class: 'mx-auto' do
-    %button{ class: "mt-3 py-3 px-10 font-medium  bg-violet rounded-lg cursor-pointer" }
+    %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
       Log Out
+
+  = link_to edit_user_registration_path, method: :delete, class: 'mx-auto' do
+    %button{ class: "mt-3 py-3 px-10 font-medium  bg-violet rounded-lg cursor-pointer" }
+      Edit Account 
+
+
+

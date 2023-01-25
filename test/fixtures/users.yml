@@ -4,6 +4,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  avatar_url             :string
+#  bio                    :string
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
@@ -13,6 +14,7 @@
 #  encrypted_password     :string           default(""), not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
+#  location               :string
 #  name                   :string
 #  provider               :string
 #  remember_created_at    :datetime
@@ -21,6 +23,8 @@
 #  sign_in_count          :integer          default(0), not null
 #  uid                    :string
 #  unconfirmed_email      :string
+#  username               :string
+#  website                :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
