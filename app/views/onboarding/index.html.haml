@@ -1,0 +1,12 @@
+.div{"data-controller": "onboarding"}
+  = simple_form_for @user , url: user_path(@user), method: :put do |f|
+    = f.input :username, id: 'username' , wrapper_html: {"data-action": 'keyup->onboarding#checkUsername'}, input_html:{'data-onboarding-target': 'username'} 
+
+    %span#username-taken{"data-onboarding-target" => "usernameTaken", style: "display: none;"} Username already taken
+    %span#username-taken{"data-onboarding-target" => "minLength", style: "display: none;"} Username must be atleast 4 characters
+
+    = f.button :submit, 'data-onboarding-target': 'saveButton'
+
+
+        
+    

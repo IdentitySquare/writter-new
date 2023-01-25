@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
-      
+     
   root to: "home#index" 
+  
   devise_for :users,
              controllers: {
                registrations: 'users/registrations',
@@ -10,11 +10,21 @@ Rails.application.routes.draw do
                invitations: 'users/invitations',
                omniauth_callbacks: "users/omniauth_callbacks"
   }
-  
+
+  resources   :users, only: [:update]
+
+  get '/onboarding', to: "onboarding#index"
+
   devise_scope :user do
-    
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
+
+  resources :onboarding, only: [] do
+    collection do
+        post :checkUsername
+    end
+  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
