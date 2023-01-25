@@ -1,6 +1,10 @@
-.underline.font-bold
+.underline
   Home page
+
 - if current_user
-  You have logged in \#{current_user.name}
-  - link_to destroy_user_session_path, method: :delete, class: 'mx-auto' do
-    Log Out
+
+  You have logged in #{current_user.name}
+
+  = link_to destroy_user_session_path, method: :delete, class: 'mx-auto' do
+    %button{ class: "mt-3 py-3 px-10 font-medium text-white bg-violet rounded-lg cursor-pointer" }
+      Log Out
