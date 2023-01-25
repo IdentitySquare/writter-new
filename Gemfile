@@ -48,6 +48,13 @@ gem "bootsnap", require: false
 # Postgres
 gem 'pg'
 
+
+# Omniauth
+
+gem 'omniauth'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-google-oauth2', "~> 1.0"
+
 # Sidekiq
 gem 'sidekiq'
 
@@ -68,6 +75,7 @@ gem 'rack-attack'
 # Log in
 gem 'devise'
 
+
 # Checking email format
 gem "valid_email2"
 
@@ -76,8 +84,6 @@ gem 'strong_password', '~> 0.0.9'
 # Hashid 
 gem "hashid-rails", "~> 1.0"
 
-# Haml
-gem "haml-rails", "~> 2.0"
 
 # SEO
 gem "meta-tags"
@@ -89,6 +95,10 @@ gem 'awesome_print'
 
 gem 'annotate'
 
+gem 'high_voltage', '~> 3.1'
+
+gem 'haml-rails'
+gem 'html2haml'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -115,10 +125,6 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
-  # erb to haml
-  gem "erb2haml"
-  
 end
 
 group :test do
