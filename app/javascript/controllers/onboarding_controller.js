@@ -10,7 +10,7 @@ export default class extends Controller {
         if (this.usernameTarget.value.length < 4 ) {
             console.log(this.usernameTarget.value);
             this.errorMessageTarget.classList.remove("invisible")
-            this.errorMessageTarget.innerHTML = 'Username must be atleast 4 characters'
+            this.errorMessageTarget.innerHTML = 'Username must contain atleast 4 characters'
             target.disabled = true;
             target.classList.add("bg-disable");
 

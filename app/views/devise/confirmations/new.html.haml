@@ -1,10 +1,19 @@
-%h2 Resend confirmation instructions
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-  .actions
-    = f.submit "Resend confirmation instructions"
-= render "devise/shared/links"
+.flex.min-h-full.flex-col.bg-white.lg:relative
+  .flex.flex-grow.flex-col
+    %main.flex.flex-grow.flex-col.bg-white
+      .mx-auto.flex.w-full.max-w-7xl.flex-grow.flex-col.px-6.lg:px-8
+        .flex-shrink-0.pt-10.sm:pt-16
+          %a.inline-flex{href: "/"}
+            %span.sr-only Your Company
+            %img.h-12.w-auto{alt: "", src: "https://tailwindui.com/img/logos/mark.svg?color=emerald&shade=900"}/
+        .my-auto.flex-shrink-0.py-16.sm:py-32
+          %h1.mt-2.text-4xl.tracking-tight.text-gray-900.text-center.font-serif.sm:text-2xl Send confirmation email again
+          %div{class: 'sm:max-w-md mx-auto'}
+            = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+              = render "devise/shared/error_messages", resource: resource
+              %label.block.text-sm.font-medium.text-gray-700{:for => "email"} Email
+              .mt-1
+                = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: '#block mb-6 w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm{autocomplete: "email", name: "email", required: "", type: "email"}'
+                
+                = f.submit "Resend instructions", class: 'flex w-full justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2{type: "submit"}'
+          

@@ -1,1 +1,17 @@
-Please respond to the confirmation sent to "#{params[:email]}".
+.flex.min-h-full.flex-col.bg-white.lg:relative
+  .flex.flex-grow.flex-col
+    %main.flex.flex-grow.flex-col.bg-white
+      .mx-auto.flex.w-full.max-w-7xl.flex-grow.flex-col.px-6.lg:px-8
+        .flex-shrink-0.pt-10.sm:pt-16
+          %a.inline-flex{href: "/"}
+            %span.sr-only Your Company
+            %img.h-12.w-auto{alt: "", src: "https://tailwindui.com/img/logos/mark.svg?color=emerald&shade=900"}/
+        .my-auto.flex-shrink-0.py-16.sm:py-32
+          %h1.mt-2.text-4xl.tracking-tight.text-gray-900.font-serif.sm:text-2xl Nearly there...confirm your email!
+          %p.mt-2.text-base.text-gray-500 We have sent a confirmation email to #{params[:email]}. Click on the link in the email to activate your account.
+          .mt-6
+            %a.text-base.font-medium.text-emerald-800.hover:text-emerald-500{href: new_user_confirmation_path('user')}
+              Didn't get an email?
+              %span{"aria-hidden" => "true"} →
+  / .hidden.lg:absolute.lg:inset-y-0.lg:right-0.lg:block{class: "lg:w-1/2"}
+  /   %img.absolute.inset-0.h-full.w-full.object-cover{alt: "", src: "https://images.unsplash.com/photo-1528459061998-56fd57ad86e3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=740&q=80"}/

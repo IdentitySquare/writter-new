@@ -19,10 +19,9 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def create
-    debugger
+    
     existing_user = User.where(email: params[:user][:email])&.first
     if existing_user.present? && !existing_user.confirmed?
-      debugger
       redirect_to page_path('confirmation_reminder', email: params[:user][:email])
     else
       super
