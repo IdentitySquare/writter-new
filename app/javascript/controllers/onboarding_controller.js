@@ -1,20 +1,22 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-    static targets = [ "username", "usernameTaken", "saveButton", "minLength"]
+    static targets = [ "username", "usernameTaken", "saveButton", "errorMessage"]
 
     checkUsername(event) {
         const target = this.saveButtonTarget;
         event.preventDefault()
 
-        if (this.usernameTarget.value.length < 4) {
+        if (this.usernameTarget.value.length < 4 ) {
             console.log(this.usernameTarget.value);
-            this.minLengthTarget.style.display = 'block';
+            this.errorMessageTarget.classList.remove("invisible")
+            this.errorMessageTarget.innerHTML = 'Username must be atleast 4 characters'
             target.disabled = true;
             target.classList.add("bg-disable");
+
             return;
         } else {
-            this.minLengthTarget.style.display = 'none';
+            this.errorMessageTarget.classList.add("invisible")
             target.disabled = false;
             target.classList.remove("bg-disable");
         }   
@@ -31,16 +33,19 @@ export default class extends Controller {
         .then(data => {
             
             if (data.status == 'error') {
-                this.usernameTakenTarget.style.display = 'block';            
+                this.errorMessageTarget.classList.remove("invisible")
+                this.errorMessageTarget.innerHTML = 'Username already taken'
                 target.disabled = true;
                 target.classList.add("bg-disable");
 
             } else {
                 
-                this.usernameTakenTarget.style.display = 'none';           
+                this.errorMessageTarget.classList.add("invisible")
                 target.disabled = false;
                 target.classList.remove("bg-disable");
             }
         });
+
+
     }
 }
