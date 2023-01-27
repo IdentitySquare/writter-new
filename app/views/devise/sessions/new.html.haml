@@ -1,17 +1,40 @@
-%h2.underline Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name),data: { turbo: false }) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.flex.min-h-full.flex-col.justify-center.py-12.sm:px-6.lg:px-8
+  .sm:mx-auto.sm:w-full.sm:max-w-md
+    %img.mx-auto.h-12.w-auto{alt: "Your Company", src: "https://tailwindui.com/img/logos/mark.svg?color=emerald&shade=700"}/
+    %h2.mt-6.text-center.text-3xl.tracking-tight.text-gray-900.font-serif Sign in
+    %p.mt-2.text-center.text-sm.text-gray-600
+      Or
+      %a.font-medium.text-emerald-700.hover:text-emerald-500{href: new_user_registration_path} Create your Account
+  .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
+    .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10
+      = form_for(resource, as: resource_name, url: session_path(resource_name),data: { turbo: false }, html: { class: 'space-y-6'}) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        %div
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Email address
+          .mt-1
+            = f.email_field :email, autofocus: true, autocomplete: "email",class: '#block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm{autocomplete: "email", name: "email", required: "", type: "email"}'
+            
+        %div
+          %label.block.text-sm.font-medium.text-gray-700{for: "password"} Password
+          .mt-1
+
+            = f.password_field :password, autocomplete: "new-password",class: '#block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm{autocomplete: "current-password", name: "password", required: "", type: "password"}'
+          
+        .flex.items-center.justify-between
+          .flex.items-center
+            = f.check_box :remember_me, id: 'remember-me', class: 'h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500{name: "remember-me", type: "checkbox"}'
+            
+            %label.ml-2.block.text-sm.text-gray-900{for: "remember-me"} Remember me
+          .text-sm
+            %a.font-medium.text-emerald-700.hover:text-emerald-500{href: new_password_path(resource_name)} Forgot your password?
+        %div
+          %button.flex.w-full.justify-center.rounded-md.border.border-transparent.bg-emerald-800.py-2.px-4.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-emerald-500.focus:ring-offset-2{type: "submit"} Sign in
+      .mt-6
+        .relative
+          .absolute.inset-0.flex.items-center
+            .w-full.border-t.border-gray-300
+          .relative.flex.justify-center.text-sm
+            %span.bg-white.px-2.text-gray-500 
+        .mt-6.justify-center
+          %div
+            = render "devise/shared/links"

@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-
+  skip_before_action :check_onboarding
   # GET /resource/sign_in
   # def new
   #   super
@@ -18,6 +18,16 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
+  def create
+    
+    existing_user = User.where(email: params[:user][:email])&.first
+    if existing_user.present? && !existing_user.confirmed?
+      redirect_to page_path('confirmation_reminder', email: params[:user][:email])
+    else
+      super
+    end
+    
+  end
   def after_sign_out_path_for(_resource_or_scope)
     new_user_session_path
   end
