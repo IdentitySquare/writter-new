@@ -14,8 +14,8 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = @user.posts.build
-    if @article.save
-       redirect_to edit_article_path(@article), notice: 'Post was successfully created.'
+    if @post.save
+       redirect_to edit_post_path(@post), notice: 'Post was successfully created.'
     else
       format.html { render :new, status: :unprocessable_entity }
       format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -58,6 +58,7 @@ class PostsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -67,5 +68,9 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :body)
+    end
+
+    def set_user
+      @user = current_user
     end
 end

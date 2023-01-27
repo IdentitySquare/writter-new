@@ -4,6 +4,8 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
+    = f.input :title, hint: 'No special characters.'
+    = f.input :body, hint: 'No special characters.'
 
   .form-actions
     = f.button :submit
