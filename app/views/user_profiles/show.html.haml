@@ -1,24 +1,29 @@
-%h1
-  User Profile
 
-%br
-#{@user.name}
-%p
-  @#{@user.username}
-%p
-  #{@user.bio}
-%p
-  #{@user.website}
-%p
-  #{@user.location}
 
-%p
-  #{@user.created_at.to_date.strftime("Joined on %m/%d/%Y")}
 
-%br
-= link_to edit_user_registration_path(@user), class: 'mx-auto' do
-  %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
-    Edit Account 
-= link_to '', class: 'mx-auto' do
-  %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
-    New Post
+
+
+.flex.flex-col.mx-auto.max-w-3xl.mt-10
+  .text-left.font-semibold.font-serif.text-4xl
+    #{@user.name}
+  .text-slate-400.mb-3.flex.flex-row
+    @#{@user.username}
+  %p
+    #{@user.bio}
+  %p
+    #{@user.website}
+  %p
+    #{@user.location}
+
+  %p
+    #{@user.created_at.to_date.strftime("Joined on %m/%d/%Y")}
+
+
+  / = link_to edit_user_registration_path(@user), class: 'mx-auto' do
+  /   %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
+  /     Edit Account 
+  / = link_to '', class: 'mx-auto' do
+  /   %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
+  /     New Post
+
+
