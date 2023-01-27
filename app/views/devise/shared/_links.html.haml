@@ -5,8 +5,9 @@
     = form_for "Login",                                      |
       url: omniauth_authorize_path(resource_name, provider), |
       method: :post,                                         |
-      data: {turbo: "false"} do |f|                       |
-      = f.submit "#{omni_auth_text} with #{provider}", type: 'image', src: url_for('/assets/btn_google_signin_light_normal_web.png')
+      data: {turbo: "false"} do |f|   
+      .text-center                      
+        = f.submit "#{omni_auth_text} with #{provider}", type: 'image', src: url_for('/assets/btn_google_signin_light_normal_web.png')
 
 
 
