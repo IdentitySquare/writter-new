@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
      
   root to: "home#index" 
-  
+
+  resources :user_profiles, only: [:update, :show]
+
   devise_for :users,
              controllers: {
                registrations: 'users/registrations',
@@ -10,8 +12,6 @@ Rails.application.routes.draw do
                invitations: 'users/invitations',
                omniauth_callbacks: "users/omniauth_callbacks"
   }
-
-  resources   :users, only: [:update]
 
   get '/onboarding', to: "onboarding#index"
 
