@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UserProfilesController < ApplicationController
   before_action :set_user
   skip_before_action :check_onboarding
 

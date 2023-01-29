@@ -1,0 +1,14 @@
+!!!
+%html.h-full
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title WritterNew
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+    %script{:src => "https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"}
+  %body.h-full
+    = yield
