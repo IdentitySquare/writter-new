@@ -3,20 +3,25 @@
 
 
 
-.flex.flex-col.mx-auto.max-w-3xl.mt-10
+.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
   .text-left.font-semibold.font-serif.text-4xl
     #{@user.name}
-  .text-slate-400.mb-3.flex.flex-row
+  .text-slate-400.mb-3.flex.flex-row.gap-3
     @#{@user.username}
-  %p
-    #{@user.bio}
-  %p
-    #{@user.website}
-  %p
-    #{@user.location}
+    .flex.flex-row.gap-1
+      %i{"data-feather" => "map-pin",class: 'w-5'}
+      #{@user.location}
 
-  %p
-    #{@user.created_at.to_date.strftime("Joined on %m/%d/%Y")}
+    .flex.flex-row.gap-1
+      %i{"data-feather" => "link-2",class: 'w-5'}
+      #{@user.website}
+
+
+  %p.mb-10
+    #{@user.bio}
+
+  %hr
+
 
 
   / = link_to edit_user_registration_path(@user), class: 'mx-auto' do
