@@ -5,7 +5,11 @@ class PostsController < ApplicationController
   before_action :set_user, except: [:index]
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    if params[:status].nil?
+      @posts = Post.all
+    else
+      @posts = current_user.posts.where(status: params[:status])
+    end
   end
 
   # GET /posts/1 or /posts/1.json
@@ -14,7 +18,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    if @user.posts.where(body: nil)
+    if @user.posts.where(body: nil).any?
       redirect_to edit_post_path(@user.posts.where(body: nil).first)
     else
       @post = @user.posts.build

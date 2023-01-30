@@ -5,14 +5,16 @@
   .text-slate-400.mb-3.flex.flex-row.gap-3
     @#{@user.username}
     .flex.flex-row.gap-1
-      %i{"data-feather" => "map-pin",class: 'w-5'}
-      #{@user.location}
+      -if @user.location.present?
+        %i{"data-feather" => "map-pin",class: 'w-5'}
+        #{@user.location}
+        
+      -if @user.bio.present?
+        .flex.flex-row.gap-1
+          %i{"data-feather" => "link-2",class: 'w-5'}
+          #{@user.website}
 
-    .flex.flex-row.gap-1
-      %i{"data-feather" => "link-2",class: 'w-5'}
-      #{@user.website}
-
-
+    
   %p.mb-10
     #{@user.bio}
 
