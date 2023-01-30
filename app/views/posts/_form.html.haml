@@ -5,7 +5,7 @@
 
   .form-inputs
     = f.input :title, hint: 'No special characters.'
-    = f.input :body, hint: 'No special characters.'
+    = f.hidden_field :body
 
   .form-actions
     = f.button :submit

@@ -27,7 +27,6 @@ export default class extends Controller {
         console.log('Editor.js is ready to work!')
       }
 
-
     });
   }
 
@@ -41,20 +40,10 @@ export default class extends Controller {
     console.log('trying to save')
 
     this.editor.save().then((outputData) => {
-        console.log(outputData.blocks);
-        console.log(JSON.stringify({body: outputData.blocks }));
-        var data = {post: {body: outputData.blocks}}
-        var a = JSON.stringify(data)
-        console.log(a)
-        // Send the output data server for storage
-        fetch("/posts/2", {
-            method: "PATCH",
-            body: {},
-            headers: {
-              "Content-Type": "application/json",
-              "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
-            },
-        });
+      console.log(JSON.stringify(outputData))
+      console.log(outputData.blocks)
+      // Update hiddent field
+      document.getElementById('post_body').value = JSON.stringify(outputData.blocks).toString()     
     });
   }
   
