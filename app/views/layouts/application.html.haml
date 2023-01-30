@@ -50,7 +50,8 @@
                 / Heroicon name: mini/plus
                 %svg.-ml-1.mr-2.h-5.w-5{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
                   %path{d: "M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"}
-                %span Write
+                = link_to 'Write', new_post_path
+       
             .hidden.md:ml-4.md:flex.md:flex-shrink-0.md:items-center
               %button.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
                 %span.sr-only View notifications
@@ -74,7 +75,7 @@
                   To: "transform opacity-0 scale-95"
                 .absolute.hidden.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", 'data-dropdown-target': 'dropdown'}
                   / Active: "bg-gray-100", Not Active: ""
-                  %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: "#", role: "menuitem", tabindex: "-1"} Your Profile
+                  %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: user_profile_path(current_user.id), role: "menuitem", tabindex: "-1"} Your Profile
                   %a#user-menu-item-1.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: "#", role: "menuitem", tabindex: "-1"} Settings
       
                   %a#user-menu-item-2.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: destroy_user_session_path,method: :delete, role: "menuitem", tabindex: "-1"} Sign out

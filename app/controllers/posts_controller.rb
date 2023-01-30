@@ -14,12 +14,16 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = @user.posts.build
-    if @post.save
-       redirect_to edit_post_path(@post), notice: 'Post was successfully created.'
+    if @user.posts.where(body: nil)
+      redirect_to edit_post_path(@user.posts.where(body: nil).first)
     else
-      format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: @post.errors, status: :unprocessable_entity }
+      @post = @user.posts.build
+      if @post.save
+         redirect_to edit_post_path(@post), notice: 'Post was successfully created.'
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
     end
   end
 
