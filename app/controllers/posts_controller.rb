@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_post, only: %i[ show edit update destroy ]
 
   before_action :set_user, except: [:index]
@@ -37,6 +38,9 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+
+    puts "params: #{params.inspect}"
+    
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
@@ -67,7 +71,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:body, :title)
     end
 
     def set_user
