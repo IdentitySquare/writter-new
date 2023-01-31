@@ -10,11 +10,27 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
     %script{:src => "https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"}
-    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/header@latest"}
     
-    / = javascript_include_tag "/javascript/controllers/editor_controller.js", "data-turbo-track": "reload", defer: true
-
+    
+    
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/header@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/paragraph@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/nested-list@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"}
+
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/code@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@calumk/editorjs-nested-checklist@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/underline@latest"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"}
+
+    %script{src: "https://cdn.jsdelivr.net/npm/@albatarnik/editorjs-table@2.0.4/dist/table.min.js"}
+    
+   
   %body.h-full
 
     %nav.bg-white.shadow{'data-controller': 'dropdown'}
