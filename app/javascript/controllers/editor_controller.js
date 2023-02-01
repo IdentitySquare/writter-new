@@ -7,9 +7,16 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ "render"]
   connect() {
+    if (this.data.get("value") !== "") {
+      var dataValue = JSON.parse(this.data.get("value"))
+    } else {
+      var dataValue = null
+    }
 
-    console.log('yahh')
-    console.log(this.data.get("readOnly") == 'true')
+    var dataValue = null
+
+    console.log(dataValue)
+    
     this.editor = new EditorJS({
       holder: this.element,
       readOnly: this.data.get("readOnly") == 'true',
@@ -65,7 +72,8 @@ export default class extends Controller {
 
       },
 
-      data: JSON.parse(this.data.get("value")),
+      
+      data: dataValue,
 
       onChange: () => {
         this.handleContentChanged();
