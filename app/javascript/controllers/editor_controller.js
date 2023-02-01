@@ -7,10 +7,12 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ "render"]
   connect() {
-    
+
+    console.log('yahh')
+    console.log(this.data.get("readOnly") == 'true')
     this.editor = new EditorJS({
       holder: this.element,
-      readOnly: this.data.get("readOnly"),
+      readOnly: this.data.get("readOnly") == 'true',
 
       tools: {
         header: {
