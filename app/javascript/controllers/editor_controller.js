@@ -5,11 +5,13 @@ import { Controller } from "@hotwired/stimulus"
 // import Header from '@editorjs/header';
 
 export default class extends Controller {
+  static targets = [ "render"]
   connect() {
-    console.log('hey')
+    
     this.editor = new EditorJS({
       holder: this.element,
-      
+      readOnly: this.data.get("readOnly"),
+
       tools: {
         header: {
           class: Header,
@@ -61,6 +63,8 @@ export default class extends Controller {
 
       },
 
+      data: JSON.parse(this.data.get("value")),
+
       onChange: () => {
         this.handleContentChanged();
       },
@@ -69,7 +73,10 @@ export default class extends Controller {
         console.log('Editor.js is ready to work!')
       }
 
+
     });
+
+
   }
 
 
@@ -79,11 +86,8 @@ export default class extends Controller {
 
   
   handleContentChanged() {
-    console.log('trying to save')
-
     this.editor.save().then((outputData) => {
-      
-      // Update hiddent field
+
       document.getElementById('post_body').value = JSON.stringify(outputData).toString()
     
     });

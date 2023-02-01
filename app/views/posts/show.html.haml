@@ -1,8 +1,10 @@
 %p#notice= notice
 
-.mx-auto.prose{"data-controller": "post", "data-post-value" => "#{@post.body}"}
+.mx-auto.prose{"data-controller": "editor", "data-editor-value" => "#{@post.body}", "data-editor-read-only" => true}
   
-  %div{"data-post-target": "render" }
+  %div{"data-editor-target": "render" }
   = link_to 'Edit', edit_post_path(@post)
   \|
   = link_to 'Back', posts_path
+
+
