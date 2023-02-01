@@ -1,6 +1,6 @@
 %p#notice= notice
 
-.prose{"data-controller": "post", "data-post-value" => "#{@post.body}"}
+.mx-auto.prose{"data-controller": "post", "data-post-value" => "#{@post.body}"}
   
   %div{"data-post-target": "render" }
   = link_to 'Edit', edit_post_path(@post)
