@@ -82,10 +82,10 @@ export default class extends Controller {
     console.log('trying to save')
 
     this.editor.save().then((outputData) => {
-      console.log(JSON.stringify(outputData))
-      console.log(outputData.blocks)
+      
       // Update hiddent field
-      document.getElementById('post_body').value = JSON.stringify(outputData.blocks).toString()     
+      document.getElementById('post_body').value = JSON.stringify(outputData).toString()
+    
     });
   }
   

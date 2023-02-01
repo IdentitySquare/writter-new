@@ -1,8 +1,8 @@
 %p#notice= notice
 
-.prose
-  %h1
-    hiiiiiiii
+.prose{"data-controller": "post", "data-post-value" => "#{@post.body}"}
+  
+  %div{"data-post-target": "render" }
   = link_to 'Edit', edit_post_path(@post)
   \|
   = link_to 'Back', posts_path
