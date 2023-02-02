@@ -1,39 +1,39 @@
+.container.mx-auto.py-2.max-w-xl
 
-
-#editor.mt-20{"data-controller": "editor", "data-editor-value" => "#{@post.body}", "data-editor-read-only" => "false"}
-  
-  %div{"data-editor-target": "render" }
-
-
-
-
-
-%br
-
-%br
-
-%br
-%br
-%br
-%br
-
-%br
-
-%br
-
-%br
-
-%br
-
-%br
-
-%br
+  #editor.mt-20{"data-controller": "editor", "data-editor-value" => "#{@post.body}", "data-editor-read-only" => "false"}
+    
+    %div{"data-editor-target": "render" }
 
 
 
 
-= render 'form'
 
-= link_to 'Show', @post
-\|
-= link_to 'Back', posts_path
+  %br
+
+  %br
+
+  %br
+  %br
+  %br
+  %br
+
+  %br
+
+  %br
+
+  %br
+
+  %br
+
+  %br
+
+  %br
+
+
+
+
+  = render 'form'
+
+  = link_to 'Show', @post
+  \|
+  = link_to 'Back', posts_path
