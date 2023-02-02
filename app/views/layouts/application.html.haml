@@ -10,16 +10,12 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
     %script{:src => "https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"}
-    
-    
-    
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/header@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/paragraph@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/nested-list@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"}
-
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/code@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"}
@@ -32,7 +28,6 @@
     
    
   %body.h-full
-
     %nav.fixed.w-full.bg-white.shadow.z-20{'data-controller': 'dropdown'}
       .mx-auto.max-w-7xl.px-4.sm:px-6.lg:px-8
         .flex.h-16.justify-between
@@ -61,13 +56,16 @@
               %img.block.h-8.w-auto.lg:hidden{alt: "Your Company", src: "https://tailwindui.com/img/logos/mark.svg?color=black"}/
               %img.hidden.h-8.w-auto.lg:block{alt: "Your Company", src: "https://tailwindui.com/img/logos/mark.svg?color=black"}/
           .flex.items-center
+            - if controller_name == 'posts' && action_name == 'edit'
+              .flex-shrink-0.mr-3
+                = render 'form'
             .flex-shrink-0
               %button.relative.inline-flex.items-center.rounded-md.border.border-transparent.bg-black.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
-                / Heroicon name: mini/plus
-                %svg.-ml-1.mr-2.h-5.w-5{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
-                  %path{d: "M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"}
+
                 = link_to 'Write', new_post_path
-       
+            
+
+
             .hidden.md:ml-4.md:flex.md:flex-shrink-0.md:items-center
               %button.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
                 %span.sr-only View notifications

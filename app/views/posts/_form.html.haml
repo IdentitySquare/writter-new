@@ -4,8 +4,10 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :title, hint: 'No special characters.'
     = f.hidden_field :body
 
   .form-actions
-    = f.button :submit
+    
+    = f.button :submit ,value: 'Update', class: "relative inline-flex cursor-pointer items-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" do
+      
+      \#{f.icon :edit}
