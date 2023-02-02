@@ -7,13 +7,13 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ "render"]
   connect() {
+
     if (this.data.get("value") !== "") {
       var dataValue = JSON.parse(this.data.get("value"))
     } else {
       var dataValue = null
     }
 
-    var dataValue = null
 
     console.log(dataValue)
     
