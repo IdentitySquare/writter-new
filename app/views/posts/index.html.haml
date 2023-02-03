@@ -1,32 +1,3 @@
 .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
   .text-left.font-semibold.font-serif.text-4xl
-    Your Posts
-  
-
-
-  %div
-    .border-b.border-gray-200
-      %nav.-mb-px.flex.space-x-8{"aria-label" => "Tabs"}
-        / Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-        %a.border-transparent.text-gray-500.hover:text-gray-700.hover:border-gray-300.whitespace-nowrap.py-4.px-1.border-b-2.font-medium.text-sm{:href => posts_path(status: 'published')} Published
-        %a.border-transparent.text-gray-500.hover:text-gray-700.hover:border-gray-300.whitespace-nowrap.py-4.px-1.border-b-2.font-medium.text-sm{:href => posts_path(status: 'draft')} Drafts
-
-
-    
-    %table
-      %thead
-        %tr
-          %th
-          %th
-          %th
-
-      %tbody
-        - @posts.each do |post|
-          %tr
-
-            %td= link_to post.title, post
-            %td= link_to 'Edit', edit_post_path(post)
-            %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
-
-    %br
-
+    All posts

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy publish ]
 
   before_action :set_user, except: [:index]
   # GET /posts or /posts.json
@@ -57,6 +57,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def publish
+    @post.status = "published"
+    @post.published_at = Time.now
+    @post.save
+    redirect_to post_url(@post)
+  end
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy

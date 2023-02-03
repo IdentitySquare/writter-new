@@ -15,7 +15,7 @@ class UserProfilesController < ApplicationController
       @posts = @user.posts.where(status: params[:status])
     end
   end
-
+  
   private
 
   def set_user
