@@ -25,4 +25,27 @@ class Post < ApplicationRecord
 
    #----- ASSOCIATIONS -----#
    belongs_to :user
+
+
+  def title
+    return nil if empty?
+
+    first_block = JSON.parse(body)&.fetch('blocks')[0]
+    return first_block['data']['text'] if first_block&.fetch('type') == 'header'
+
+    return nil
+  end
+
+  def body_content
+    return nil if empty?
+
+    block_index = title.present? ? 1 : 0
+
+    body_block
+  end
+
+  def empty?
+    return true if body.nil? || JSON.parse(body)&.fetch('blocks').empty?
+  end
+
 end

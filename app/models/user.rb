@@ -59,11 +59,11 @@ class User < ApplicationRecord
     username.present?
   end
 
-  def published_articles
-
+  def published_posts
+    posts.published
   end
 
-  def draft_articles
-
+  def draft_posts
+    posts.draft
   end
 end

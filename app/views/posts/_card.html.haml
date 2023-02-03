@@ -1,0 +1,9 @@
+.h-40.bg-white.max-w-xl.border.border-neutral-300.rounded-md.px-4.py-5.sm:px-6
+  .flex.flex-row.text-neutral-700.justify-between
+    .text-lg.font-bold
+      = post.title
+
+    %span.text-sm.uppercase
+      = post.created_at.strftime('%d %b %Y')
+
+  .text-sm

@@ -5,11 +5,7 @@ class PostsController < ApplicationController
   before_action :set_user, except: [:index]
   # GET /posts or /posts.json
   def index
-    if params[:status].nil?
-      @posts = Post.all
-    else
-      @posts = current_user.posts.where(status: params[:status])
-    end
+
   end
 
   # GET /posts/1 or /posts/1.json

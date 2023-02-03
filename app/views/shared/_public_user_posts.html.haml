@@ -1,0 +1,21 @@
+%hr.mb-10
+
+
+
+
+/ = link_to edit_user_registration_path(@user), class: 'mx-auto' do
+/   %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
+/     Edit Account 
+/ = link_to '', class: 'mx-auto' do
+/   %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
+/     New Post
+.flex.flex-col.gap-3
+  - @posts.each do |post|
+
+    - next if post.empty?
+
+    = link_to post do
+
+      = render 'posts/card', post: post
+
+
