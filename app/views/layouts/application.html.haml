@@ -9,6 +9,7 @@
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
+
     %script{:src => "https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/header@latest"}
@@ -59,6 +60,8 @@
             - if controller_name == 'posts' && action_name == 'edit'
               .flex-shrink-0.mr-3
                 = render 'form'
+
+            
             .flex-shrink-0
               %button.relative.inline-flex.items-center.rounded-md.border.border-transparent.bg-black.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
 
