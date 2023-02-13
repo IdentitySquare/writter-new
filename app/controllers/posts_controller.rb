@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
+        
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,11 +58,19 @@ class PostsController < ApplicationController
   end
 
   def publish
-    @post.status = "published"
-    @post.published_at = Time.now
-    @post.save
-    redirect_to post_url(@post)
+    if @post.draft?
+      @post.status = "published"
+      @post.published_at = Time.now
+      @post.save
+      redirect_to post_url(@post)
+    elsif @post.published?
+      @post.status = "draft"
+      @post.published_at = nil
+      @post.save
+      redirect_to post_url(@post)
+    end
   end
+
   # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy

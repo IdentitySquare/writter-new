@@ -29,12 +29,17 @@
         - if controller_name == 'posts' && action_name == 'edit'
           .flex-shrink-0.mr-3
             = render 'form'
+          .flex-shrink-0.mr-3
+            %button.relative.inline-flex.items-center.rounded-md.border.border-transparent.bg-black.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
 
+              = link_to 'Publish', publish_post_path
 
-        .flex-shrink-0
-          %button.relative.inline-flex.items-center.rounded-md.border.border-transparent.bg-black.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+       
+        - else
+          .flex-shrink-0
+            %button.relative.inline-flex.items-center.rounded-md.border.border-transparent.bg-black.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
 
-            = link_to 'Write', new_post_path
+              = link_to 'Write', new_post_path
         
 
 

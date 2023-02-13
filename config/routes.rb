@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   resources :posts, except: [:create]
   
+  get 'posts/:id/publish', to: 'posts#publish' , as: 'publish_post'
+
   get '/onboarding', to: "onboarding#index"
 
   devise_scope :user do
