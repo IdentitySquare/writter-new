@@ -5,7 +5,10 @@ class PostsController < ApplicationController
   before_action :set_user, except: [:index]
   # GET /posts or /posts.json
   def index
-
+    @posts = Post.all
+    if current_user
+      @non_authored_posts = Post.where.not(user: current_user)
+    end
   end
 
   # GET /posts/1 or /posts/1.json

@@ -20,7 +20,7 @@
   - if current_user == @user
     = render 'shared/private_user_posts'
   - else
-    = render 'shared/public_user_posts'
+    = render 'shared/public_user_posts', posts: @posts
   / %hr.mb-10
 
 

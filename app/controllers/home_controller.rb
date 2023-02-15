@@ -5,7 +5,7 @@ class HomeController < ApplicationController
       redirect_to new_user_session_path 
     else
 
-      redirect_to user_profile_path(current_user.id)
+      redirect_to posts_path
     end
   end
  end
