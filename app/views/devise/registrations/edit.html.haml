@@ -1,58 +1,44 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, "data-controller": "onboarding" }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name, autofocus: true
+.flex.min-h-full.flex-col.justify-center.py-12.sm:px-6.lg:px-8
+  .sm:mx-auto.sm:w-full.sm:max-w-md
+    %h2.mt-6.text-center.text-3xl.tracking-tight.text-gray-900.font-serif Update your profile
 
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
+  .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
+    .py-8.px-4.shadow{class: 'sm:rounded-lg.sm:px-10', "data-controller": "onboarding"}
+  
+      = simple_form_for @user , url: registration_path(@user), method: :put do |f|
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Name
+          .mt-1
+   
+            = f.input :name, label:false, input_html:{ class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
 
-  .field
-    = f.label :bio
-    %br/
-    = f.text_field :bio, autofocus: true 
+        %div
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Username
+          .mt-1
+      
+            = f.input :username, required: true, label: false, id: 'username' , wrapper_html: {"data-action": 'keyup->onboarding#checkUsername'}, input_html:{'data-onboarding-target': 'username', class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
 
-  .field
-    = f.label :website
-    %br/
-    = f.text_field :website, autofocus: true
+            %div#username-taken.invisible.text-xs.mt-2.text-rose-500.pl-1{"data-onboarding-target" => "errorMessage"} Username already taken
 
-  .field
-    = f.label :location
-    %br/
-    = f.text_field :location, autofocus: true
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "location"} Location
+          .mt-1
+      
+            = f.input :location, label: false, input_html:{rows: 5, class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
+
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Bio
+          .mt-1
+      
+            = f.input :bio, as: :text,maxlength: 160, label: false, input_html:{rows: 5, class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
 
 
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Website
+          .mt-1
+      
+            = f.input :website,label: false, input_html:{ class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
 
         
-      
-  / .field
-  /   = f.label :password
-  /   %i (leave blank if you don't want to change it)
-  /   %br/
-  /   = f.password_field :password, autocomplete: "new-password"
-  /   - if @minimum_password_length
-  /     %br/
-  /     %em
-  /       = @minimum_password_length
-  /       characters minimum
-  / .field
-  /   = f.label :password_confirmation
-  /   %br/
-  /   = f.password_field :password_confirmation, autocomplete: "new-password"
-  / .field
-  /   = f.label :current_password
-  /   %i (we need your current password to confirm your changes)
-  /   %br/
-  /   = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
+
+        = f.button :submit, value: 'Update', 'data-onboarding-target': 'saveButton', input_html: {"data-action": 'click->onboarding#checkUsername'},class: 'flex w-full justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2{type: "submit"}'
