@@ -1,6 +1,11 @@
 .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
-  .text-left.font-semibold.font-serif.text-4xl
-    #{@user.name}
+  .flex.flex-row.justify-between
+    .text-left.font-semibold.font-serif.text-4xl
+      #{@user.name}
+    %button.relative.inline-flex.items-center.rounded-full.border.border-gray.px-4.py-2.text-sm.font-medium.shadow-sm.hover:bg-emerald-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+
+      = link_to 'Edit Profile', edit_user_registration_path(@user)
+    
   .text-slate-400.mb-3.flex.flex-row.gap-3
     @#{@user.username}
     .flex.flex-row.gap-1
