@@ -23,8 +23,8 @@
             %svg.hidden.h-6.w-6{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg",'data-dropdown-target': 'openImage'}
               %path{d: "M6 18L18 6M6 6l12 12", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
         .flex.flex-shrink-0.items-center
-          %img.block.h-8.w-auto.lg:hidden{alt: "Your Company", src: "https://tailwindui.com/img/logos/mark.svg?color=black"}/
-          %img.hidden.h-8.w-auto.lg:block{alt: "Your Company", src: "https://tailwindui.com/img/logos/mark.svg?color=black"}/
+          -# %img.block.h-8.w-auto.lg:hidden{alt: "Your Company", src: "https://tailwindui.com/img/logos/mark.svg?color=black"}/
+          %img.hidden.h-8.w-auto.lg:block{alt: "Your Company",src: url_for('/assets/logotype_black.png')}/
       .flex.items-center
         - if controller_name == 'posts' && action_name == 'edit'
           .flex-shrink-0.mr-3
