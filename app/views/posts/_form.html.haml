@@ -1,5 +1,6 @@
 -# frozen_string_literal: true
-= simple_form_for(@post) do |f|
+
+= simple_form_for(@post, publish: true) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
@@ -7,7 +8,9 @@
     = f.hidden_field :body
 
   .form-actions
-    
-    = f.button :submit ,value: 'Save Changes', class: "relative inline-flex cursor-pointer items-center rounded-md border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" do
-      
+  
+    = f.button :submit , 'Save Changes',  name: 'draft', class: "relative inline-flex cursor-pointer items-center  border px-4 py-2 text-sm font-medium text-black shadow-sm  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mr-2" do
       \#{f.icon :edit}
+    = f.button :submit ,'Save and Publish', name: 'publish',  class: "#{@post.published? ? 'hidden': ''} relative inline-flex cursor-pointer items-center border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" do
+      \#{f.icon :edit}
+

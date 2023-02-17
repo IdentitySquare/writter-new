@@ -52,7 +52,14 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         
-        format.json { render :show, status: :ok, location: @post }
+        if  params['publish'].present?
+          self.publish
+          redirect_to post_url(@post) and return
+        else
+          format.html { render :show, status: :ok, location: @post }
+          format.json { render :show, status: :ok, location: @post }
+        end
+        
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -61,16 +68,16 @@ class PostsController < ApplicationController
   end
 
   def publish
+    
     if @post.draft?
       @post.status = "published"
       @post.published_at = Time.now
       @post.save
-      redirect_to post_url(@post)
     elsif @post.published?
       @post.status = "draft"
       @post.published_at = nil
       @post.save
-      redirect_to post_url(@post)
+      redirect_to post_url(@post) 
     end
   end
 
