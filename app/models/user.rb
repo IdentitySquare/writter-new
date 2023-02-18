@@ -41,7 +41,7 @@ class User < ApplicationRecord
 
   validates :username, length: {minimum: 4 }, on: :update
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

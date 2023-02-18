@@ -23,7 +23,6 @@ class Post < ApplicationRecord
     
   #----- CONSTANTS -----#
    enum status: { draft: 0, published: 1 }
-
    #----- ASSOCIATIONS -----#
    belongs_to :user
 

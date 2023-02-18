@@ -139,10 +139,11 @@ group :test do
   # Automated testing
   gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-callback-matchers', '~> 1.1.1'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers','~> 5.0'
 
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'bullet'
 end
 
 gem "factory_bot", "~> 6.2"
