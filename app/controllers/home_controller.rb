@@ -1,5 +1,11 @@
 class HomeController < ApplicationController
   def index
-    redirect_to new_user_session_path if !current_user   
+    
+    if !current_user
+      redirect_to new_user_session_path 
+    else
+
+      redirect_to posts_path
+    end
   end
  end

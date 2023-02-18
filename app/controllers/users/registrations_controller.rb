@@ -25,6 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
+    
     super
   end
 
@@ -62,6 +63,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
     page_path('confirmation_reminder', email: resource.email)
+  end
+
+  def after_update_path_for(resource)
+    user_profile_path(resource)
   end
 
   def update_resource(resource, params)

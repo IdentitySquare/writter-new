@@ -40,7 +40,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :username, length: {minimum: 4 }, on: :update
-  
+
+  has_many :posts, dependent: :destroy
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -55,5 +57,13 @@ class User < ApplicationRecord
 
   def onboarded?
     username.present?
+  end
+
+  def published_posts
+    posts.published
+  end
+
+  def draft_posts
+    posts.draft
   end
 end

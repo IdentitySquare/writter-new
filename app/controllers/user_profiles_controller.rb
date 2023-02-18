@@ -8,6 +8,14 @@ class UserProfilesController < ApplicationController
     end
   end
 
+  def show
+    if params[:status].nil?
+      @posts = Post.all
+    else
+      @posts = @user.posts.where(status: params[:status])
+    end
+  end
+  
   private
 
   def set_user
@@ -15,6 +23,7 @@ class UserProfilesController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name,:username)
+    params.require(:user).permit(:name,:username,:bio, :website)
   end
+
 end

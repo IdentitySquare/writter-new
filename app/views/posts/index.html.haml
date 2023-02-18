@@ -1,0 +1,14 @@
+.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
+  
+  .text-center.font-serif.text-sm.mb-5
+    Your Reading List 
+  .text-center.font-semibold.font-serif.text-4xl.mb-5
+    Stories & Ideas for Today
+
+  .text-center.font-serif.text-sm.uppercase.mb-5
+    #{Date.today.strftime("%A, %d %B")}
+
+  
+  = render 'shared/public_user_posts', posts: @non_authored_posts
+  
+

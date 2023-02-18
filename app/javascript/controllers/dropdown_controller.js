@@ -10,13 +10,19 @@ export default class extends Controller {
 
       if (wasOpen){
         this.dropdownTargets.forEach(element => element.classList.add('hidden'));
-        this.closeImageTarget.classList.remove('hidden');
-        this.openImageTarget.classList.add('hidden')
+        
+        if (this.hasCloseImageTarget){
+          this.closeImageTarget.classList.remove('hidden');
+          this.openImageTarget.classList.add('hidden');
+        }
+
       } else{
         this.dropdownTargets.forEach(element => element.classList.remove('hidden'));
-       
-        this.openImageTarget.classList.remove('hidden');
-        this.closeImageTarget.classList.add('hidden')
+        
+        if (this.hasCloseImageTarget){
+          this.openImageTarget.classList.remove('hidden');
+          this.closeImageTarget.classList.add('hidden')
+        }
       }
 
     }

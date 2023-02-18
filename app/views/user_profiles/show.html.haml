@@ -1,34 +1,55 @@
-
-
-
-
-
 .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
-  .text-left.font-semibold.font-serif.text-4xl
-    #{@user.name}
+  .flex.flex-row.justify-between
+    .text-left.font-semibold.font-serif.text-4xl
+      #{@user.name}
+    %button.relative.inline-flex.items-center.rounded-full.border.border-gray.px-4.py-2.text-sm.font-medium.shadow-sm.hover:bg-emerald-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+
+      = link_to 'Edit Profile', edit_user_registration_path(@user)
+    
   .text-slate-400.mb-3.flex.flex-row.gap-3
     @#{@user.username}
     .flex.flex-row.gap-1
-      %i{"data-feather" => "map-pin",class: 'w-5'}
-      #{@user.location}
+      -if @user.location.present?
+        %i{"data-feather" => "map-pin",class: 'w-5'}
+        #{@user.location}
+        
+      -if @user.bio.present?
+        .flex.flex-row.gap-1
+          %i{"data-feather" => "link-2",class: 'w-5'}
+          #{@user.website}
 
-    .flex.flex-row.gap-1
-      %i{"data-feather" => "link-2",class: 'w-5'}
-      #{@user.website}
-
-
+    
   %p.mb-10
     #{@user.bio}
 
-  %hr
+  - if current_user == @user
+    = render 'shared/private_user_posts'
+  - else
+    = render 'shared/public_user_posts', posts: @posts
+  / %hr.mb-10
 
 
 
-  / = link_to edit_user_registration_path(@user), class: 'mx-auto' do
-  /   %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
-  /     Edit Account 
-  / = link_to '', class: 'mx-auto' do
-  /   %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
-  /     New Post
 
+  / / = link_to edit_user_registration_path(@user), class: 'mx-auto' do
+  / /   %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
+  / /     Edit Account 
+  / / = link_to '', class: 'mx-auto' do
+  / /   %button{ class: "mt-3 py-3 px-10 font-medium bg-violet rounded-lg cursor-pointer" }
+  / /     New Post
+  / .flex.flex-col.gap-3
+  /   - @user.posts.each do |post|
 
+  /     - next if post.empty?
+
+  /     = link_to post do
+
+  /       .h-40.bg-white.max-w-xl.border.border-neutral-300.rounded-md.px-4.py-5.sm:px-6
+  /         .flex.flex-row.text-neutral-700.justify-between
+  /           .text-lg.font-bold
+  /             = post.title
+
+  /           %span.text-sm.uppercase
+  /             = post.created_at.strftime('%d %b %Y')
+
+  /         .text-sm

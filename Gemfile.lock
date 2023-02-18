@@ -413,7 +413,7 @@ DEPENDENCIES
   rspec-rails (~> 5.0.0)
   selenium-webdriver
   shoulda-callback-matchers (~> 1.1.1)
-  shoulda-matchers
+  shoulda-matchers (~> 5.0)
   sidekiq
   simple_form
   sprockets-rails

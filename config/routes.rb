@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
      
   root to: "home#index" 
 
@@ -12,6 +13,12 @@ Rails.application.routes.draw do
                invitations: 'users/invitations',
                omniauth_callbacks: "users/omniauth_callbacks"
   }
+
+  resources   :users, only: [:update]
+
+  resources :posts, except: [:create]
+  
+  get 'posts/:id/publish', to: 'posts#publish' , as: 'publish_post'
 
   get '/onboarding', to: "onboarding#index"
 
