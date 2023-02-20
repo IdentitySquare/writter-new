@@ -7,12 +7,13 @@
       = link_to 'Edit Profile', edit_user_registration_path(@user)
 
     - if current_user && current_user != @user_profile
-      - if current_user.followees.include?(@user_profile)
-        = button_to "Unfollow", follow_user_profile_path(@user), method: :delete
-      - else
-        = button_to "Follow", follow_user_profile_path(followee: @user), method: :post
+      -# - if current_user.followees.include?(@user_profile)
+      -# = button_to "Unfollow", follow_user_profile_path(@user), method: :delete
+      -# - else
+      = button_to "Follow", follow_user_profile_path(followee: @user), method: :post
 
-    
+      = button_to "Like", follow_user_profile_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post
+
   .text-slate-400.mb-3.flex.flex-row.gap-3
     @#{@user.username}
     .flex.flex-row.gap-1

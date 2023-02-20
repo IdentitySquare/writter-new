@@ -18,20 +18,16 @@ class UserProfilesController < ApplicationController
   
 
   def follow
+    @follow = current_user.follows.new(follow_params)
     debugger
-    @follower = Follower.new(followee: @user, follower: current_user)
-    if @follower.save
-      redirect_to @user
-    else
-      flash[:error] = "Unable to follow user."
-      redirect_to @user
-    end
-    current_user.followees << @user
-    debugger
+    @follow.save
     redirect_back(fallback_location: root_path)
+    
   end
   
+  
   def unfollow
+    
     current_user.followed_users.find_by(followee_id: @user.id).destroy
     redirect_back(fallback_location: root_path)
   end
@@ -46,6 +42,9 @@ class UserProfilesController < ApplicationController
     params.require(:user).permit(:name,:username,:bio, :website)
   end
 
-
+  private
+  def follow_params
+   params.require(:follow).permit(:followable_id, :followable_type)
+  end
 
 end

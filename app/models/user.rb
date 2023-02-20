@@ -43,10 +43,9 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
-  has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
-  has_many :followees, through: :followed_users, source_type: 'User'
-  has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
-  has_many :followers, through: :following_users, source_type: 'User'
+  
+  has_many :follows, as: :followable
+  has_many :follows
 
 
   def self.from_omniauth(auth)
