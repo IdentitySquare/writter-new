@@ -43,9 +43,12 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
-  
-  has_many :follows, as: :followable
-  has_many :follows
+  has_many :received_follows, as: :followable, class_name: "Follow"
+  has_many :followers, through: :received_follows, source: :user
+
+
+  has_many :given_follows, class_name: "Follow"
+  has_many :following, through: :given_follows, source: :followable, source_type: "User"
 
 
   def self.from_omniauth(auth)
