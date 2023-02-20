@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :user_profiles, only: [:update, :show] do
     member do
       post 'follow', to: 'user_profiles#follow'
+      delete 'unfollow', to: 'user_profiles#unfollow'
     end
   end
 

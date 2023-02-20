@@ -18,18 +18,17 @@ class UserProfilesController < ApplicationController
   
 
   def follow
-    @follow = current_user.follows.new(follow_params)
-    debugger
+    @follow = current_user.given_follows.new(follow_params)
     @follow.save
     redirect_back(fallback_location: root_path)
   end
   
-  
   def unfollow
-    
-    current_user.followed_users.find_by(followee_id: @user.id).destroy
+    @follow = current_user.given_follows.find_by(followable: @user)
+    @follow.destroy 
     redirect_back(fallback_location: root_path)
   end
+  
   private
 
   def set_user
