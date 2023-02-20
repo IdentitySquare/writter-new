@@ -16,6 +16,6 @@
 #  index_follows_on_follower  (follower_type,follower_id)
 #
 class Follow < ApplicationRecord
-  belongs_to :follower, polymorphic: true
+  belongs_to :follower, class_name: :user
   belongs_to :followee, polymorphic: true
 end

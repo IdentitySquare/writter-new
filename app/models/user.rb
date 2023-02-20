@@ -43,12 +43,12 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
-  has_many :follower_relationships, class_name: "Follow", foreign_key: "followee_id"
-  has_many :followers, through: :follower_relationships, source: :follower, source_type: 'User'
+  has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
+  has_many :followees, through: :followed_users, source_type: 'User'
+  has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
+  has_many :followers, through: :following_users, source_type: 'User'
 
-  has_many :followee_relationships, class_name: "Follow", foreign_key: "follower_id"
-  has_many :followees, through: :followee_relationships, source: :followee, source_type: 'User'
-  
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -72,4 +72,7 @@ class User < ApplicationRecord
   def draft_posts
     posts.draft
   end
+
+
+  
 end

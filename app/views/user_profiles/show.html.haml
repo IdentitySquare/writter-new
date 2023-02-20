@@ -5,6 +5,13 @@
     %button.relative.inline-flex.items-center.rounded-full.border.border-gray.px-4.py-2.text-sm.font-medium.shadow-sm.hover:bg-emerald-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
 
       = link_to 'Edit Profile', edit_user_registration_path(@user)
+
+    - if current_user && current_user != @user_profile
+      - if current_user.followees.include?(@user_profile)
+        = button_to "Unfollow", follow_user_profile_path(@user), method: :delete
+      - else
+        = button_to "Follow", follow_user_profile_path(followee: @user), method: :post
+
     
   .text-slate-400.mb-3.flex.flex-row.gap-3
     @#{@user.username}

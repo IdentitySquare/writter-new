@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   
      
   root to: "home#index" 
-
-  resources :user_profiles, only: [:update, :show]
+  
+  resources :user_profiles, only: [:update, :show] do
+    member do
+      post 'follow', to: 'user_profiles#follow'
+    end
+  end
 
   devise_for :users,
              controllers: {
