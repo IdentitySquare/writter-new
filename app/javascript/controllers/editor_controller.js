@@ -19,6 +19,7 @@ export default class extends Controller {
     
     this.editor = new EditorJS({
       holder: this.element,
+      minHeight : 0,
       readOnly: this.data.get("readOnly") == 'true',
 
       tools: {
