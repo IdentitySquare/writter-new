@@ -8,9 +8,11 @@
 
     - if current_user && current_user != @user
       - if current_user.following.include?(@user)
-        = button_to "Unfollow", unfollow_user_profile_path(@user), method: :delete
+        = button_to '', unfollow_user_profile_path(@user), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
+      
       - else
-        = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post
+        
+        = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-sm font-medium shadow-sm hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 
   .text-slate-400.mb-3.flex.flex-row.gap-3
     @#{@user.username}
