@@ -1,0 +1,42 @@
+.flex.flex-row.justify-between
+  .text-left.font-semibold.font-serif.text-4xl
+    #{@user.name}
+  - if current_user && current_user == @user
+    %button.relative.inline-flex.items-center.rounded-full.border.border-gray.px-4.py-2.text-sm.font-medium.shadow-sm.hover:bg-green-200.hover:border.hover:border-black.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+      = link_to 'Edit Profile', edit_user_registration_path(@user)
+  - else
+    - if current_user.following.include?(@user)
+      = button_to '', unfollow_user_profile_path(@user), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
+    
+    - else
+      
+      = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-sm font-medium shadow-sm hover:bg-green-200 hover:border hover:border-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+.text-slate-400.mb-3.flex.flex-row.gap-3
+  @#{@user.username}
+
+%p.mb-3
+  #{@user.bio}
+.text-slate-400.mb-3.flex.flex-row.gap-5
+  
+  -if @user.location.present?
+    .flex.flex-row.gap-2
+      %i{"data-feather" => "map-pin",class: 'w-5'}
+      #{@user.location}
+      
+  -if @user.website.present?
+    .flex.flex-row.gap-2
+      %i{"data-feather" => "link-2",class: 'w-5'}
+      #{@user.website}
+
+- if action_name != 'followers' && action_name != 'following'
+  .flex.flex-row.text-slate-400.mb-3.gap-5
+    = link_to followers_user_profile_path(@user), class: 'flex flex-row gap-1' do
+      .text-black.font-semibold
+        #{@user.followers.count} 
+      .text-slate-400 Followers
+    
+    = link_to following_user_profile_path(@user), class: 'flex flex-row gap-1' do
+      .text-black.font-semibold
+        #{@user.following.count} 
+      .text-slate-400 Following
+   

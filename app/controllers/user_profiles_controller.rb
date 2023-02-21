@@ -9,6 +9,7 @@ class UserProfilesController < ApplicationController
   end
 
   def show
+
     if params[:status].nil?
       @posts = Post.all
     else
@@ -24,14 +25,23 @@ class UserProfilesController < ApplicationController
   end
   
   def unfollow
+
     @follow = current_user.given_follows.find_by(followable: @user)
     @follow.destroy 
     redirect_back(fallback_location: root_path)
   end
-  
+
+  def followers
+    @followers = @user.followers
+  end
+
+  def following
+    @following = @user.following
+  end
   private
 
   def set_user
+
     @user = User.find(params[:id])
   end
 

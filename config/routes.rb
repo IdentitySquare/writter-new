@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     member do
       post 'follow', to: 'user_profiles#follow'
       delete 'unfollow', to: 'user_profiles#unfollow'
+      get 'followers', to: 'user_profiles#followers'
+      get 'following', to: 'user_profiles#following'
     end
   end
 
