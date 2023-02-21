@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_post, only: %i[ show edit update destroy publish ]
 
-  before_action :set_user, except: [:index]
+  before_action :set_user, except: [:index, :new]
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -18,10 +18,10 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    if @user.posts.where(body: nil).any?
-      redirect_to edit_post_path(@user.posts.where(body: nil).first)
+    if current_user.posts.where(body: nil).any?
+      redirect_to edit_post_path(current_user.posts.where(body: nil).first)
     else
-      @post = @user.posts.build
+      @post = current_user.posts.build
       if @post.save
          redirect_to edit_post_path(@post), notice: 'Post was successfully created.'
       else
@@ -104,6 +104,6 @@ class PostsController < ApplicationController
     end
 
     def set_user
-      @user = current_user
+      @user = @post.user
     end
 end
