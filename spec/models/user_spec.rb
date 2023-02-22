@@ -45,4 +45,26 @@ RSpec.describe User, type: :model do
   describe 'validations' do
     it { should validate_length_of(:username).is_at_least(4).on(:update) }
   end
+
+  describe 'followers' do
+    before do
+      @user = FactoryBot.create(:user)
+      @followed_user = FactoryBot.create(:user)
+
+      FactoryBot.create(:follow,
+        user: @user,
+        followable: @followed_user)
+    end
+    
+    it 'calculates correct number of followers' do
+      expect(@user.followers.count).to eq(0)
+      expect(@followed_user.followers.count).to eq(1)
+    end
+
+    it 'calculates correct number of following' do
+      expect(@user.following.count).to eq(1)
+      expect(@followed_user.following.count).to eq(0)
+    end
+
+  end
 end
