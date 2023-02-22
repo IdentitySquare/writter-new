@@ -56,19 +56,23 @@
     %div{"data-editor-target": "render" }
     
 
-  .text-neutral-600.text-bold.z-10{class: '-mt-20'}
-
-    .flex.flex-row.gap-3.justify-between
+  
+  .text-neutral-600.text-bold.z-10{class: 'pt-20'}
+    %hr.mb-5
+    .flex.flex-row.gap-3.justify-between.items-center.uppercase.mb-5
      
-      About #{@user.name} 
+      #{@user.name} 
       
-      %button.bg-neutral-500.hover:bg-neutral-800.text-white.font-bold.py-2.px-4.rounded-full.text-xs
-        Follow
+      - if current_user && current_user.following.include?(@user)
+        = button_to '', unfollow_user_profile_path(@user), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
+      
+      - elsif current_user != @user
+        
+        = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-sm font-medium shadow-sm hover:bg-lime-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+
+     
 
 
-
-
-
-    %hr.mt-5
+    
     = @user.bio
 

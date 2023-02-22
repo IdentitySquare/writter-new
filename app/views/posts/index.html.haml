@@ -8,7 +8,8 @@
   .text-center.font-serif.text-sm.uppercase.mb-5
     #{Date.today.strftime("%A, %d %B")}
 
+  - posts = RecommendationService.new(current_user).recommended_posts(10)
   
-  = render 'shared/public_user_posts', posts: @non_authored_posts
+  = render 'shared/public_user_posts', posts: posts
   
 
