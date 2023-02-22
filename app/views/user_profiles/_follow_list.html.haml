@@ -1,3 +1,5 @@
+:ruby
+  current_user == @user ? own_profile = true : own_profile = false
 %div
   .border-b.border-gray-200.mb-10
     %nav.-mb-px.flex.space-x-8{"aria-label" => "Tabs"}
@@ -18,18 +20,27 @@
           = render 'user_card_small', user: user
     - elsif selected == 'Followers'
       .py-10
-        .text-bold.text-2xl.text-center
+        .text-bold.text-xl.text-center
           No one here just yet!
         .text-bold.text-md.text-center
-          Writing more posts and interacting with other writers helps boost followers.
+          = own_profile ? "Writing more posts and interacting with other writers helps boost followers." : ""
           
     - else
       .py-10
-        .text-bold.text-2xl.text-center
-          Join the community.
+        .text-bold.text-xl.text-center
+          -# display different text if user is viewing their own profile
+          = own_profile ? "You're not following anyone yet!" : "This user isn't following anyone yet!"
+
         .text-bold.text-md.text-center
-          Follow others for new ideas and to connect with your Writer community.
-      
-          
+          = own_profile ? "Here are some writers who might interest you." : ""
+
+    
+    - if selected == 'Following' && current_user == @user && @recommendations.any?
+      .p-5.bg-white.border.border-gray-200.rounded-md.mx-auto.w-full{class:'md:w-3/4'}
+        - @recommendations&.each do |user|
+          = link_to user_profile_path(user) do
+            = render 'user_card_small', user: user
+        
+            
       
       
