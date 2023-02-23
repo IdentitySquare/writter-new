@@ -67,7 +67,11 @@ class PostsController < ApplicationController
     @post.body = @post.draft_body
     @post.status = "published"
     @post.published_at = Time.now
-    @post.save
+    if @post.save
+      redirect_to post_url(@post) 
+    else
+      render :edit
+    end
   end
 
   def unpublish
