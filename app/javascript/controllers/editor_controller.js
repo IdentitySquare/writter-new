@@ -7,7 +7,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ "render"]
   connect() {
-
+    
     if (this.data.get("value") !== "" && JSON.parse(this.data.get("value"))['blocks'].length > 0)  {
       var dataValue = JSON.parse(this.data.get("value"))
     } else {
@@ -15,7 +15,7 @@ export default class extends Controller {
     }
 
     console.log('dataValue')
-    console.log(JSON.parse(this.data.get("value"))['blocks'].length != 0)
+
     
     this.editor = new EditorJS({
       holder: this.element,
@@ -28,7 +28,7 @@ export default class extends Controller {
           class: Header,
           inlineToolbar: true,
           config: {
-            placeholder: 'Add a Title'
+            placeholder: 'Your title goes here...'
           },
         },
         paragraph: {

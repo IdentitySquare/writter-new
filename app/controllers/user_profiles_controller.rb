@@ -13,6 +13,7 @@ class UserProfilesController < ApplicationController
     if params[:status].nil?
       @posts = Post.all
     else
+      
       @posts = @user.posts.where(status: params[:status])
     end
   end
@@ -47,7 +48,6 @@ class UserProfilesController < ApplicationController
 
     @user = User.find(params[:id])
   end
-
 
   def user_params
     params.require(:user).permit(:name,:username,:bio, :website)

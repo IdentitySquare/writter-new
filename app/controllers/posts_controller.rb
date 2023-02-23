@@ -13,13 +13,15 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    
+    if @post.draft?
+      redirect_to edit_post_path(@post)
+    end
   end
 
   # GET /posts/new
   def new
-    if current_user.posts.where(body: nil).any?
-      redirect_to edit_post_path(current_user.posts.where(body: nil).first)
+    if current_user.posts.where(draft_body: nil).any?
+      redirect_to edit_post_path(current_user.posts.where(draft_body: nil).first)
     else
       @post = current_user.posts.build
       if @post.save
