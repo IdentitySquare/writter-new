@@ -37,7 +37,7 @@ class UserProfilesController < ApplicationController
 
   def following
     @following = @user.following
-    if @following.size < 5 
+    if @following.empty?
       @recommendations = RecommendationService.new(@user).recommended_accounts(3)
     end
   end

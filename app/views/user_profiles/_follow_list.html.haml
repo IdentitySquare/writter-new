@@ -35,7 +35,7 @@
           = own_profile ? "Here are some writers who might interest you." : ""
 
     
-    - if selected == 'Following' && current_user == @user && @recommendations.any?
+    - if selected == 'Following' && current_user == @user && @recommendations.present?
       .p-5.bg-white.border.border-gray-200.rounded-md.mx-auto.w-full{class:'md:w-3/4'}
         - @recommendations&.each do |user|
           = link_to user_profile_path(user) do
