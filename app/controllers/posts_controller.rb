@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_post, only: %i[ show edit update destroy publish ]
+  before_action :set_post, only: %i[ show edit update destroy publish unpublish ]
 
   before_action :set_user, except: [:index, :new]
   # GET /posts or /posts.json
@@ -46,19 +46,13 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-
-    puts "params: #{params.inspect}"
-    
     respond_to do |format|
       if @post.update(post_params)
         
-        if  params['publish'].present?
-          self.publish
-          redirect_to post_url(@post) and return
-        else
-          format.html { render :show, status: :ok, location: @post }
-          format.json { render :show, status: :ok, location: @post }
-        end
+        
+        format.html { render :show, status: :ok, location: @post }
+        format.json { render :show, status: :ok, location: @post }
+        
         
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -67,18 +61,19 @@ class PostsController < ApplicationController
     end
   end
 
-  def publish
-    
-    if @post.draft?
-      @post.status = "published"
-      @post.published_at = Time.now
-      @post.save
-    elsif @post.published?
-      @post.status = "draft"
-      @post.published_at = nil
-      @post.save
-      redirect_to post_url(@post) 
-    end
+  def publish 
+    @post.body = @post.draft_body
+    @post.status = "published"
+    @post.published_at = Time.now
+    @post.save
+  end
+
+  def unpublish
+    @post.body = @post.draft_body
+    @post.status = "draft"
+    @post.published_at = nil
+    @post.save
+    redirect_to post_url(@post) 
   end
 
   # DELETE /posts/1 or /posts/1.json
@@ -100,7 +95,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:body, :title)
+      params.require(:post).permit(:body, :title, :draft_body)
     end
 
     def set_user

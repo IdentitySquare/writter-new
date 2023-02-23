@@ -95,16 +95,29 @@ export default class extends Controller {
     this.editor.destroy();
   }
 
-  
+
   handleContentChanged() {
+    var timeoutId;
+    // this.saveTask();
     this.editor.save().then((outputData) => {
 
-      document.getElementById('post_body').value = JSON.stringify(outputData).toString()
-    
+      document.getElementById('post_draft_body').value = JSON.stringify(outputData).toString()
+      clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(this.savePost(), 1000)
+      
+
     });
   }
   
-
+  savePost () { 
+    const postForm = document.querySelector(".simple_form")
+    console.log(postForm)
+    // cllick submit button
+    
+    postForm.requestSubmit();
+    
+  }
 
 }
 

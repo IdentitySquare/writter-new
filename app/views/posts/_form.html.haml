@@ -5,12 +5,10 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.hidden_field :body
+    = f.hidden_field :draft_body
 
   .form-actions
   
-    = f.button :submit , 'Save Changes',  name: 'draft', class: "relative inline-flex cursor-pointer items-center  border px-4 py-2 text-sm font-medium text-black shadow-sm  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mr-2" do
-      \#{f.icon :edit}
-    = f.button :submit ,'Save and Publish', name: 'publish',  class: "#{@post.published? ? 'hidden': ''} relative inline-flex cursor-pointer items-center border border-transparent bg-black px-4 py-2 text-sm font-medium text-white shadow-sm  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" do
+    = f.button :submit , 'Save Changes',  id: 'update_post', class: "hidden relative inline-flex cursor-pointer items-center  border px-4 py-2 text-sm font-medium text-black shadow-sm  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mr-2" do
       \#{f.icon :edit}
 
