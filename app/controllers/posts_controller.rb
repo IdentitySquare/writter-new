@@ -1,13 +1,15 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_post, only: %i[ show edit update destroy publish unpublish ]
-
+  
   before_action :set_user, except: [:index, :new]
+
   # GET /posts or /posts.json
   def index
     @posts = Post.all
     if current_user
-      @non_authored_posts = Post.where.not(user: current_user)
+      page = params[:page].present? ? params[:page] : 1 
+      @non_authored_posts = RecommendationService.new(current_user).recommended_posts(10)
     end
   end
 
