@@ -8,7 +8,6 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     if current_user
-      page = params[:page].present? ? params[:page] : 1 
       @non_authored_posts = RecommendationService.new(current_user).recommended_posts(10)
     end
   end
