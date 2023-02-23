@@ -147,3 +147,5 @@ group :test do
 end
 
 gem "factory_bot", "~> 6.2"
+
+gem "pundit", "~> 2.3"
