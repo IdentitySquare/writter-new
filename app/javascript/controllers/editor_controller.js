@@ -8,17 +8,18 @@ export default class extends Controller {
   static targets = [ "render"]
   connect() {
 
-    if (this.data.get("value") !== "") {
+    if (this.data.get("value") !== "" && JSON.parse(this.data.get("value"))['blocks'].length > 0)  {
       var dataValue = JSON.parse(this.data.get("value"))
     } else {
-      var dataValue = null
+      var dataValue = {"time":1677155768141,"blocks":[{"id":"pgD-hmVDIY","type":"header","data":{"text":"","level":2}},{"id":"bDW9OO6bew","type":"paragraph","data":{"text":""}}],"version":"2.26.5"}
     }
 
-
-    console.log(dataValue)
+    console.log('dataValue')
+    console.log(JSON.parse(this.data.get("value"))['blocks'].length != 0)
     
     this.editor = new EditorJS({
       holder: this.element,
+      placeholder: "Let's write an awesome story!",
       minHeight : 0,
       readOnly: this.data.get("readOnly") == 'true',
 
@@ -27,12 +28,15 @@ export default class extends Controller {
           class: Header,
           inlineToolbar: true,
           config: {
-            placeholder: 'Enter a header'
+            placeholder: 'Add a Title'
           },
         },
         paragraph: {
           class: Paragraph,
           inlineToolbar: true,
+          config: {
+            placeholder: 'Write your idea here...'
+          },
         },
         list: {
           class: NestedList,
@@ -112,7 +116,6 @@ export default class extends Controller {
   
   savePost () { 
     const postForm = document.querySelector(".simple_form")
-    console.log(postForm)
     // cllick submit button
     
     postForm.requestSubmit();
