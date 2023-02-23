@@ -20,6 +20,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    
     if current_user.posts.where(draft_body: nil).any?
       redirect_to edit_post_path(current_user.posts.where(draft_body: nil).first)
     else
@@ -35,11 +36,13 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    authorize @post
   end
 
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
+    authorize @post
 
     respond_to do |format|
       
@@ -48,6 +51,7 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
+    authorize @post
     respond_to do |format|
       if @post.update(post_params)
         
@@ -64,6 +68,7 @@ class PostsController < ApplicationController
   end
 
   def publish 
+    authorize @post
     @post.body = @post.draft_body
     @post.status = "published"
     @post.published_at = Time.now
@@ -75,6 +80,7 @@ class PostsController < ApplicationController
   end
 
   def unpublish
+    authorize @post
     @post.body = @post.draft_body
     @post.status = "draft"
     @post.published_at = nil
