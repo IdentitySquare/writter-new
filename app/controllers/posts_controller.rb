@@ -1,25 +1,29 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_post, only: %i[ show edit update destroy publish ]
-
+  before_action :set_post, only: %i[ show edit update destroy publish unpublish ]
+  
   before_action :set_user, except: [:index, :new]
+
   # GET /posts or /posts.json
   def index
     @posts = Post.all
     if current_user
-      @non_authored_posts = Post.where.not(user: current_user)
+      @non_authored_posts = RecommendationService.new(current_user).recommended_posts(10)
     end
   end
 
   # GET /posts/1 or /posts/1.json
   def show
-    
+    if @post.draft?
+      redirect_to edit_post_path(@post)
+    end
   end
 
   # GET /posts/new
   def new
-    if current_user.posts.where(body: nil).any?
-      redirect_to edit_post_path(current_user.posts.where(body: nil).first)
+    
+    if current_user.posts.where(draft_body: nil).any?
+      redirect_to edit_post_path(current_user.posts.where(draft_body: nil).first)
     else
       @post = current_user.posts.build
       if @post.save
@@ -33,11 +37,13 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    authorize @post
   end
 
   # POST /posts or /posts.json
   def create
     @post = Post.new(post_params)
+    authorize @post
 
     respond_to do |format|
       
@@ -46,19 +52,14 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-
-    puts "params: #{params.inspect}"
-    
+    authorize @post
     respond_to do |format|
       if @post.update(post_params)
         
-        if  params['publish'].present?
-          self.publish
-          redirect_to post_url(@post) and return
-        else
-          format.html { render :show, status: :ok, location: @post }
-          format.json { render :show, status: :ok, location: @post }
-        end
+        
+        format.html { render :show, status: :ok, location: @post }
+        format.json { render :show, status: :ok, location: @post }
+        
         
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -67,18 +68,25 @@ class PostsController < ApplicationController
     end
   end
 
-  def publish
-    
-    if @post.draft?
-      @post.status = "published"
-      @post.published_at = Time.now
-      @post.save
-    elsif @post.published?
-      @post.status = "draft"
-      @post.published_at = nil
-      @post.save
+  def publish 
+    authorize @post
+    @post.body = @post.draft_body
+    @post.status = "published"
+    @post.published_at = Time.now
+    if @post.save
       redirect_to post_url(@post) 
+    else
+      render :edit
     end
+  end
+
+  def unpublish
+    authorize @post
+    @post.body = @post.draft_body
+    @post.status = "draft"
+    @post.published_at = nil
+    @post.save
+    redirect_to post_url(@post) 
   end
 
   # DELETE /posts/1 or /posts/1.json
@@ -100,7 +108,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:body, :title)
+      params.require(:post).permit(:body, :title, :draft_body)
     end
 
     def set_user

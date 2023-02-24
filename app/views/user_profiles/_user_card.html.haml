@@ -19,23 +19,23 @@
 .text-slate-400.mb-3.flex.flex-row.gap-5
   
   -if @user.location.present?
-    .flex.flex-row.gap-2
+    .flex.flex-row.gap-1
       %i{"data-feather" => "map-pin",class: 'w-5'}
       #{@user.location}
       
   -if @user.website.present?
-    .flex.flex-row.gap-2
+    .flex.flex-row.gap-1
       %i{"data-feather" => "link-2",class: 'w-5'}
       #{@user.website}
 
 - if action_name != 'followers' && action_name != 'following'
   .flex.flex-row.text-slate-400.mb-3.gap-5
-    = link_to followers_user_profile_path(@user), class: 'flex flex-row gap-1' do
+    = link_to followers_user_profile_path(@user), class: 'flex flex-row gap-1 text-sm ' do
       .text-black.font-semibold
         #{@user.followers.count} 
       .text-slate-400 Followers
     
-    = link_to following_user_profile_path(@user), class: 'flex flex-row gap-1' do
+    = link_to following_user_profile_path(@user), class: 'flex flex-row gap-1 text-sm ' do
       .text-black.font-semibold
         #{@user.following.count} 
       .text-slate-400 Following

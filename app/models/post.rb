@@ -4,6 +4,7 @@
 #
 #  id           :bigint           not null, primary key
 #  body         :text
+#  draft_body   :string
 #  published_at :datetime
 #  status       :integer          default("draft"), not null
 #  title        :string
@@ -29,10 +30,14 @@ class Post < ApplicationRecord
 
   def title
     return nil if empty?
-
-    first_block = JSON.parse(body)&.fetch('blocks')[0]
-    return first_block['data']['text'] if first_block&.fetch('type') == 'header'
-
+    
+    if body.present?
+      first_block = JSON.parse(body)&.fetch('blocks')[0]
+      return first_block['data']['text'] if first_block&.fetch('type') == 'header'
+    else
+      first_block = JSON.parse(draft_body)&.fetch('blocks')[0]
+      return first_block['data']['text'] if first_block&.fetch('type') == 'header'
+    end
     return nil
   end
 
@@ -45,7 +50,7 @@ class Post < ApplicationRecord
   end
 
   def empty?
-    return true if body.nil? || JSON.parse(body)&.fetch('blocks').empty?
+    draft_body.nil? || JSON.parse(draft_body)&.fetch('blocks').empty?
   end
 
 end

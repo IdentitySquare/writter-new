@@ -11,8 +11,9 @@ class UserProfilesController < ApplicationController
   def show
 
     if params[:status].nil?
-      @posts = Post.all
+      @posts = @user.posts.published
     else
+      
       @posts = @user.posts.where(status: params[:status])
     end
   end
@@ -37,17 +38,15 @@ class UserProfilesController < ApplicationController
 
   def following
     @following = @user.following
-    if @following.size < 5 
+    if @following.empty?
       @recommendations = RecommendationService.new(@user).recommended_accounts(3)
     end
   end
   private
 
   def set_user
-
     @user = User.find(params[:id])
   end
-
 
   def user_params
     params.require(:user).permit(:name,:username,:bio, :website)

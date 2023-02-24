@@ -4,6 +4,7 @@
 #
 #  id           :bigint           not null, primary key
 #  body         :text
+#  draft_body   :string
 #  published_at :datetime
 #  status       :integer          default("draft"), not null
 #  title        :string

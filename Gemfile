@@ -21,6 +21,8 @@ gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 
+gem 'kaminari'
+
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
@@ -147,3 +149,5 @@ group :test do
 end
 
 gem "factory_bot", "~> 6.2"
+
+gem "pundit", "~> 2.3"

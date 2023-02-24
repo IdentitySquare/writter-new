@@ -31,12 +31,23 @@
           .flex-shrink-0.mr-3
             = render 'form'
           
-          - if @post.draft?
-          
-            .flex-shrink-0.mr-3
-              %button.relative.inline-flex.items-center.rounded-md.border.border-transparent.bg-black.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+          -# variable text is different depending on whether the post is a draft or not
 
-                = link_to 'Publish', publish_post_path
+          - label = @post.draft? ? 'Publish' : 'Publish changes'
+          
+          
+          .flex-shrink-0.mr-3
+            %button.relative.inline-flex.items-center.border.border-transparent.bg-black.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+
+              = link_to label, publish_post_path
+          
+          - if @post.published?
+            .flex-shrink-0.mr-3
+              %button.relative.inline-flex.items-center.bg-gray-400.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-gray-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+
+                = link_to 'Unpublish Post', unpublish_post_path(@post) 
+            
+          
 
        
         - else

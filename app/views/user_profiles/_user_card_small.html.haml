@@ -3,18 +3,18 @@
   .text-left.font-semibold.font-serif.text-lg
     #{user.name}
 
+  - if current_user != user
+    - if current_user.following.include?(user)
+      = button_to '', unfollow_user_profile_path(user), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 z-50" 
 
-  - if current_user.following.include?(user)
-    = button_to '', unfollow_user_profile_path(user), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 z-50" 
-
-  - else
-        
-    = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: user.id, followable_type: user.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-xs font-medium shadow-sm hover:bg-green-200 hover:border hover:border-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+    - else
+          
+      = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: user.id, followable_type: user.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-xs font-medium shadow-sm hover:bg-green-200 hover:border hover:border-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 
 .text-slate-400.mb-3.flex.flex-row.gap-3
   @#{user.username}
 
-%p.mb-3
+%p.mb-3{class: 'md:w-3/4'}
   #{user.bio}
 
 
