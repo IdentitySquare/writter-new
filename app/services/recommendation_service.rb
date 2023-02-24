@@ -10,6 +10,7 @@ class RecommendationService
 
     def recommended_posts(sample)
         # Get the a random sample number of posts written by accounts that the user is following or is writter by recommended_accounts
-        Post.published.where(user_id: @user.following_ids).or(Post.where(user_id: recommended_accounts(10).ids)).sample(sample)
+        Post.published.where(user_id: @user.following_ids).order(created_at: :desc)
+            .or(Post.published.order(created_at: :desc).where(user_id: recommended_accounts(10).ids)).limit(sample)
     end
 end

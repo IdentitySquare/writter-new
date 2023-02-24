@@ -11,7 +11,7 @@ class UserProfilesController < ApplicationController
   def show
 
     if params[:status].nil?
-      @posts = Post.all
+      @posts = @user.posts.published
     else
       
       @posts = @user.posts.where(status: params[:status])
@@ -45,7 +45,6 @@ class UserProfilesController < ApplicationController
   private
 
   def set_user
-
     @user = User.find(params[:id])
   end
 
