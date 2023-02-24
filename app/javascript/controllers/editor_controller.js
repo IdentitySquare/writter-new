@@ -104,7 +104,8 @@ export default class extends Controller {
     var timeoutId;
     // this.saveTask();
     this.editor.save().then((outputData) => {
-
+      
+      document.getElementById('saveStatus').innerHTML = ""
       document.getElementById('post_draft_body').value = JSON.stringify(outputData).toString()
       clearTimeout(timeoutId);
 
@@ -115,6 +116,7 @@ export default class extends Controller {
   }
   
   savePost () { 
+    document.getElementById('saveStatus').innerHTML = "- Saving..."
     const postForm = document.querySelector(".simple_form")
     postForm.requestSubmit();
     
