@@ -1,8 +1,17 @@
 .bg-neutral-50.h-screen
   .div.mx-auto.py-2.max-w-3xl.drop-shadow-md.bg-white.rounded-lg.h-full
     .max-w-xl.mx-auto
-      #editor.mt-20{"data-controller": "editor", "data-editor-value" => "#{@post.draft_body}", "data-editor-read-only" => "false"}      
+      #editor.mt-20{"data-controller": "editor", "data-editor-value" => "#{@post.draft_body}", "data-editor-read-only" => "false"}  
+        
+        .flex.flex-row.gap-2.items-center
+          .h-2.w-2.bg-green-300.rounded-full
+          .text-gray-400.font-sans.text-sm
+            Draft 
+          #saveStatus.text-gray-400.font-sans.text-sm
+            
         %div{"data-editor-target": "render" }
+
+        
   
 
       
