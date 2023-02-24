@@ -116,8 +116,6 @@ export default class extends Controller {
   
   savePost () { 
     const postForm = document.querySelector(".simple_form")
-    // cllick submit button
-    
     postForm.requestSubmit();
     
   }
