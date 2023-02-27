@@ -1,5 +1,5 @@
 class UserProfilesController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: :notifications
   skip_before_action :check_onboarding
 
   def update 
@@ -18,7 +18,8 @@ class UserProfilesController < ApplicationController
     end
   end
   
-
+  def notifications
+  end
   def follow
     @follow = current_user.given_follows.new(follow_params)
     @follow.save
