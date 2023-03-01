@@ -3,6 +3,7 @@ class UserProfilesController < ApplicationController
   skip_before_action :check_onboarding
 
   def update 
+    debugger
     if @user.update(user_params)
       redirect_to root_path
     end
@@ -50,7 +51,9 @@ class UserProfilesController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name,:username,:bio, :website)
+    user_params = params.require(:user).permit(:name,:username,:bio, :website,:notifications, :notifications_freq)
+    user_params[:notifications_freq] = params[:user][:notifications_freq].to_i
+    return user_params
   end
 
   private
