@@ -5,6 +5,7 @@ class PostsMailer < ApplicationMailer
   #
   #   en.posts_mailer.daily_mail.subject
   #
+  before_action :set_user
   def daily_mail
     @greeting = "Hi"
 
@@ -20,5 +21,9 @@ class PostsMailer < ApplicationMailer
     @greeting = "Hi"
 
     mail to: "to@example.org"
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
   end
 end
