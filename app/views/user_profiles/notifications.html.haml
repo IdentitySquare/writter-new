@@ -17,7 +17,8 @@
             %label.relative.inline-flex.items-center.cursor-pointer
               = f.check_box :notifications, checked: current_user.notifications, class: "sr-only peer","data-action": "change->toggle#disableFields click->toggle#submitForm" 
               .w-11.h-6.bg-gray-200.peer-focus:outline-none.peer-focus:ring-green-800.dark:peer-focus:ring-green-800.rounded-full.peer.dark:bg-gray-700.peer-checked:after:translate-x-full.peer-checked:after:border-white.after:absolute.after:bg-white.after:border-gray-300.after:border.after:rounded-full.after:h-5.after:w-5.after:transition-all.dark:border-gray-600.peer-checked:bg-green-800{class: "after:content-[''] after:top-[2px] after:left-[2px]", "data-toggle-target": 'toggle'}
-        
+
+      
       %div
         %label.block.text-md.font-bold.text-gray-900 Notifications about your account
         .mt-1
@@ -56,6 +57,6 @@
             = f.check_box :product_notifications, class: 'h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-green-800{name: "product-notifications", type: "checkbox"}', "data-action": "change->toggle#submitForm" 
 
       %div
-        = f.submit "Sign up", class: 'hidden {type: "submit"}'
+        = f.submit "Update Values", class: 'hidden {type: "submit"}'
         
 

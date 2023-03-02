@@ -26,6 +26,7 @@
 #  reset_password_sent_at         :datetime
 #  reset_password_token           :string
 #  sign_in_count                  :integer          default(0), not null
+#  timezone                       :string           default("UTC")
 #  uid                            :string
 #  unconfirmed_email              :string
 #  username                       :string
@@ -45,6 +46,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :username, length: {minimum: 4 }, on: :update
+  validates :timezone, presence: true
+
+  before_save :set_time_zone
 
   has_many :posts, dependent: :destroy
 
@@ -88,6 +92,10 @@ class User < ApplicationRecord
     posts.draft
   end
 
+  private
 
+  def set_time_zone
+    self.timezone = Time.zone.name
+  end
   
 end
