@@ -28,10 +28,11 @@ class EmailingService
       posts = Post.published.where(published_at: 1.day.ago..Time.now)
               .where.not(user: user)
               .where(user: user.following)
+              .pluck(:id)
       
       
       next if posts.empty?
-      debugger
+      
       PostsMailer.with(post_mailer_params(user,posts)).send("#{user.new_article_notifications_freq}_mail").deliver_later
     end
   end
@@ -43,7 +44,7 @@ class EmailingService
   def post_mailer_params(user, posts)
     { 
       user_id: user.id,
-      posts: posts
+      posts_ids: posts
     }
   end
 
