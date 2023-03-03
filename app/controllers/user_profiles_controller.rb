@@ -3,6 +3,7 @@ class UserProfilesController < ApplicationController
   skip_before_action :check_onboarding
 
   def update 
+
     if @user.update(user_params)
       
       respond_to do |format|
@@ -61,7 +62,8 @@ class UserProfilesController < ApplicationController
                                                :notifications, 
                                                :notifications_freq,
                                                :new_article_notifications_freq,
-                                               :performance_notifications_freq,)
+                                               :performance_notifications_freq,
+                                               :product_notifications)
     user_params[:notifications_freq] = params[:user][:notifications_freq].to_i
     user_params[:new_article_notifications_freq] = params[:user][:new_article_notifications_freq].to_i
     user_params[:performance_notifications_freq] = params[:user][:performance_notifications_freq].to_i
