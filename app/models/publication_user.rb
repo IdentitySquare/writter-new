@@ -22,4 +22,6 @@
 class PublicationUser < ApplicationRecord
   belongs_to :user
   belongs_to :publication
+
+  enum status: { editor: 0, admin: 1 }
 end

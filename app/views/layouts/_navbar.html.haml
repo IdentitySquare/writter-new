@@ -84,6 +84,7 @@
               / Active: "bg-gray-100", Not Active: ""
               %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: user_profile_path(current_user.id), role: "menuitem", tabindex: "-1"} Your Profile
               %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: user_profile_path(current_user.id), role: "menuitem", tabindex: "-1"} Your Posts
+              %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: publications_manage_path, role: "menuitem", tabindex: "-1"} Your Publications
               %a#user-menu-item-2.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: destroy_user_session_path,method: :delete, role: "menuitem", tabindex: "-1"} Sign out
 
               / = link_to destroy_user_session_path, method: :delete, class: 'mx-auto' do

@@ -49,6 +49,10 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
+  has_many :publication_users
+  has_many :publications, through: :publication_users
+
+
   has_many :received_follows, as: :followable, class_name: "Follow"
   has_many :followers, through: :received_follows, source: :user
 

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
+
+  get 'publications/manage', to: 'publications#manage'
+
   devise_for :users,
              controllers: {
                registrations: 'users/registrations',
