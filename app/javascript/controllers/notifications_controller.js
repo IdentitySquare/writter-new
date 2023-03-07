@@ -4,7 +4,7 @@ export default class extends Controller {
     static targets = [ "toggle", "fields", 'form' ]
 
     submitForm(){
-      this.formTarget.submit();
+      this.formTarget.requestSubmit();
     }
 
     disableFields(){

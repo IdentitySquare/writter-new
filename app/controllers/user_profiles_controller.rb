@@ -9,7 +9,7 @@ class UserProfilesController < ApplicationController
       respond_to do |format|
         format.turbo_stream { flash.now[:notice] = "settings change" }
         format.html {redirect_back fallback_location: root_path}
-      end
+      end 
     end
   end
 
