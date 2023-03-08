@@ -7,7 +7,7 @@ class EmailingService
 
   def send_notification_emails_at_6pm!
     # for unread notifications
-    users = User.where(timezone: timezones, notifications: true)
+    users = User.where(timezone: relevant_timezones, notifications: true)
                 .where.not(notifications_freq: nil)
                 .where.not(notifications_freq: 'off')
     mail_type = 'notifications_freq'
@@ -39,7 +39,7 @@ class EmailingService
 
       next if posts.empty?
      
-      PostsMailer.with(post_mailer_params(user,posts)).send(mail_due).deliver_now
+      PostsMailer.with(post_mailer_params(user,posts)).send(mail_due).deliver_later
     end
   end
 

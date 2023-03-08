@@ -10,6 +10,3 @@
 - @posts.each do |post|
   %p
     %a{:href => post_url(post)}= post.title
-    = render 'shared/public_user_posts', posts: @posts
-
-

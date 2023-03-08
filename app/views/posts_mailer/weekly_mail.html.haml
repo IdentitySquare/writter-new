@@ -5,3 +5,7 @@
 %p
 
 
+
+- @posts.each do |post|
+  %p
+    %a{:href => post_url(post)}= post.title

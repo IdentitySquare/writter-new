@@ -14,7 +14,6 @@ class UserProfilesController < ApplicationController
   end
 
   def show
-
     if params[:status].nil?
       @posts = @user.posts.published
     else
