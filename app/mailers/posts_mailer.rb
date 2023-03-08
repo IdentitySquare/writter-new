@@ -1,29 +1,28 @@
 class PostsMailer < ApplicationMailer
-
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.posts_mailer.daily_mail.subject
-  #
   before_action :set_user
-  def daily_mail
-    @greeting = "Hi"
+  before_action :set_posts
 
-    mail to: "to@example.org"
+  def daily_mail  
+    mail(
+      to: "#{@user.name} <#{@user.email}>",
+      subject: "New Posts from writers you follow"
+    )
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.posts_mailer.weekly_mail.subject
-  #
   def weekly_mail
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+    mail(
+      to: "#{@user.name} <#{@user.email}>",
+      subject: "New Posts from writers you follow"
+    )
   end
+
+  private
 
   def set_user
     @user = User.find(params[:user_id])
+  end
+
+  def set_posts
+    @posts = Post.find(params[:post_ids])
   end
 end

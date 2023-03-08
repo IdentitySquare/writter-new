@@ -1,24 +1,24 @@
 class PerformanceMailer < ApplicationMailer
-
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.performance_mailer.daily_mail.subject
-  #
+  before_action :set_user
+  
   def daily_mail
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+    mail(
+      to: "#{@user.name} <#{@user.email}>",
+      subject: "Notifications you've missed"
+    )
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.performance_mailer.weekly_mail.subject
-  #
+ 
   def weekly_mail
-    @greeting = "Hi"
+    mail(
+      to: "#{@user.name} <#{@user.email}>",
+      subject: "Notifications you've missed"
+    )
+  end
 
-    mail to: "to@example.org"
+  private
+
+  def set_user
+    @user = User.find(params[:user_id])
   end
 end
