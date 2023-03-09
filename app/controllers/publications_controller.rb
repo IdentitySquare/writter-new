@@ -16,11 +16,11 @@ class PublicationsController < ApplicationController
 
   def update
     if @publication.update(publication_params)
-      redirect_to root_path
+      redirect_to publication_path(@publication)
     end
   end
+
   def index
-    
   end
 
   def manage
