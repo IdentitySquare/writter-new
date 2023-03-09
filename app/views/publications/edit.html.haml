@@ -1,0 +1,32 @@
+.flex.min-h-full.flex-col.justify-center.py-12.sm:px-6.lg:px-8
+  .sm:mx-auto.sm:w-full.sm:max-w-md
+    %h2.mt-6.text-center.text-3xl.tracking-tight.text-gray-900 Your New Publication
+
+  .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
+    .py-8.px-4.shadow{class: 'sm:rounded-lg.sm:px-10', "data-controller": "onboarding"}
+  
+      = simple_form_for @publication , url: publication_path(@publication), method: :put do |f|
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Name
+          .mt-1
+   
+            = f.input :name, label:false, input_html:{ class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
+
+       
+
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Bio
+          .mt-1
+      
+            = f.input :bio, as: :text,maxlength: 160, label: false, input_html:{rows: 5, class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
+
+
+
+        %div.mb-10
+          %label.block.text-sm.font-medium.leading-6.text-gray-900{:for => "email"} Admin
+          .mt-2
+            %input#email.block.w-full.rounded-md.border-0.text-gray-900.shadow-sm.ring-1.ring-gray-300.placeholder:text-gray-400.focus:ring-2.focus:ring-inset.focus:ring-indigo-600.disabled:cursor-not-allowed.disabled:bg-gray-50.disabled:text-gray-500.disabled:ring-gray-200.sm:text-sm.sm:leading-6{:class => "py-1.5", :disabled => "disabled", :name => "email", :placeholder => "#{current_user.name}", :type => "email", :value =>  "#{current_user.name}"}/
+          %p#email-description.mt-2.text-sm.text-gray-300 You can invite other users as admins and editors later.
+        
+        = f.button :submit, value: 'Finish Editing', 'data-onboarding-target': 'saveButton', input_html: {"data-action": 'click->onboarding#checkUsername'},class: 'flex w-full justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2{type: "submit"}'
+

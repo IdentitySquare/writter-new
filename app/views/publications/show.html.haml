@@ -1,0 +1,10 @@
+.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
+  .text-center.font-sans-serif.text-4xl.mb-5
+    = @publication.name
+
+-# -link to edit publication
+
+- if policy(@publication).update?
+  = link_to 'Edit Publication', edit_publication_path(@publication)
+
+

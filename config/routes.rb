@@ -12,8 +12,10 @@ Rails.application.routes.draw do
     end
   end
 
-
-  get 'publications/manage', to: 'publications#manage'
+  resources :publications, only: [:create, :new, :show, :index,:edit,:update]
+    
+    
+  # get 'publications/manage', to: 'publications#manage', as: 'manage_publications'
 
   devise_for :users,
              controllers: {

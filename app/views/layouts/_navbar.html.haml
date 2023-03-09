@@ -82,11 +82,11 @@
               To: "transform opacity-0 scale-95"
             .absolute.hidden.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", 'data-dropdown-target': 'dropdown'}
               / Active: "bg-gray-100", Not Active: ""
-              %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: user_profile_path(current_user.id), role: "menuitem", tabindex: "-1"} Your Profile
-              %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: user_profile_path(current_user.id), role: "menuitem", tabindex: "-1"} Your Posts
-              %a#user-menu-item-0.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: publications_manage_path, role: "menuitem", tabindex: "-1"} Your Publications
-              %a#user-menu-item-2.block.px-4.py-2.text-sm.text-gray-700.hover:bg-gray-100{href: destroy_user_session_path,method: :delete, role: "menuitem", tabindex: "-1"} Sign out
-
+              = link_to "Your Profile", user_profile_path(current_user.id), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+              = link_to "Your Posts", user_profile_path(current_user.id), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+              = link_to "Your Publications", publications_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+              = link_to "Sign out", destroy_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+              
               / = link_to destroy_user_session_path, method: :delete, class: 'mx-auto' do
               /     %button{ class: "mt-3 py-3 px-10 font-medium text-white bg-violet rounded-lg cursor-pointer" }
               /       Log Out

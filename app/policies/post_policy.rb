@@ -1,5 +1,5 @@
 class PostPolicy < ApplicationPolicy
-    attr_reader :user, :program
+    attr_reader :user, :post
   
     class Scope < Scope
       def resolve

@@ -1,52 +1,56 @@
 class PublicationsController < ApplicationController
-  before_action :set_user,  except: :manage
 
+
+  before_action :set_publication, only: [:show, :edit, :update]
+  
+  
   def new 
-    if @user.update(user_params)
+    @publication = Publication.new()
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @publication.update(publication_params)
       redirect_to root_path
     end
+  end
+  def index
+    
   end
 
   def manage
     @publications = current_user.publications
   end
   
-  def create 
-    if @user.update(user_params)
-      redirect_to root_path
+  def create
+    @publication = Publication.new(publication_params)
+    authorize @publication
+
+    Publication.transaction do
+      
+      @publication.save!
+      @publication_user = PublicationUser.new(publication: @publication, user: current_user, role: 'admin')
+      @publication_user.save!
+      redirect_to publication_path(@publication)
     end
+    
+   
   end
   
 
-  # def show
-  #   if params[:status].nil?
-  #     @posts = @user.posts.published
-  #   else
-      
-  #     @posts = @user.posts.where(status: params[:status])
-  #   end
-  # end
-  
-
-  # def follow
-  #   @follow = current_user.given_follows.new(follow_params)
-  #   @follow.save
-  #   redirect_back(fallback_location: root_path)
-  # end
-  
-  # def unfollow
-
-  #   @follow = current_user.given_follows.find_by(followable: @user)
-  #   @follow.destroy 
-  #   redirect_back(fallback_location: root_path)
-  # end
-
-  # def followers
-  #   @followers = @user.followers
-  # end
-
   private
-  def follow_params
-    params.require(:follow).permit(:followable_id, :followable_type)
-  end  
+  
+  def publication_params
+    params.require(:publication).permit(:name, :bio)
+  end
+
+  def set_publication
+    @publication = Publication.find(params[:id])
+  end
+  
 end
