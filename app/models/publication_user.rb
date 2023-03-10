@@ -20,8 +20,45 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class PublicationUser < ApplicationRecord
+
+  #------- RELATIONS -------#
   belongs_to :user
   belongs_to :publication
 
+  #------- ENUMS -------#
   enum role: { admin: 0, editor: 1 }
+
+  attr_accessor :email, :invited_by
+
+  #------- CALLBACKS -------#
+  before_validation :set_user
+  after_create :send_mail
+
+  def set_user
+    return if user_id.present?
+
+    # self.user = User.with_deleted.where(email: email)&.first
+    self.user = User.where(email: email)&.first
+    # User.restore(user.id) if user&.deleted?
+
+    if user.blank?
+      new_user = User.invite!({ email: email }, invited_by) do |u|
+        u.skip_invitation = true
+      end
+      self.user = new_user
+    end
+  end
+
+  def send_mail
+    if pending_invite?
+      PublicationUserMailer.with(user: user, publication: company).invited_to_join.deliver_now
+    else
+      PublicationUserMailer.with(user: user, publication: company).added_to_publication.deliver_now
+    end
+  end
+
+  def pending_invite?
+    user.pending_invite?
+  end
+
 end

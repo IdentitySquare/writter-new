@@ -46,7 +46,7 @@ class PublicationsController < ApplicationController
   private
   
   def publication_params
-    params.require(:publication).permit(:name, :bio)
+    params.require(:publication).permit(:name, :bio, :editor_emails, :invited_by)
   end
 
   def set_publication
