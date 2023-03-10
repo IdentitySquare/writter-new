@@ -23,7 +23,8 @@ Rails.application.routes.draw do
                confirmations: 'users/confirmations',
                sessions: 'users/sessions',
                invitations: 'users/invitations',
-               omniauth_callbacks: "users/omniauth_callbacks"
+               omniauth_callbacks: "users/omniauth_callbacks",
+               invitations: 'devise/invitations'
   }
 
   resources   :users, only: [:update]

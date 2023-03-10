@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: publications
+#
+#  id         :bigint           not null, primary key
+#  bio        :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Publication < ApplicationRecord
   has_many :publication_users
   has_many :users, through: :publication_users

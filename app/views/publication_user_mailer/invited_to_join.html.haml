@@ -1,0 +1,11 @@
+
+#{t('.two')}
+
+= link_to t("devise.mailer.invitation_instructions.accept"), accept_user_invitation_url(@user, invitation_token: @token)
+
+- if @user.invitation_due_at
+
+  = t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format'))
+
+
+= t("devise.mailer.invitation_instructions.ignore")

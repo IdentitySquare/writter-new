@@ -26,7 +26,9 @@
             .flex.flex-wrap
               = @publication.publication_users.where(role: :editor).each do |editor|
                 .text-xs.text-center.mt-1
-                  = editor.email
+                  = editor.user.email
+                  - if editor.user.pending_invite?
+                    (Requested)
 
             = f.hidden_field :invited_by, value: current_user.id
             = f.hidden_field :editor_emails, 'data-publication-users-target': 'editorEmails', value: @publication.publication_users.joins(:user).where(role: :editor).pluck('users.email').join(',')
