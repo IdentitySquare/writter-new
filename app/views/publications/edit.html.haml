@@ -23,15 +23,20 @@
 
             .text-black
               Editors
-            .flex.flex-wrap
-              = @publication.publication_users.where(role: :editor).each do |editor|
-                .text-xs.text-center.mt-1
-                  = editor.user.email
-                  - if editor.user.pending_invite?
-                    (Requested)
+            .flex.flex-wrap.text-xs.gap-5{'data-publication-users-target': 'newEmails'}
+              
+              - @publication.publication_users.includes(:user).where(role: :editor).each do |editor|
+                
+                = editor.user.email
+                - if editor.user.pending_acceptance?
+                  (Requested)
+
+             
+                -# this is where the new emails will be added
+
 
             = f.hidden_field :invited_by, value: current_user.id
-            = f.hidden_field :editor_emails, 'data-publication-users-target': 'editorEmails', value: @publication.publication_users.joins(:user).where(role: :editor).pluck('users.email').join(',')
+            = f.hidden_field :editor_emails, 'data-publication-users-target': 'editorEmails', value: []
             = f.text_field :user_email, 'data-publication-users-target': 'emailInput', class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'
             .btn-primary{type: "button", "data-action": "click->publication-users#add"} Add User
         %div.mb-6
