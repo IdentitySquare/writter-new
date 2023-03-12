@@ -25,7 +25,7 @@
               Editors
             .flex.flex-wrap.text-xs.gap-5{'data-publication-users-target': 'newEmails'}
               
-              - @publication.publication_users.includes(:user).where(role: :editor).each do |editor|
+              - @publication.editors.each do |editor|
                 
                 = editor.user.email
                 - if editor.user.pending_acceptance?

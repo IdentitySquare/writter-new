@@ -23,6 +23,14 @@ class Publication < ApplicationRecord
       PublicationUser.create(publication: self, email: email, invited_by:,  role: 'editor')
     end
   end
+
+  def editors
+    publication_users.includes(:user).where(role: :editor)
+  end
+
+  def admins
+    publication_users.includes(:user).where(role: :admin)
+  end
 end
 
   
