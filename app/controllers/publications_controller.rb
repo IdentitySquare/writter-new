@@ -21,9 +21,6 @@ class PublicationsController < ApplicationController
   end
 
   def index
-  end
-
-  def manage
     @publications = current_user.publications
   end
   

@@ -2,11 +2,23 @@
   
   
   .text-center.font-semibold.text-4xl.mb-5
-    Publications
+    Your Publications
 
 
-  You dont have any publications
 
-  %button.relative.inline-flex.items-center.rounded-sm.border.border-transparent.bg-black.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+  - if @publications.empty?
+    You dont have any publications yet. 
+  
 
-    = link_to 'New Publication', new_publication_path, class: 'text-white'
+  - else
+  
+
+    - @publications.each do |publication|
+      .flex.flex-row.pb-10
+        = publication.name
+
+
+  .flex-shrink-0
+    %button.btn-primary{type: "button"}
+
+      = link_to 'New Publication', new_publication_path
