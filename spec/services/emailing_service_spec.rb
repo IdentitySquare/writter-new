@@ -31,7 +31,7 @@ describe 'DailyActionReminderService' do
                 {
                   params: {
                     user_id: @user.id,
-                    posts_ids: @followed_user.posts.pluck(:id),
+                    post_ids: @followed_user.posts.pluck(:id),
                   },
                   args: []
                 }
@@ -53,7 +53,7 @@ describe 'DailyActionReminderService' do
                 {
                   params: {
                     user_id: @user.id,
-                    posts_ids: @followed_user.posts.pluck(:id),
+                    post_ids: @followed_user.posts.pluck(:id),
                   },
                   args: []
                 }
@@ -80,7 +80,7 @@ describe 'DailyActionReminderService' do
               {
                 params: {
                   user_id: @user.id,
-                  posts_ids: @followed_user.posts.pluck(:id),
+                  post_ids: @followed_user.posts.pluck(:id),
                 },
                 args: []
               }
@@ -106,7 +106,7 @@ describe 'DailyActionReminderService' do
               {
                 params: {
                   user_id: @user.id,
-                  posts_ids: @followed_user.posts.pluck(:id),
+                  post_ids: @followed_user.posts.pluck(:id),
                 },
                 args: []
               }
