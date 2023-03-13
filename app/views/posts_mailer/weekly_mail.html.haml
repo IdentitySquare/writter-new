@@ -1,11 +1,13 @@
-%p Hello #{@user.name},
+%p Hi #{@user.name},
 
 %p
   Writers you have followed have published new posts this week. Want to check them out?
 %p
 
+/link to each post in the list/
 
-
-- @posts.each do |post|
-  %p
-    %a{:href => post_url(post)}= post.title
+- @posts[0..2].each do |post|
+  = render 'post_card', post: post
+  %hr
+      
+       
