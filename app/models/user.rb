@@ -23,10 +23,10 @@
 #  last_sign_in_ip                :string
 #  location                       :string
 #  name                           :string
-#  new_article_notifications_freq :integer          default(0)
+#  new_article_notifications_freq :integer          default("daily")
 #  notifications                  :boolean          default(TRUE)
-#  notifications_freq             :integer          default(0)
-#  performance_notifications_freq :integer          default(0)
+#  notifications_freq             :integer          default("instantly")
+#  performance_notifications_freq :integer          default("daily")
 #  product_notifications          :boolean          default(TRUE)
 #  provider                       :string
 #  remember_created_at            :datetime
@@ -50,6 +50,15 @@
 #  index_users_on_invited_by_id         (invited_by_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_invitation_token      (invitation_token) UNIQUE
+#  index_users_on_invited_by            (invited_by_type,invited_by_id)
+#  index_users_on_invited_by_id         (invited_by_id)
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and 
@@ -57,6 +66,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :username, length: {minimum: 4 }, on: :update
+  validates :timezone, presence: true
+
+  before_save :set_time_zone
 
   has_many :posts, dependent: :destroy
 
@@ -72,6 +84,14 @@ class User < ApplicationRecord
   has_many :following, through: :given_follows, source: :followable, source_type: "User"
 
 
+  # notification preference stored as enum
+  enum notifications_freq: { instantly: 0, daily: 1, weekly: 2, off: 3  }, _suffix: :notifications
+
+  enum new_article_notifications_freq: { daily: 0, weekly: 1, off: 2}, _suffix: :new_article_notifications
+
+  enum performance_notifications_freq: { daily: 0, weekly: 1, off: 2}, _suffix: :performance_notifications
+
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -96,12 +116,20 @@ class User < ApplicationRecord
     posts.draft
   end
 
+
   def pending_invite?
     invitation_created_at.present? && invitation_sent_at.blank? 
   end
 
   def pending_acceptance?
     invitation_sent_at.present? && invitation_accepted_at.blank?
+
+  end
+  private
+
+  def set_time_zone
+    self.timezone = Time.zone.name
+
   end
   
 end

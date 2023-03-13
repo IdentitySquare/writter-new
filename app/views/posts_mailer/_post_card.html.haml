@@ -1,0 +1,11 @@
+= link_to post_url(post) do
+  .d-flex
+    .post-card.align-left.w-fit
+      .font-bold
+        #{post.title}
+
+      .text-sm
+        = post.user.name
+
+      .body-text.mt-5
+        = post.body_content

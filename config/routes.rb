@@ -12,11 +12,11 @@ Rails.application.routes.draw do
     end
   end
 
+
   resources :publications, only: [:create, :new, :show, :index,:edit,:update]
     
-    
-  # get 'publications/manage', to: 'publications#manage', as: 'manage_publications'
-
+  get 'settings/notifications', to: 'user_profiles#notifications_settings', as: :notifications_settings
+  
   devise_for :users,
              controllers: {
                registrations: 'users/registrations',
@@ -26,11 +26,9 @@ Rails.application.routes.draw do
                omniauth_callbacks: "users/omniauth_callbacks",
                invitations: 'devise/invitations'
   }
-
   resources   :users, only: [:update]
 
   resources :posts, except: [:create] 
-  
   get 'posts/:id/publish', to: 'posts#publish' , as: 'publish_post'
   get 'posts/:id/unpublish', to: 'posts#unpublish' , as: 'unpublish_post'
 

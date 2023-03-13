@@ -23,10 +23,10 @@
 #  last_sign_in_ip                :string
 #  location                       :string
 #  name                           :string
-#  new_article_notifications_freq :integer          default(0)
+#  new_article_notifications_freq :integer          default("daily")
 #  notifications                  :boolean          default(TRUE)
-#  notifications_freq             :integer          default(0)
-#  performance_notifications_freq :integer          default(0)
+#  notifications_freq             :integer          default("instantly")
+#  performance_notifications_freq :integer          default("daily")
 #  product_notifications          :boolean          default(TRUE)
 #  provider                       :string
 #  remember_created_at            :datetime

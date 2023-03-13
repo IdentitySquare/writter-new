@@ -23,10 +23,10 @@
 #  last_sign_in_ip                :string
 #  location                       :string
 #  name                           :string
-#  new_article_notifications_freq :integer          default(0)
+#  new_article_notifications_freq :integer          default("daily")
 #  notifications                  :boolean          default(TRUE)
-#  notifications_freq             :integer          default(0)
-#  performance_notifications_freq :integer          default(0)
+#  notifications_freq             :integer          default("instantly")
+#  performance_notifications_freq :integer          default("daily")
 #  product_notifications          :boolean          default(TRUE)
 #  provider                       :string
 #  remember_created_at            :datetime
@@ -41,6 +41,14 @@
 #  created_at                     :datetime         not null
 #  updated_at                     :datetime         not null
 #  invited_by_id                  :bigint
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_invitation_token      (invitation_token) UNIQUE
+#  index_users_on_invited_by            (invited_by_type,invited_by_id)
+#  index_users_on_invited_by_id         (invited_by_id)
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 # Indexes
 #

@@ -21,7 +21,6 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    
     if current_user.posts.where(draft_body: nil).any?
       redirect_to edit_post_path(current_user.posts.where(draft_body: nil).first)
     else
