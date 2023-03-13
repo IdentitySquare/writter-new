@@ -151,3 +151,5 @@ end
 gem "factory_bot", "~> 6.2"
 
 gem "pundit", "~> 2.3"
+
+gem "timecop", "~> 0.9.6"

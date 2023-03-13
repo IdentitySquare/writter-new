@@ -21,7 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
-    
+  include ActionView::Helpers::SanitizeHelper
   #----- CONSTANTS -----#
    enum status: { draft: 0, published: 1 }
    #----- ASSOCIATIONS -----#
@@ -45,8 +45,10 @@ class Post < ApplicationRecord
     return nil if empty?
 
     block_index = title.present? ? 1 : 0
-
-    body_block
+    
+    body_block = JSON.parse(body)&.fetch('blocks')[block_index]
+    
+    return strip_tags(body_block['data']['text'])
   end
 
   def empty?

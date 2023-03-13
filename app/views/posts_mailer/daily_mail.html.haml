@@ -1,0 +1,15 @@
+
+%p Hi #{@user.name},
+
+%p
+  Writers you have followed have published new posts today. Want to check them out?
+%p
+
+/link to each post in the list/
+
+- @posts[0..2].each do |post|
+  = render 'post_card', post: post
+  %hr
+      
+       
+       
