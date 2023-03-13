@@ -4,7 +4,7 @@ class PerformanceMailer < ApplicationMailer
   def daily_mail
     mail(
       to: "#{@user.name} <#{@user.email}>",
-      subject: "Notifications you've missed"
+      subject: "Today's Performance Report"
     )
   end
 
@@ -12,7 +12,7 @@ class PerformanceMailer < ApplicationMailer
   def weekly_mail
     mail(
       to: "#{@user.name} <#{@user.email}>",
-      subject: "Notifications you've missed"
+      subject: "This week's performance report"
     )
   end
 

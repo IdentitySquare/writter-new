@@ -4,21 +4,21 @@ class NotificationsMailer < ApplicationMailer
   def instantly_mail
     mail(
       to: "#{@user.name} <#{@user.email}>",
-      subject: "Notifications you've missed"
+      subject: "You have a new notification!"
     )
   end
 
   def daily_mail
     mail(
       to: "#{@user.name} <#{@user.email}>",
-      subject: "Notifications you've missed"
+      subject: "Notifications you've missed today"
     )
   end
   
   def weekly_mail
     mail(
       to: "#{@user.name} <#{@user.email}>",
-      subject: "Notifications you've missed"
+      subject: "Notifications you've missed this week"
     )
   end
 
