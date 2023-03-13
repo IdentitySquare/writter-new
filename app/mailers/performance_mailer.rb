@@ -8,7 +8,6 @@ class PerformanceMailer < ApplicationMailer
     )
   end
 
- 
   def weekly_mail
     mail(
       to: "#{@user.name} <#{@user.email}>",
