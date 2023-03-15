@@ -35,7 +35,6 @@ class PublicationUser < ApplicationRecord
   after_create :send_mail
 
   def set_user
-    debugger
     return if user_id.present?
 
     # self.user = User.with_deleted.where(email: email)&.first
@@ -51,7 +50,6 @@ class PublicationUser < ApplicationRecord
   end
 
   def send_mail
-    debugger
     if pending_invite?
       PublicationUserMailer.with(user: user, publication: publication, role: role).invited_to_join.deliver_now
     else

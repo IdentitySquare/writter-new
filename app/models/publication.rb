@@ -22,7 +22,7 @@ class Publication < ApplicationRecord
 
       PublicationUser.create(publication: self, email: email, invited_by:,  role: 'editor')
     end
-    debugger
+    
     admin_emails.split(',').each do |email|
       # next if publication_users.where(email: email).present?
 
