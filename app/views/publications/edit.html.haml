@@ -47,13 +47,42 @@
               .relative.flex.flex-grow.items-stretch.focus-within:z-10
                 
                 %input#email.block.w-full.rounded-none.rounded-l-md.border-0.text-gray-900.ring-1.ring-inset.ring-gray-300.placeholder:text-gray-400.focus:ring-2.focus:ring-inset.focus:ring-emerald-500.sm:text-sm.sm:leading-6{:class => "py-1.5", :name => "email", :placeholder => "Enter email...", :type => "email", 'data-publication-users-target': 'emailInput'}/
-              %button.relative.-ml-px.inline-flex.items-center.rounded-r-md.px-3.py-2.text-sm.font-semibold.text-gray-900.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#addEditor"}
+              %button.relative.-ml-px.inline-flex.items-center.rounded-r-md.px-3.py-2.text-sm.font-medium.text-gray-900.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#addEditor"}
                 
                 Add as Editor
 
             
            
         %div.mb-6
+
+          %label.block.text-sm.font-medium.text-gray-700.mb-5
+            Admins
+          .flex.flex-wrap.text-xs.gap-2{'data-publication-users-target': 'newAdmins'}
+            
+            - @publication.admins.each do |admin|
+              
+              .border.rounded-full.border-gray-200.px-3.py-2
+                = admin.user.email
+                - if admin.user.pending_acceptance?
+                  (Requested)
+
+              
+              -# this is where the new emails will be added
+
+
+          = f.hidden_field :invited_by, value: current_user.id
+          = f.hidden_field :admin_emails, 'data-publication-users-target': 'adminEmails', value: []
+
+          
+          %div
+            
+            .mt-2.flex.rounded-md.shadow-sm
+              .relative.flex.flex-grow.items-stretch.focus-within:z-10
+                
+                %input#email.block.w-full.rounded-none.rounded-l-md.border-0.text-gray-900.ring-1.ring-inset.ring-gray-300.placeholder:text-gray-400.focus:ring-2.focus:ring-inset.focus:ring-emerald-500.sm:text-sm.sm:leading-6{:class => "py-1.5", :name => "email", :placeholder => "Enter email...", :type => "email", 'data-publication-users-target': 'adminEmailInput'}/
+              %button.relative.-ml-px.inline-flex.items-center.rounded-r-md.px-3.py-2.text-sm.font-medium.text-gray-900.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#addAdmin"}               
+                Add as Admin
+
     
 
         = f.button :submit, value: 'Save', 'data-onboarding-target': 'saveButton',class: 'flex w-full justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2{type: "submit"}'
