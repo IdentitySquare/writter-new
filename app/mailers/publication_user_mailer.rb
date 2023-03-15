@@ -1,7 +1,9 @@
 class PublicationUserMailer < ApplicationMailer
     before_action :set_user
+    before_action :set_role
+    before_action :set_publication
   
-    def invited_to_join  
+    def invited_to_join
       mail(
         to: "#{@user.name} <#{@user.email}>",
         subject: 'Join to be a part of this publication'
@@ -18,6 +20,14 @@ class PublicationUserMailer < ApplicationMailer
     private
     def set_user
       @user = params[:user]
+    end
+
+    def set_role
+      @role = params[:role] 
+    end
+
+    def set_publication
+      @publication = params[:publication]
     end
   end
   

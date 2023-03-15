@@ -52,9 +52,9 @@ class PublicationUser < ApplicationRecord
   def send_mail
     
     if pending_invite?
-      PublicationUserMailer.with(user: user, publication: publication).invited_to_join.deliver_now
+      PublicationUserMailer.with(user: user, publication: publication, role: role).invited_to_join.deliver_now
     else
-      PublicationUserMailer.with(user: user, publication: publication).added_to_publication.deliver_now
+      PublicationUserMailer.with(user: user, publication: publication, role: role).added_to_publication.deliver_now
     end
   end
 

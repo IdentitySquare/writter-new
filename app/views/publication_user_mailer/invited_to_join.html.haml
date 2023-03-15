@@ -1,11 +1,9 @@
 
-#{t('.two')}
-
-= link_to t("devise.mailer.invitation_instructions.accept"), accept_user_invitation_url(@user, invitation_token: @token)
-
-- if @user.invitation_due_at
-
-  = t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format'))
-
-
-= t("devise.mailer.invitation_instructions.ignore")
+%p 
+  Hi #{@user.name},
+%p
+  You have been invited as an #{@role} to the publication '#{@publication.name}'. To continue, please click the button below to create your account on Writter.
+%p 
+  = link_to 'Create Account', accept_user_invitation_url(@user, invitation_token: @token), class: 'button'
+%p
+  = t("devise.mailer.invitation_instructions.ignore")
