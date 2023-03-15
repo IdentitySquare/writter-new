@@ -1,24 +1,26 @@
 .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
   
+  = render 'user_profiles/settings_header', selected: 'publications'
+
   
-  .text-center.font-semibold.text-4xl.mb-5
-    Your Publications
-
-
-
   - if @publications.empty?
-    You dont have any publications yet. 
+    .text-center.mb-10
+      You dont have any publications yet. 
   
+    %button.btn-secondary.mx-auto{type: "button"}
 
+      = link_to 'Create your first Publication', new_publication_path
   - else
   
 
+   
+
+
+    .flex.justify-end
+      = link_to '+ Create a New Publication', new_publication_path, class: 'text-green-900'
+
+    -# link to each publication
     - @publications.each do |publication|
       .flex.flex-row.pb-10
-        = publication.name
-
-
-  .flex-shrink-0
-    %button.btn-primary{type: "button"}
-
-      = link_to 'New Publication', new_publication_path
+        = link_to "#{publication.name}", publication_path(publication)
+  
