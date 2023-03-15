@@ -113,8 +113,7 @@ class User < ApplicationRecord
   end
 
   def pending_acceptance?
-    invitation_sent_at.present? && invitation_accepted_at.blank?
-
+    invitation_created_at.present? && invitation_accepted_at.blank?
   end
   private
 

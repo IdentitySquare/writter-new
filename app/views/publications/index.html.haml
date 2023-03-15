@@ -20,7 +20,7 @@
       = link_to '+ Create a New Publication', new_publication_path, class: 'text-green-900'
 
     -# link to each publication
-    - @publications.each do |publication|
+    - @publications.uniq.each do |publication|
       .flex.flex-row.pb-10
         = link_to "#{publication.name}", publication_path(publication)
   
