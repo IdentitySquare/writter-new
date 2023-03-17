@@ -60,7 +60,7 @@ class UserProfilesController < ApplicationController
                                                :username,
                                                :bio, 
                                                :website,
-                                               :notifications, 
+                                               :email_notifications, 
                                                :notifications_freq,
                                                :new_article_notifications_freq,
                                                :performance_notifications_freq,

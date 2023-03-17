@@ -2,7 +2,7 @@
 describe 'DailyActionReminderService' do
 
   before do
-    @user = FactoryBot.create(:user, notifications: true, new_article_notifications_freq: 0)
+    @user = FactoryBot.create(:user, email_notifications: true, new_article_notifications_freq: 0)
     @followed_user = FactoryBot.create(:user)
 
     FactoryBot.create(:follow,
@@ -67,7 +67,7 @@ describe 'DailyActionReminderService' do
     
     context 'notifications off' do
       it 'doesnt send email when new post from follower' do
-        @user.update(notifications: true)
+        @user.update(email_notifications: true)
         @user.update(new_article_notifications_freq: 2)
         @post = FactoryBot.create(:post, user: @followed_user, status: 1, published_at: 1.hour.ago)
         expect { EmailingService.new.send_new_posts_emails_at_6pm!(timezones: [@user.timezone]) }
@@ -93,7 +93,7 @@ describe 'DailyActionReminderService' do
 
     context 'main email notifications off' do
       it 'doesnt send email when new post from follower' do
-        @user.update(notifications: false)
+        @user.update(email_notifications: false)
         @user.update(new_article_notifications_freq: 1)
         @post = FactoryBot.create(:post, user: @followed_user, status: 1, published_at: 1.hour.ago)
         expect { EmailingService.new.send_new_posts_emails_at_6pm!(timezones: [@user.timezone]) }

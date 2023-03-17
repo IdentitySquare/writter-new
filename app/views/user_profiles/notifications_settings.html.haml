@@ -15,10 +15,10 @@
               Be alerted by email if you are away from Writter.
           .mt-1
             %label.relative.inline-flex.items-center.cursor-pointer
-              = f.check_box :notifications, checked: current_user.notifications, class: "sr-only peer","data-action": "change->notifications#disableFields click->notifications#submitForm" ,"data-notifications-target": 'toggle'
+              = f.check_box :email_notifications, checked: current_user.email_notifications, class: "sr-only peer","data-action": "change->notifications#disableFields click->notifications#submitForm" ,"data-notifications-target": 'toggle'
               .w-11.h-6.bg-gray-200.peer-focus:outline-none.peer-focus:ring-green-800.dark:peer-focus:ring-green-800.rounded-full.peer.dark:bg-gray-700.peer-checked:after:translate-x-full.peer-checked:after:border-white.after:absolute.after:bg-white.after:border-gray-300.after:border.after:rounded-full.after:h-5.after:w-5.after:transition-all.dark:border-gray-600.peer-checked:bg-green-800{class: "after:content-[''] after:top-[2px] after:left-[2px]"}
 
-      .flex.flex-col.gap-5{"data-notifications-target": 'fields', class: "#{current_user.notifications? ? '' : 'opacity-25'}"}
+      .flex.flex-col.gap-5{"data-notifications-target": 'fields', class: "#{current_user.email_notifications? ? '' : 'opacity-25'}"}
         %div
           %label.block.text-md.font-bold.text-gray-900 Notifications about your account
           .mt-1
@@ -26,7 +26,7 @@
             = f.collection_radio_buttons :notifications_freq, User.notifications_freqs, :second, :first , checked: current_user.notifications_freq_before_type_cast do |b| 
               .flex.flex-row.py-2.justify-between
                 = b.label class: 'capitalize text-gray-700'       
-                = b.radio_button class: 'h-6 w-6 border-gray-300 text-green-800 transition disabled:opacity-25' , "data-action": "change->notifications#submitForm", disabled: !current_user.notifications
+                = b.radio_button class: 'h-6 w-6 border-gray-300 text-green-800 transition disabled:opacity-25' , "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
 
         %div
           %label.block.text-md.font-bold.text-gray-900 When someone you follow publishes a new article
@@ -37,7 +37,7 @@
                 
                 
                 = b.label class: 'capitalize text-gray-700'       
-                = b.radio_button class: 'h-6 w-6 border-gray-300 text-green-800 disabled:opacity-25' , "data-action": "change->notifications#submitForm", disabled: !current_user.notifications
+                = b.radio_button class: 'h-6 w-6 border-gray-300 text-green-800 disabled:opacity-25' , "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
 
 
         %div
@@ -47,13 +47,13 @@
             = f.collection_radio_buttons :performance_notifications_freq, User.performance_notifications_freqs, :second, :first, checked: current_user.performance_notifications_freq_before_type_cast,  "data-action": "change->notifications#submitForm"  do |b| 
               .flex.flex-row.py-2.justify-between
                 = b.label class: 'capitalize text-gray-700'
-                = b.radio_button class: "h-6 w-6 border-gray-300 text-green-800 disabled:opacity-25"  ,  "data-action": "change->notifications#submitForm", disabled: !current_user.notifications
+                = b.radio_button class: "h-6 w-6 border-gray-300 text-green-800 disabled:opacity-25"  ,  "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
         
         %div
           .flex.flex-row.py-2.justify-between
             %label.block.text-md.font-bold.text-gray-900 Be alerted when new product and feature updates are released
             .mt-1
-              = f.check_box :product_notifications, class: 'h-4 w-4 rounded border-gray-300 text-emerald-800 disabled:opacity-25 focus:ring-green-800{name: "product-notifications", type: "checkbox"}', "data-action": "change->notifications#submitForm", disabled: !current_user.notifications
+              = f.check_box :product_notifications, class: 'h-4 w-4 rounded border-gray-300 text-emerald-800 disabled:opacity-25 focus:ring-green-800{name: "product-notifications", type: "checkbox"}', "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
 
         %div
           = f.submit "Update Values", class: 'hidden {type: "submit"}'

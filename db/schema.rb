@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_182425) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_194816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_182425) do
     t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "text"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
@@ -120,7 +121,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_182425) do
     t.string "bio"
     t.string "location"
     t.string "website"
-    t.boolean "notifications", default: true
     t.integer "notifications_freq", default: 0
     t.integer "new_article_notifications_freq", default: 0
     t.integer "performance_notifications_freq", default: 0
@@ -134,6 +134,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_182425) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.boolean "email_notifications", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"

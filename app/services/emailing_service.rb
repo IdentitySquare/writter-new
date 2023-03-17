@@ -7,7 +7,7 @@ class EmailingService
 
   def send_notification_emails_at_6pm!
     # for unread notifications
-    users = User.where(timezone: relevant_timezones, notifications: true)
+    users = User.where(timezone: relevant_timezones, email_notifications: true)
                 .where.not(notifications_freq: nil)
                 .where.not(notifications_freq: 'off')
     mail_type = 'notifications_freq'
@@ -18,7 +18,7 @@ class EmailingService
 
   def send_new_posts_emails_at_6pm!(timezones: relevant_timezones)
     # for new posts from people you follow
-    users = User.where(timezone: ['UTC'], notifications: true)
+    users = User.where(timezone: ['UTC'], email_notifications: true)
                 .where.not(new_article_notifications_freq: nil)
                 .where.not(new_article_notifications_freq: 'off')
     
