@@ -3,7 +3,14 @@
     .max-w-xl.mx-auto
       #editor.mt-20{"data-controller": "editor", "data-editor-value" => "#{@post.draft_body}", "data-editor-read-only" => "false"}      
         %div{"data-editor-target": "render" }
-  
 
+
+      -# - @post.images.each do |image|
+      -#   = image_tag image
       
+      -# = form_with model: @post do |form|
+       
+      -#   = form.file_field :images, multiple: true
+      -#   %br/
+      -#   = form.submit
 

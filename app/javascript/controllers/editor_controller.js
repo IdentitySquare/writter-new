@@ -1,5 +1,6 @@
 
 import { Controller } from "@hotwired/stimulus"
+import { DirectUpload } from "@rails/activestorage";
 // import EditorJS from 'editor.js';
 // import EditorJS from '@editorjs/editorjs';
 // import Header from '@editorjs/header';
@@ -14,7 +15,7 @@ export default class extends Controller {
       var dataValue = {"time":1677155768141,"blocks":[{"id":"pgD-hmVDIY","type":"header","data":{"text":"","level":2}},{"id":"bDW9OO6bew","type":"paragraph","data":{"text":""}}],"version":"2.26.5"}
     }
 
-    console.log('dataValue')
+    
 
     
     this.editor = new EditorJS({
@@ -74,6 +75,44 @@ export default class extends Controller {
             cols: 3,
           },
         },
+
+        image: {
+          class: ImageTool,
+          config: {
+            
+          },
+
+          uploader: {
+            uploadByFile(file) {
+              const url = "/rails/active_storage/direct_uploads";
+              const upload = new DirectUpload(file, url);
+              console.log('yeah')
+              console.log(url)
+              return new Promise(function (resolve, reject) {
+                upload.create((error, blob) => {
+                  if (error) {
+                    reject(error);
+                  } else {
+                    fetch(`/blocks/get_image_url?attachable_sgid=${blob.attachable_sgid}`)
+                      .then((response) => response.json())
+                      .then((imageUrlResp) => {
+                        console.log(imageUrlResp);
+                        resolve({
+                          success: 1,
+                          file: {
+                            url: imageUrlResp.url,
+                            attachable_sgid: blob.attachable_sgid,
+                          },
+                        });
+                      });
+                  }
+                });
+              });
+            }
+          }
+
+          
+        }
 
       },
 

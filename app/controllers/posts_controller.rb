@@ -56,9 +56,9 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         
+        format.turbo_stream { }
+        format.html { redirect_back(fallback_location: root_path)}
         
-        format.html { render :show, status: :ok, location: @post }
-        format.json { render :show, status: :ok, location: @post }
         
         
       else
@@ -108,7 +108,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:body, :title, :draft_body)
+      params.require(:post).permit(:body, :title, :draft_body,images:[])
     end
 
     def set_user
