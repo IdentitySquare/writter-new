@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_10_111740) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_111326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_111740) do
     t.integer "status", default: 0, null: false
     t.datetime "published_at"
     t.string "draft_body"
+    t.bigint "publication_id"
+    t.index ["publication_id"], name: "index_posts_on_publication_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -70,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_111740) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: fal
+    t.datetime "updated_at", null: false
     t.string "name"
     t.string "provider"
     t.string "uid"
@@ -92,7 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_111740) do
     t.integer "invitation_limit"
     t.string "invited_by_type"
     t.bigint "invited_by_id"
-   t.integer "invitations_count", default: 0
+    t.integer "invitations_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
@@ -101,6 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_111740) do
   end
 
   add_foreign_key "follows", "users"
+  add_foreign_key "posts", "publications"
   add_foreign_key "posts", "users"
   add_foreign_key "publication_users", "publications"
   add_foreign_key "publication_users", "users"

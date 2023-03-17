@@ -107,6 +107,14 @@ class User < ApplicationRecord
     posts.draft
   end
 
+  def publications_as_editor
+    publications.where(publication_users: { role: "editor" })
+  end
+  
+  
+  def publications_as_admin
+    publications.where(publication_users: { role: "admin" })
+  end
 
   def pending_invite?
     invitation_created_at.present? && invitation_sent_at.blank? 
