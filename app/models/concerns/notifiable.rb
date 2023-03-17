@@ -1,7 +1,7 @@
 module Notifiable
     extend ActiveSupport::Concern
   
-    has_many :notifications, as: :notifiable, dependent: :destroy
+    has_many :notifications, as: :notifiable
 
     after_create: :send_email if notifications_freq == 'instantly'
   

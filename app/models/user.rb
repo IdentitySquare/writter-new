@@ -11,6 +11,7 @@
 #  current_sign_in_at             :datetime
 #  current_sign_in_ip             :string
 #  email                          :string           default(""), not null
+#  email_notifications            :boolean          default(FALSE)
 #  encrypted_password             :string           default(""), not null
 #  invitation_accepted_at         :datetime
 #  invitation_created_at          :datetime
@@ -24,7 +25,6 @@
 #  location                       :string
 #  name                           :string
 #  new_article_notifications_freq :integer          default("daily")
-#  notifications                  :boolean          default(TRUE)
 #  notifications_freq             :integer          default("instantly")
 #  performance_notifications_freq :integer          default("daily")
 #  product_notifications          :boolean          default(TRUE)
@@ -53,6 +53,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and 
+  self.ignored_columns = ["notifications"]
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
@@ -70,7 +71,7 @@ class User < ApplicationRecord
   has_many :given_follows, class_name: "Follow"
   has_many :following, through: :given_follows, source: :followable, source_type: "User"
 
-
+  has_many :notifications
   # notification preference stored as enum
   enum notifications_freq: { instantly: 0, daily: 1, weekly: 2, off: 3  }, _suffix: :notifications
 

@@ -5,6 +5,7 @@
 #  id              :bigint           not null, primary key
 #  notifiable_type :string           not null
 #  read_at         :datetime
+#  text            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  notifiable_id   :bigint           not null
@@ -21,5 +22,5 @@
 #
 class Notification < ApplicationRecord
   belongs_to :user
-  belongs_to :notifiable, polymorphic: true
+  belongs_to :notifiable, polymorphic: true, required: true
 end
