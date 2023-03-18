@@ -62,22 +62,48 @@
     
 
   
-  .text-neutral-900.text-bold.z-10{class: 'pt-20'}
-    %hr.mb-5
-    .flex.flex-row.gap-3.justify-between.items-center.uppercase.mb-5
+  -# .text-neutral-900.text-bold.z-10{class: 'pt-20'}
+  -#   %hr.mb-5
+  -#   .flex.flex-row.gap-3.justify-between.items-center.uppercase.mb-5
      
-      #{@user.name} 
+  -#     #{@user.name} 
       
-      - if current_user && current_user.following.include?(@user)
-        = button_to '', unfollow_user_profile_path(@user), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
+  -#     - if current_user && current_user.following.include?(@user)
+  -#       = button_to '', unfollow_user_profile_path(@user), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
       
-      - elsif current_user != @user
+  -#     - elsif current_user != @user
         
-        = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-sm font-medium shadow-sm hover:bg-green-200 hover:border-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+  -#       = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-sm font-medium shadow-sm hover:bg-green-200 hover:border-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 
      
 
 
     
-    = @user.bio
+  -#   = @user.bio
+
+  %hr.mb-5.mt-5
+
+  .block.text-gray-700.font-bold.mb-5
+    #{@post.comments.size > 1  ? "#{@post.comments.size} " : ''  }Comments
+  = simple_form_for :comment, url: comments_path do |f|
+    = f.input :body, as: :text, maxlength: 160, label: false, input_html:{rows: 5, class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-900 focus:outline-none focus:ring-emerald-900 sm:text-sm'}, placeholder: "Write a comment...", required: true
+    = f.hidden_field :post_id, value: @post.id
+    .flex.items-end.mt-3
+      = f.submit "Post", class: 'flex ml-auto justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-5 cursor-pointer text-sm font-medium text-white shadow-sm hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2{type: "submit"}'
+      
+
+     
+
+  - @post.comments.includes([:user]).each do |comment|
+    .flex.flex-col.items-start.mb-4.gap-5.py-5
+      .flex.flex-row.gap-2.items-center
+        
+        %img.w-10.h-10.rounded-full{ src: comment.user.avatar_url, alt: "Avatar" }
+        .text-gray-700.text-md.mb-1= comment.user.name
+
+      %p.text-gray-500.text-md.mb-2= comment.body
+
+                
+    
+    %hr.border-t.border-gray-200.mt-5
 

@@ -70,7 +70,7 @@ class User < ApplicationRecord
   has_many :given_follows, class_name: "Follow"
   has_many :following, through: :given_follows, source: :followable, source_type: "User"
 
-
+  has_many :comments
   # notification preference stored as enum
   enum notifications_freq: { instantly: 0, daily: 1, weekly: 2, off: 3  }, _suffix: :notifications
 
