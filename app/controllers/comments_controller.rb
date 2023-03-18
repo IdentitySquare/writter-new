@@ -23,10 +23,10 @@ class CommentsController < ApplicationController
   # DELETE /posts/1 or /posts/1.json
   def destroy
     authorize @comment
-    @post.destroy
+    @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_back(fallback_location: root_path)}
       format.json { head :no_content }
     end
   end
@@ -34,8 +34,8 @@ class CommentsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
+    def set_comment
+      @comment = Comment.find(params[:id])
     end
 
     def comment_params
