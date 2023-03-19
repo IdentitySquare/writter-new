@@ -1,114 +1,19 @@
 .container.max-w-xl.mx-auto
-  .bg-white.px-4.py-5.sm:px-0{'data-controller': 'dropdown'}
-    .flex.space-x-3
-      .flex-shrink-0
-        = link_to user_profile_path(@user) do
-          %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
-            %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
-              %path{:d => "M24
-              20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
-
-      .min-w-0.flex-1
-        %p.text-sm.font-medium.text-gray-900
-          %a.hover:underline{href: user_profile_path(@user)} #{@user.name}
-        %p.text-sm.text-gray-500
-          #{@post.created_at.strftime('%b %Y')}
-      
-    
-      - if policy(@post).update?
-        
-        .flex.flex-shrink-0.self-center
-          .relative.inline-block.text-left
-            %div
-              %button#menu-0-button.-m-2.flex.items-center.rounded-full.p-2.text-gray-400.hover:text-gray-600{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button",'data-action': 'click->dropdown#toggleDropdown'}
-                %span.sr-only Open options
-                / Heroicon name: mini/ellipsis-vertical
-                %svg.h-5.w-5{"aria-hidden" => "true", :fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
-                  %path{:d => "M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z"}
-            /
-              Dropdown menu, show/hide based on menu state.
-              
-              Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-              Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-            .hidden.absolute.right-0.z-10.mt-2.w-56.origin-top-right.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "menu-0-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1",'data-dropdown-target': 'dropdown'}
-              .py-1{:role => "none"}
-                / Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700"
-                %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => edit_post_path(@post), :role => "menuitem", :tabindex => "-1"}
-            
-                  %svg.feather.feather-edit-2.mr-2{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                    %path{:d => "M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"}
 
 
-                  %span Edit
-                
-                - if @post.published?
-                  %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => unpublish_post_path(@post), :data => { confirm: 'Your confirm message' }, :role => "menuitem", :tabindex => "-1"}
-      
-                    %svg.feather.feather-file-minus{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                      %path{:d => "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}
-                      
-                    %span.ml-2 Unpublish
-                  
+  = render 'banner', user: @user
 
-
-
-  .prose.font-serif{"data-controller": "editor", "data-editor-value" => "#{@post.body}", "data-editor-read-only" => 'true'}
-    
-    %div{"data-editor-target": "render" }
+  = render 'post', post: @post
 
   %hr.mb-5.mt-5
 
   .block.text-gray-700.font-bold.mb-5
     #{@post.comments.kept.size > 1  ? "#{@post.comments.kept.size} " : ''  }Comments
-  = simple_form_for :comment, url: comments_path do |f|
-    = f.input :body, as: :text, maxlength: 1000, label: false, input_html:{rows: 5, class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-900 focus:outline-none focus:ring-emerald-900 sm:text-sm'}, placeholder: "Write a comment...", required: true
-    = f.hidden_field :post_id, value: @post.id
-    .flex.items-end.mt-3
-      = f.submit "Post", class: 'flex ml-auto justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-5 cursor-pointer text-sm font-medium text-white shadow-sm hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2{type: "submit"}'
-      
 
-     
-
-  - @post.comments.kept.includes([:user]).each do |comment|
-    .flex.flex-col.items-start.mb-4.gap-5.py-5.pr-3{'data-controller': 'dropdown'}
-      .flex.flex-row.gap-2.items-center.w-full
-        
-        %img.w-10.h-10.rounded-full{ src: comment.user.avatar_url, alt: "Avatar" }
-        .text-gray-700.text-sm.font-medium= comment.user.name
-
-        %span.text-xs.uppercase.text-gray-500 #{comment.created_at.strftime('%d %b %Y')}
-
-
-        - if policy(comment).destroy?
-          .flex.flex-shrink-0.self-center.ml-auto
-            .relative.inline-block.text-left
-
-              %button#menu-0-button.-m-2.flex.items-center.rounded-full.p-2.text-gray-400.hover:text-gray-600{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button",'data-action': 'click->dropdown#toggleDropdown'}
-                %span.sr-only Open options
-                / Heroicon name: mini/ellipsis-horizontal
-                %svg.h-5.w-8{"aria-hidden" => "true", :fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
-                  %path{:d => "M4 8.5a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z"}
-
-
-              .hidden.absolute.right-0.z-10.mt-2.origin-top-right.rounded-md.bg-white.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "menu-0-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1",'data-dropdown-target': 'dropdown'}
-                .py-1{:role => "none"}
-              
-                  = button_to comment_path(comment), method: :delete, class: 'text-gray-700 flex px-4 py-2 text-sm', role: 'menuitem', tabindex: '-1' do
-                    %svg.feather.feather-edit-2.mr-2{ fill: 'none', height: '20', stroke: 'currentColor', 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', viewbox: '0 0 24 24', width: '20', xmlns: 'http://www.w3.org/2000/svg' }
-                      %polyline{ points: '3 6 5 6 21 6' }
-                      %path{ d: 'M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2' }
-                      %line{ x1: '10', x2: '10', y1: '11', y2: '17' }
-                      %line{ x1: '14', x2: '14', y1: '11', y2: '17' }
-
-                    %span Delete
-
-      %p.text-gray-500.text-sm.mb-2= comment.body
-
-                
+  = render 'comments/form', post: @post
+  
+  
+  .div#comments
+    = render 'comments/comments', comments: @post.comments.kept.includes([:user])
     
-    %hr.border-t.border-gray-200.mt-5
-
+ 
