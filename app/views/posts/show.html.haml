@@ -59,12 +59,11 @@
   .prose.font-serif{"data-controller": "editor", "data-editor-value" => "#{@post.body}", "data-editor-read-only" => 'true'}
     
     %div{"data-editor-target": "render" }
-    
 
   %hr.mb-5.mt-5
 
   .block.text-gray-700.font-bold.mb-5
-    #{@post.comments.size > 1  ? "#{@post.comments.size} " : ''  }Comments
+    #{@post.comments.kept.size > 1  ? "#{@post.comments.kept.size} " : ''  }Comments
   = simple_form_for :comment, url: comments_path do |f|
     = f.input :body, as: :text, maxlength: 1000, label: false, input_html:{rows: 5, class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-900 focus:outline-none focus:ring-emerald-900 sm:text-sm'}, placeholder: "Write a comment...", required: true
     = f.hidden_field :post_id, value: @post.id
@@ -74,7 +73,7 @@
 
      
 
-  - @post.comments.includes([:user]).each do |comment|
+  - @post.comments.kept.includes([:user]).each do |comment|
     .flex.flex-col.items-start.mb-4.gap-5.py-5.pr-3{'data-controller': 'dropdown'}
       .flex.flex-row.gap-2.items-center.w-full
         
