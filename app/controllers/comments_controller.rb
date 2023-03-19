@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
 
       if @comment.save
-        format.turbo_stream { flash.now[:notice] = "comment created" }
+        format.turbo_stream
 
       else
         format.html { render :new, status: :unprocessable_entity }
