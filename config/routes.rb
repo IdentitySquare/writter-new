@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+ 
   
      
   root to: "home#index" 
@@ -22,6 +23,9 @@ Rails.application.routes.draw do
                invitations: 'users/invitations',
                omniauth_callbacks: "users/omniauth_callbacks"
   }
+
+  resources :comments, only: [:create, :destroy]
+
   resources   :users, only: [:update]
 
   resources :posts, except: [:create] 
