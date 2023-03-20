@@ -2,17 +2,21 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[destroy ]
 
   def create
-    @comment = current_user.comments.new(comment_params)
-    authorize @comment
-    
-    respond_to do |format|
 
-      if @comment.save
-        format.turbo_stream
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+    if current_user
+      @comment = current_user.comments.new(comment_params)
+
+      respond_to do |format|
+        if @comment.save
+          format.turbo_stream
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @comment.errors, status: :unprocessable_entity }
+        end
       end
+
+    else
+      redirect_to new_user_session_path 
     end
 
   end
