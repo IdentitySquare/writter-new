@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.new(comment_params)
-
+    authorize @comment
+    
     respond_to do |format|
 
       if @comment.save
