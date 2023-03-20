@@ -8,9 +8,10 @@
   %hr.mb-5.mt-5
 
   .block.text-gray-700.font-bold.mb-5
-    #{@post.comments.kept.size > 1  ? "#{@post.comments.kept.size} " : ''  }Comments
+    Comments
 
-  = render 'comments/form', post: @post
+  .div#commentsForm
+    = render 'comments/form', post: @post, comment: Comment.new
   
   
   .div#comments
