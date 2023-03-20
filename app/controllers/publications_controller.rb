@@ -9,6 +9,7 @@ class PublicationsController < ApplicationController
   end
 
   def show
+    @posts =  @publication.posts
   end
 
   def edit
@@ -22,7 +23,7 @@ class PublicationsController < ApplicationController
 
   def index
     @publications = current_user.publications
-  end
+  end 
   
   def create
     @publication = Publication.new(publication_params)

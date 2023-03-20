@@ -6,8 +6,13 @@
 
 -# - if policy(@publication).update?
 -#   = link_to 'Edit Publication', edit_publication_path(@publication)
+ 
 
 
 .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
 
   = @publication.name
+
+  - @publication.posts.each do |post|
+    = render 'posts/card', post: post
+    

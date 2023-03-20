@@ -45,6 +45,30 @@
 
                   %span Edit
                 
+                / Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700"
+                #menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => edit_post_path(@post), :role => "menuitem", :tabindex => "-1"}
+            
+                  
+
+                  %svg.feather.feather-plus{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+                    %line{:x1 => "12", :x2 => "12", :y1 => "5", :y2 => "19"}
+                    %line{:x1 => "5", :x2 => "19", :y1 => "12", :y2 => "12"}
+
+
+                  %span.ml-2
+                  
+                    Add to a publication
+
+                    = simple_form_for(@post) do |f|
+
+                      = f.collection_radio_buttons :publication_id, current_user.publications, :id, :name do |b| 
+                        .flex.flex-row.py-2.justify-between
+                          = b.label class: 'capitalize text-gray-700'       
+                          = b.radio_button class: 'h-6 w-6 border-gray-300 text-green-800 transition disabled:opacity-25'
+
+                      .form-actions
+                      
+                        = f.button :submit , 'Add',  class: "btn-secondary"
                 - if @post.published?
                   %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => unpublish_post_path(@post), :data => { confirm: 'Your confirm message' }, :role => "menuitem", :tabindex => "-1"}
       
