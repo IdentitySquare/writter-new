@@ -1,107 +1,21 @@
 .container.max-w-xl.mx-auto
-  .bg-white.px-4.py-5.sm:px-0{'data-controller': 'dropdown'}
-    .flex.space-x-3
-      .flex-shrink-0
-        = link_to user_profile_path(@user) do
-          %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
-            %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
-              %path{:d => "M24
-              20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
-
-      .min-w-0.flex-1
-        %p.text-sm.font-medium.text-gray-900
-          %a.hover:underline{href: user_profile_path(@user)} #{@user.name}
-        %p.text-sm.text-gray-500
-          #{@post.created_at.strftime('%b %Y')}
-      
-    
-      - if policy(@post).update?
-        
-        .flex.flex-shrink-0.self-center
-          .relative.inline-block.text-left
-            %div
-              %button#menu-0-button.-m-2.flex.items-center.rounded-full.p-2.text-gray-400.hover:text-gray-600{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button",'data-action': 'click->dropdown#toggleDropdown'}
-                %span.sr-only Open options
-                / Heroicon name: mini/ellipsis-vertical
-                %svg.h-5.w-5{"aria-hidden" => "true", :fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
-                  %path{:d => "M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z"}
-            /
-              Dropdown menu, show/hide based on menu state.
-              
-              Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-              Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-            .hidden.absolute.right-0.z-10.mt-2.w-56.origin-top-right.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "menu-0-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1",'data-dropdown-target': 'dropdown'}
-              .py-1{:role => "none"}
-                / Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700"
-                %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => edit_post_path(@post), :role => "menuitem", :tabindex => "-1"}
-            
-                  %svg.feather.feather-edit-2.mr-2{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                    %path{:d => "M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"}
 
 
-                  %span Edit
-                
-                / Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700"
-                #menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => edit_post_path(@post), :role => "menuitem", :tabindex => "-1"}
-            
-                  
+  = render 'banner', user: @user
 
-                  %svg.feather.feather-plus{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                    %line{:x1 => "12", :x2 => "12", :y1 => "5", :y2 => "19"}
-                    %line{:x1 => "5", :x2 => "19", :y1 => "12", :y2 => "12"}
+  = render 'post', post: @post
 
 
-                  %span.ml-2
-                  
-                    Add to a publication
+  %hr.mb-5.mt-5
 
-                    = simple_form_for(@post) do |f|
+  .block.text-gray-700.font-bold.mb-5
+    Comments
 
-                      = f.collection_radio_buttons :publication_id, current_user.publications, :id, :name do |b| 
-                        .flex.flex-row.py-2.justify-between
-                          = b.label class: 'capitalize text-gray-700'       
-                          = b.radio_button class: 'h-6 w-6 border-gray-300 text-green-800 transition disabled:opacity-25'
-
-                      .form-actions
-                      
-                        = f.button :submit , 'Add',  class: "btn-secondary"
-                - if @post.published?
-                  %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => unpublish_post_path(@post), :data => { confirm: 'Your confirm message' }, :role => "menuitem", :tabindex => "-1"}
-      
-                    %svg.feather.feather-file-minus{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                      %path{:d => "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}
-                      
-                    %span.ml-2 Unpublish
-                  
-
-
-
-  .prose.font-serif{"data-controller": "editor", "data-editor-value" => "#{@post.body}", "data-editor-read-only" => 'true'}
-    
-    %div{"data-editor-target": "render" }
-    
-
+  .div#commentsForm
+    = render 'comments/form', post: @post, comment: Comment.new
   
-  .text-neutral-900.text-bold.z-10{class: 'pt-20'}
-    %hr.mb-5
-    .flex.flex-row.gap-3.justify-between.items-center.uppercase.mb-5
-     
-      #{@user.name} 
-      
-      - if current_user && current_user.following.include?(@user)
-        = button_to '', unfollow_user_profile_path(@user), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
-      
-      - elsif current_user != @user
-        
-        = button_to "Follow", follow_user_profile_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-sm font-medium shadow-sm hover:bg-green-200 hover:border-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-
-     
-
-
+  
+  .div#comments
+    = render 'comments/comments', comments: @post.comments.kept.includes([:user])
     
-    = @user.bio
-
+ 

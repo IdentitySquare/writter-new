@@ -35,8 +35,13 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+
 # invites
 gem 'devise_invitable', '~> 2.0.0'
+
+# Soft Delete Records
+gem 'discard', '~> 1.2'
+
 
 gem 'simple_form'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
