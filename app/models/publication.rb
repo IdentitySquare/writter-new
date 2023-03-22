@@ -38,13 +38,12 @@ class Publication < ApplicationRecord
     existing_emails =  Publication.first.admins.pluck(:email)
     removed_emails = existing_emails - revised_emails
     
-    debugger
+    
     removed_emails.each do |email|
       publication_users.find_by(user: User.find_by(email: email)).destroy
     end
 
     admin_emails.split(',').each do |email|
-      debugger
       next if publication_users.where(user: User.find_by(email: email)).any?
 
       PublicationUser.create(publication: self, email: email, invited_by:,  role: 'admin')
