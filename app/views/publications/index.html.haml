@@ -16,11 +16,29 @@
    
 
 
-    .flex.justify-end
+    .flex.justify-end.mb-10
       = link_to '+ Create a New Publication', new_publication_path, class: 'text-green-900'
 
-    -# link to each publication
+
     - @publications.uniq.each do |publication|
       .flex.flex-row.pb-10
         = link_to "#{publication.name}", publication_path(publication)
-  
+
+
+        .relative.inline-block.text-left.ml-auto{"x-data": "{open: false}"}
+
+          %button#menu-0-button.-m-2.flex.items-center.rounded-full.p-2.text-gray-400.hover:text-gray-600{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button","x-on:click": "open = ! open" }
+            %span.sr-only Open options
+            / Heroicon name: mini/ellipsis-horizontal
+            %svg.h-5.w-8{"aria-hidden" => "true", :fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{:d => "M4 8.5a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0zm8 0a2 2 0 114 0 2 2 0 01-4 0z"}
+
+
+          .absolute.right-0.z-10.mt-2.origin-top-right.rounded-md.bg-white.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "menu-0-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1","x-show": "open"}
+            .py-1{:role => "none"}
+
+              = link_to "View", publication_path(publication), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+              = link_to "Edit", edit_publication_path(publication), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+              = link_to 'Leave Publication',publication.publication_users.where(user: current_user).first, data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to leave this publication?'}, class: "block text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+              
+            

@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
   resources   :users, only: [:update]
 
+  resources   :publication_users, only: [:destroy]
+
   resources :posts, except: [:create] 
   get 'posts/:id/publish', to: 'posts#publish' , as: 'publish_post'
   get 'posts/:id/unpublish', to: 'posts#unpublish' , as: 'unpublish_post'
