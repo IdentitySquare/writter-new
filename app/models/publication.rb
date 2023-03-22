@@ -18,12 +18,22 @@ class Publication < ApplicationRecord
   after_update :add_users
 
   def add_users
-    editor_emails.split(',').each do |email|
-      # next if publication_users.where(email: email).present?
 
+    
+    revised_emails = editor_emails.split(',')
+    existing_emails =  Publication.first.editors.pluck(:email)
+    removed_emails = existing_emails - revised_emails
+    
+    revised_emails.each do |email|
+      next if publication_users.where(user: User.find_by(email: email)).any?
+      
       PublicationUser.create(publication: self, email: email, invited_by:,  role: 'editor')
     end
-    
+
+    removed_emails.each do |email|
+      publication_users.find_by(user: User.find_by(email: email)).destroy
+    end
+
     admin_emails.split(',').each do |email|
       # next if publication_users.where(email: email).present?
 

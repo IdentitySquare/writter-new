@@ -6,7 +6,7 @@
   .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
     .py-8.px-4.shadow{class: 'sm:rounded-lg.sm:px-10', "data-controller": "publication-users"}
   
-      = simple_form_for @publication , url: publication_path(@publication), method: :put do |f|
+      = simple_form_for @publication , html: {'data-publication-users-target': 'form'},url: publication_path(@publication), method: :put do |f|
         %div.mb-6
           %label.block.text-sm.font-medium.text-gray-700{for: "email"} Name
           .mt-1
@@ -29,9 +29,15 @@
             - @publication.editors.each do |editor|
               
               .border.rounded-full.border-gray-200.px-3.py-2
-                = editor.user.email
+                .blah{style: "display: inline-block"}
+                  = editor.user.email
+
                 - if editor.user.pending_acceptance?
-                  (Requested)
+                  .div{style: "display: inline-block"}(Requested)
+
+                %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
+                  %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}
+                  %line{:x1 => "6", :x2 => "18", :y1 => "6", :y2 => "18"}
 
               
               -# this is where the new emails will be added
@@ -66,6 +72,10 @@
                 - if admin.user.pending_acceptance?
                   (Requested)
 
+                %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
+                  %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}
+                  %line{:x1 => "6", :x2 => "18", :y1 => "6", :y2 => "18"}
+
               
               -# this is where the new emails will be added
 
@@ -84,6 +94,7 @@
                 Add as Admin
 
     
+        %button.flex.w-full.btn-primary{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#getFinalEditors"}               
+          Save
 
-        = f.button :submit, value: 'Save', 'data-onboarding-target': 'saveButton',class: 'flex w-full justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2{type: "submit"}'
 
