@@ -1,4 +1,4 @@
-class PublicationsController < ApplicationController
+ class PublicationsController < ApplicationController
 
 
   before_action :set_publication, only: [:show, :edit, :update]

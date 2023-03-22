@@ -52,11 +52,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     authorize @post
-   
     respond_to do |format|
       if @post.update(post_params)
         format.turbo_stream {}
-        format.html {redirect_back fallback_location: root_path}
+        format.html {redirect_to root_path}
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -105,7 +104,7 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       post_params = params.require(:post).permit(:body, :title, :draft_body, :publication_id)
-      post_params[:publication_id] = post_params[:publication_id] ? post_params[:publication_id].to_i : nil
+      post_params[:publication_id] = post_params[:publication_id].present? ? post_params[:publication_id].to_i : nil
       post_params
     end
 

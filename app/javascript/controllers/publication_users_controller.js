@@ -35,4 +35,8 @@ export default class extends Controller {
     // Clear the input field value
     this.adminEmailInputTarget.value = '' 
   }
+
+  addEditor() {
+    
+  }
 }
