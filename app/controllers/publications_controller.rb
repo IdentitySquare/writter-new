@@ -1,7 +1,7 @@
  class PublicationsController < ApplicationController
 
 
-  before_action :set_publication, only: [:show, :edit, :update]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy]
   
   
   def new 
@@ -39,7 +39,14 @@
     
    
   end
-  
+  def destroy
+    debugger
+    @publication.destroy
+
+    respond_to do |format|
+      format.html { redirect_to publications_path} 
+    end
+  end
 
   private
   

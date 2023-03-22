@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
 
-  resources :publications, only: [:create, :new, :show, :index,:edit,:update]
+  resources :publications, only: [:create, :new, :show, :index,:edit,:update,:destroy]
     
   get 'settings/notifications', to: 'user_profiles#notifications_settings', as: :notifications_settings
   

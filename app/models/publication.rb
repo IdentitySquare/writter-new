@@ -10,8 +10,8 @@
 #
 class Publication < ApplicationRecord
   has_many :publication_users
-  has_many :users, through: :publication_users
-  has_many :posts
+  has_many :users, through: :publication_users, dependent: :destroy
+  has_many :posts, dependent: :nullify
 
   attr_accessor :user_email, :editor_emails, :invited_by, :admin_emails
 
