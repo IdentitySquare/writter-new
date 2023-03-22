@@ -29,7 +29,7 @@
             - @publication.editors.each do |editor|
               
               .border.rounded-full.border-gray-200.px-3.py-2
-                .blah{style: "display: inline-block"}
+                .editor{style: "display: inline-block"}
                   = editor.user.email
 
                 - if editor.user.pending_acceptance?
@@ -68,9 +68,11 @@
             - @publication.admins.each do |admin|
               
               .border.rounded-full.border-gray-200.px-3.py-2
-                = admin.user.email
+                .admin{style: "display: inline-block"}
+                  = admin.user.email
+
                 - if admin.user.pending_acceptance?
-                  (Requested)
+                  .div{style: "display: inline-block"}(Requested)
 
                 %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
                   %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}

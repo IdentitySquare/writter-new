@@ -34,8 +34,18 @@ class Publication < ApplicationRecord
       publication_users.find_by(user: User.find_by(email: email)).destroy
     end
 
+    revised_emails = admin_emails.split(',')
+    existing_emails =  Publication.first.admins.pluck(:email)
+    removed_emails = existing_emails - revised_emails
+    
+    debugger
+    removed_emails.each do |email|
+      publication_users.find_by(user: User.find_by(email: email)).destroy
+    end
+
     admin_emails.split(',').each do |email|
-      # next if publication_users.where(email: email).present?
+      debugger
+      next if publication_users.where(user: User.find_by(email: email)).any?
 
       PublicationUser.create(publication: self, email: email, invited_by:,  role: 'admin')
     end
