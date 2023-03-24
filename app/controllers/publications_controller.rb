@@ -1,9 +1,10 @@
  class PublicationsController < ApplicationController
-
-
-  before_action :set_publication, only: [:show, :edit, :update, :destroy]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy, :editor_view]
   
-  
+  def index
+    @publications = current_user.publications
+  end 
+
   def new 
     @publication = Publication.new()
   end
@@ -21,9 +22,6 @@
     end
   end
 
-  def index
-    @publications = current_user.publications
-  end 
   
   def create
     @publication = Publication.new(publication_params)
@@ -36,15 +34,20 @@
       @publication_user.save!
       redirect_to publication_path(@publication)
     end
-    
-   
   end
+
   def destroy
     @publication.destroy
 
     respond_to do |format|
       format.html { redirect_to publications_path} 
     end
+  end
+
+  def editor_view
+    @published_posts = @publication.posts.published
+    @draft_posts = @publication.posts.draft
+    
   end
 
   private

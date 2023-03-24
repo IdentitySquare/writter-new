@@ -24,7 +24,7 @@
     - @publications.uniq.each do |publication|
       .flex.flex-row.p-5.border.border-neutral-300.rounded-md.items-center
         .flex.flex-col
-          = link_to "#{publication.name}", publication_path(publication)
+          = link_to "#{publication.name}", publication_editor_view_path(publication)
           .text-sm.text-neutral-500
             = pluralize(publication.posts.count, 'articles')
 

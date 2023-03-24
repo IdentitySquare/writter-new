@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
- 
   
-     
   root to: "home#index" 
   
   resources :user_profiles, only: [:update, :show] do
@@ -15,6 +13,8 @@ Rails.application.routes.draw do
 
 
   resources :publications, only: [:create, :new, :show, :index,:edit,:update,:destroy]
+
+  get 'publications/:id/editor_view', to: 'publications#editor_view' , as: 'publication_editor_view'
     
   get 'settings/notifications', to: 'user_profiles#notifications_settings', as: :notifications_settings
   
