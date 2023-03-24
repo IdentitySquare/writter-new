@@ -15,7 +15,8 @@
 
 
   - @publication.posts.each do |post|
-    = render 'posts/card', post: post
+    = link_to post do
+      = render 'posts/card', post: post
 
   - if @publication.posts.empty?
 

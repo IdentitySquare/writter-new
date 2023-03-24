@@ -51,7 +51,12 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    authorize @post
+    if post_params.has_key?(:one)
+      authorize @post, :change_publication?
+    else
+      authorize @post
+    end
+    
     respond_to do |format|
       if @post.update(post_params)
         format.turbo_stream {}
@@ -63,7 +68,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def publish 
+  def publish
     authorize @post
     @post.body = @post.draft_body
     @post.status = "published"

@@ -35,6 +35,7 @@ class Post < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  has_paper_trail
 
   def title
     return nil if empty?

@@ -57,6 +57,10 @@ class Publication < ApplicationRecord
   def admins
     publication_users.includes(:user).where(role: :admin)
   end
+
+  def members
+    publication_users.includes(:user)
+  end
 end
 
   

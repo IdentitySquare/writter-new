@@ -13,8 +13,7 @@
       %p.text-sm.text-gray-500
         #{@post.created_at.strftime('%b %Y')}
     
-
-    - if policy(@post).update?
+    - if policy(@post).user_is_owner? || @post.publication.present? && policy(@post).user_is_editing_member_of_publication?
       
       .flex.flex-shrink-0.self-center{"x-data": "{open: false, abc: false}"}
         .relative.inline-block.text-left
@@ -28,14 +27,16 @@
           .absolute.right-0.z-10.mt-2.w-56.origin-top-right.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "menu-0-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1","x-show": "abc"}
             .py-1{:role => "none" }
               / Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700"
-              %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => edit_post_path(@post), :role => "menuitem", :tabindex => "-1"}
-          
-                %svg.feather.feather-edit-2.mr-2{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                  %path{:d => "M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"}
+              - if policy(@post).update?
+
+                %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => edit_post_path(@post), :role => "menuitem", :tabindex => "-1", :disabled => true}
+            
+                  %svg.feather.feather-edit-2.mr-2{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+                    %path{:d => "M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"}
 
 
-                %span Edit
-              
+                  %span Edit
+                
               - if @post.published?
                 %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => unpublish_post_path(@post), :data => { confirm: 'Your confirm message' }, :role => "menuitem", :tabindex => "-1"}
     

@@ -40,7 +40,6 @@
    
   end
   def destroy
-    debugger
     @publication.destroy
 
     respond_to do |format|
