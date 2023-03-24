@@ -4,14 +4,14 @@ Rails.application.routes.draw do
   
   resources :user_profiles, only: [:update, :show] do
     member do
-      post 'follow', to: 'user_profiles#follow'
-      delete 'unfollow', to: 'user_profiles#unfollow'
+      # post 'follow', to: 'user_profiles#follow'
+      # delete 'unfollow', to: 'user_profiles#unfollow'
       get 'followers', to: 'user_profiles#followers'
       get 'following', to: 'user_profiles#following'
     end
   end
 
-
+  resources :follows, only: [:create, :destroy]
   resources :publications, only: [:create, :new, :show, :index,:edit,:update,:destroy]
 
   get 'publications/:id/editor_view', to: 'publications#editor_view' , as: 'publication_editor_view'

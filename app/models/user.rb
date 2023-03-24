@@ -72,7 +72,10 @@ class User < ApplicationRecord
 
 
   has_many :given_follows, class_name: "Follow"
-  has_many :following, through: :given_follows, source: :followable, source_type: "User"
+  has_many :users_following, through: :given_follows, source: :followable, source_type: "User"
+
+  has_many :publications_following, through: :given_follows, source: :followable, source_type: "Publication"
+
 
   has_many :comments
   # notification preference stored as enum
@@ -122,6 +125,10 @@ class User < ApplicationRecord
 
   def pending_acceptance?
     invitation_created_at.present? && invitation_accepted_at.blank?
+  end
+
+  def following
+    users_following + publications_following
   end
   private
 
