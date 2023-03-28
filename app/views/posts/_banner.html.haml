@@ -86,7 +86,7 @@
               = simple_form_for(@post, "data-turbo": "false")  do |f|
 
                 
-                = f.input :publication_id, as: :hidden, input_html: { value: nil }
+                = f.input :publication_id, as: :hidden, input_html: { value: 0 }
                 
                 
                 .flex.flex-row.form-actions.my-5.items-center.justify-center

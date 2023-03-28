@@ -109,7 +109,10 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       post_params = params.require(:post).permit(:body, :title, :draft_body, :publication_id)
-      post_params[:publication_id] = post_params[:publication_id].present? ? post_params[:publication_id].to_i : nil
+
+      if post_params[:publication_id].present?
+        post_params[:publication_id] = post_params[:publication_id].zero? ?  nil : post_params[:publication_id].to_i 
+      end
       post_params
     end
 
