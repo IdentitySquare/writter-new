@@ -1,9 +1,7 @@
 class FollowsController < ApplicationController
     before_action :set_follow, only: %i[destroy ]
 
-      
     def create
-
       @follow = current_user.given_follows.new(follow_params)
       
       respond_to do |format|
@@ -14,10 +12,8 @@ class FollowsController < ApplicationController
           format.json { render json: @comment.errors, status: :unprocessable_entity }
         end
       end
-
     end
-  
-    # DELETE /posts/1 or /posts/1.json
+    
     def destroy
       @follow.destroy 
       redirect_back(fallback_location: root_path)
