@@ -14,6 +14,7 @@
   end
 
   def edit
+    authorize @publication
   end
 
   def update

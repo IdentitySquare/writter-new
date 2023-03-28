@@ -20,7 +20,7 @@ class PublicationPolicy < ApplicationPolicy
     end
   
     def update?
-      current_user_is_admin?
+      current_user_is_admin? || current_user_is_editor?
     end
   
     def destroy?

@@ -75,10 +75,7 @@
                 - if admin.user.pending_acceptance?
                   .div{style: "display: inline-block"}(Requested)
                 
-                - if policy(@publication).current_user_is_admin?
-                  %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
-                    %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}
-                    %line{:x1 => "6", :x2 => "18", :y1 => "6", :y2 => "18"}
+                
 
               
               -# this is where the new emails will be added
@@ -110,8 +107,22 @@
 
       -  if policy(@publication).current_user_is_admin?
         %hr.mt-10.mb-5 
+        - @publication_user = @publication.publication_users.where(user: current_user).first
+        .flex.flex-row.justify-end.items-center.gap-2.text-grey-500.block.text-left.py-2.text-sm.text-grey-500.hover:text-black.opacity-25{class: "#{policy(@publication_user).destroy? ? 'opacity-50' : 'opacity-25'}"}
+          
+          %svg.feather.feather-log-out{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+          
+            %path{:d => "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"}
+            %polyline{:points => "16 17 21 12 16 7"}
+            %line{:x1 => "21", :x2 => "9", :y1 => "12", :y2 => "12"}
+
         
+          = link_to_if policy(@publication_user).destroy?, 'Leave Publication', @publication.publication_users.where(user: current_user).first, data: {turbo_method: :delete, class: 'opacity-100', turbo_confirm: 'Are you sure you want to leave this publication?'}, role: "menuitem", tabindex: "-1"
+        
+
+
         .flex.flex-row.justify-end.items-center.gap-2
+
           %svg.feather.feather-trash{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
             %polyline{:points => "3 6 5 6 21 6"}
             %path{:d => "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}
