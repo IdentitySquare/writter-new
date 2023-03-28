@@ -23,8 +23,8 @@ class Publication < ApplicationRecord
 
   def add_users
 
-    if editor_emails.any?
-
+    
+    if editor_emails.present? 
       revised_emails = editor_emails.split(',')
       existing_emails =  Publication.first.editors.pluck(:email)
       removed_emails = existing_emails - revised_emails
@@ -40,7 +40,7 @@ class Publication < ApplicationRecord
       end
     end
 
-    if admin_emails.any?
+    if admin_emails.present?
       revised_emails = admin_emails.split(',')
       existing_emails =  Publication.first.admins.pluck(:email)
       removed_emails = existing_emails - revised_emails

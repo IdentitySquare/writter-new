@@ -87,6 +87,10 @@ export default class extends Controller {
     const texts2 = Array.from(admins).map((element) => element.textContent.replace(/[\r\n]/gm, '').trim()); // extract text content of each element
 
     const commaSeparatedTexts2 = texts2.join(', '); // join text content into a comma-separated list
+    if (commaSeparatedTexts2.length < 1) {
+      alert("Please add at least one admin")
+      return;
+    }
     this.adminEmailsTarget.value = commaSeparatedTexts2
     
     
