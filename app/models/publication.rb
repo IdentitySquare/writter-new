@@ -22,8 +22,6 @@ class Publication < ApplicationRecord
   after_update :add_users
 
   def add_users
-
-    
     if editor_emails.present? 
       revised_emails = editor_emails.split(',')
       existing_emails =  Publication.first.editors.pluck(:email)
