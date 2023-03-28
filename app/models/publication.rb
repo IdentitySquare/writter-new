@@ -19,40 +19,32 @@ class Publication < ApplicationRecord
 
   attr_accessor :user_email, :editor_emails, :invited_by, :admin_emails
 
-  after_update :add_users
+  after_update :add_or_remove_users
 
-  def add_users
+  def add_or_remove_users
     if editor_emails.present? 
-      revised_emails = editor_emails.split(',')
-      existing_emails =  Publication.first.editors.pluck(:email)
-      removed_emails = existing_emails - revised_emails
-      
-      revised_emails.each do |email|
-        next if publication_users.where(user: User.find_by(email: email)).any?
-        
-        PublicationUser.create(publication: self, email: email, invited_by:,  role: 'editor')
-      end
-      
-      removed_emails.each do |email|
-        publication_users.find_by(user: User.find_by(email: email)).destroy
-      end
+      update_publication_users(editor_emails, 'editor')
     end
 
     if admin_emails.present?
-      revised_emails = admin_emails.split(',')
-      existing_emails =  Publication.first.admins.pluck(:email)
-      removed_emails = existing_emails - revised_emails
-      
-      
-      removed_emails.each do |email|
-        publication_users.find_by(user: User.find_by(email: email)).destroy
-      end
+      update_publication_users(admin_emails, 'admin')
+    end
+  end
 
-      admin_emails.split(',').each do |email|
-        next if publication_users.where(user: User.find_by(email: email)).any?
-
-        PublicationUser.create(publication: self, email: email, invited_by:,  role: 'admin')
-      end
+  def update_publication_users(emails, role)
+    
+    revised_emails = emails.split(',')
+    existing_emails = send(role.pluralize).pluck(:email)
+    removed_emails = existing_emails - revised_emails
+    
+    revised_emails.each do |email|
+      next if publication_users.where(user: User.find_by(email: email.strip)).any?
+      
+      PublicationUser.create(publication: self, email: email, invited_by:,  role: role)
+    end
+    
+    removed_emails.each do |email|
+      publication_users.find_by(user: User.find_by(email: email.strip)).destroy
     end
   end
 

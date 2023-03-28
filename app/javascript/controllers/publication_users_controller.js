@@ -13,7 +13,7 @@ export default class extends Controller {
     const textSpan = document.createElement("span");
     textSpan.classList.add("editor")
     textSpan.style.display = 'inline-block'; 
-    textSpan.textContent = this.emailInputTarget.value + ' ';
+    textSpan.textContent = this.emailInputTarget.value;
     newSpan.appendChild(textSpan);
     
     // add svg after text content
@@ -45,7 +45,7 @@ export default class extends Controller {
     const textSpan = document.createElement("span");
     textSpan.classList.add("admin")
     textSpan.style.display = 'inline-block'; 
-    textSpan.textContent = this.adminEmailInputTarget.value + ' ';
+    textSpan.textContent = this.adminEmailInputTarget.value;
     newSpan.appendChild(textSpan);
     
     // add svg after text content
