@@ -66,17 +66,14 @@ class User < ApplicationRecord
   has_many :publication_users
   has_many :publications, through: :publication_users
 
-
   has_many :received_follows, as: :followable, class_name: "Follow"
   has_many :followers, through: :received_follows, source: :user
 
-
   has_many :given_follows, class_name: "Follow"
-  has_many :users_following, through: :given_follows, source: :followable, source_type: "User"
-
-  has_many :publications_following, through: :given_follows, source: :followable, source_type: "Publication"
-
-
+  has_many :followed_users, through: :given_follows, source: :followable, source_type: 'User', class_name: 'User'  
+  has_many :followed_publications, through: :given_follows, source: :followable, source_type: 'Publication', class_name: 'Publication'
+  
+  
   has_many :comments
   # notification preference stored as enum
   enum notifications_freq: { instantly: 0, daily: 1, weekly: 2, off: 3  }, _suffix: :notifications
@@ -97,6 +94,9 @@ class User < ApplicationRecord
     end
   end
 
+  def following
+    followed_users + followed_publications
+  end
 
   def onboarded?
     username.present?
@@ -127,9 +127,6 @@ class User < ApplicationRecord
     invitation_created_at.present? && invitation_accepted_at.blank?
   end
 
-  def following
-    users_following + publications_following
-  end
   private
 
   def set_time_zone

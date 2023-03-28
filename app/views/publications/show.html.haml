@@ -14,7 +14,7 @@
     = @publication.name
   
 
-  - if current_user.publications_following.include?(@publication)
+  - if current_user.following.include?(@publication)
     - follow = Follow.find_by(followable_id: @publication.id, followable_type: @publication.class.to_s, user: current_user.id)
     = button_to '', follow_path(follow), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
     
