@@ -35,27 +35,28 @@
                 - if editor.user.pending_acceptance?
                   .div{style: "display: inline-block"}(Requested)
 
-                %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
-                  %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}
-                  %line{:x1 => "6", :x2 => "18", :y1 => "6", :y2 => "18"}
+                - if policy(@publication).current_user_is_admin?
+                  %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
+                    %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}
+                    %line{:x1 => "6", :x2 => "18", :y1 => "6", :y2 => "18"}
 
-              
+                
               -# this is where the new emails will be added
 
+          - if policy(@publication).current_user_is_admin?
+            = f.hidden_field :invited_by, value: current_user.id
+            = f.hidden_field :editor_emails, 'data-publication-users-target': 'editorEmails', value: []
 
-          = f.hidden_field :invited_by, value: current_user.id
-          = f.hidden_field :editor_emails, 'data-publication-users-target': 'editorEmails', value: []
-
-          
-          %div
-            
-            .mt-2.flex.rounded-md.shadow-sm
-              .relative.flex.flex-grow.items-stretch.focus-within:z-10
-                
-                %input#email.block.w-full.rounded-none.rounded-l-md.border-0.text-gray-900.ring-1.ring-inset.ring-gray-300.placeholder:text-gray-400.focus:ring-2.focus:ring-inset.focus:ring-emerald-500.sm:text-sm.sm:leading-6{:class => "py-1.5", :name => "email", :placeholder => "Enter email...", :type => "email", 'data-publication-users-target': 'emailInput'}/
-              %button.relative.-ml-px.inline-flex.items-center.rounded-r-md.px-3.py-2.text-sm.font-medium.text-gray-900.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#addEditor"}
-                
-                Add as Editor
+         
+            %div
+              
+              .mt-2.flex.rounded-md.shadow-sm
+                .relative.flex.flex-grow.items-stretch.focus-within:z-10
+                  
+                  %input#email.block.w-full.rounded-none.rounded-l-md.border-0.text-gray-900.ring-1.ring-inset.ring-gray-300.placeholder:text-gray-400.focus:ring-2.focus:ring-inset.focus:ring-emerald-500.sm:text-sm.sm:leading-6{:class => "py-1.5", :name => "email", :placeholder => "Enter email...", :type => "email", 'data-publication-users-target': 'emailInput'}/
+                %button.relative.-ml-px.inline-flex.items-center.rounded-r-md.px-3.py-2.text-sm.font-medium.text-gray-900.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#addEditor"}
+                  
+                  Add as Editor
 
             
            
@@ -73,44 +74,48 @@
 
                 - if admin.user.pending_acceptance?
                   .div{style: "display: inline-block"}(Requested)
-
-                %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
-                  %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}
-                  %line{:x1 => "6", :x2 => "18", :y1 => "6", :y2 => "18"}
+                
+                - if policy(@publication).current_user_is_admin?
+                  %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
+                    %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}
+                    %line{:x1 => "6", :x2 => "18", :y1 => "6", :y2 => "18"}
 
               
               -# this is where the new emails will be added
 
+          - if policy(@publication).current_user_is_admin?
+            = f.hidden_field :invited_by, value: current_user.id
+            = f.hidden_field :admin_emails, 'data-publication-users-target': 'adminEmails', value: []
 
-          = f.hidden_field :invited_by, value: current_user.id
-          = f.hidden_field :admin_emails, 'data-publication-users-target': 'adminEmails', value: []
-
-          
-          %div
             
-            .mt-2.flex.rounded-md.shadow-sm
-              .relative.flex.flex-grow.items-stretch.focus-within:z-10
-                
-                %input#email.block.w-full.rounded-none.rounded-l-md.border-0.text-gray-900.ring-1.ring-inset.ring-gray-300.placeholder:text-gray-400.focus:ring-2.focus:ring-inset.focus:ring-emerald-500.sm:text-sm.sm:leading-6{:class => "py-1.5", :name => "email", :placeholder => "Enter email...", :type => "email", 'data-publication-users-target': 'adminEmailInput'}/
-              %button.relative.-ml-px.inline-flex.items-center.rounded-r-md.px-3.py-2.text-sm.font-medium.text-gray-900.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#addAdmin"}               
-                Add as Admin
+            %div
+              
+              .mt-2.flex.rounded-md.shadow-sm
+                .relative.flex.flex-grow.items-stretch.focus-within:z-10
+                  
+                  %input#email.block.w-full.rounded-none.rounded-l-md.border-0.text-gray-900.ring-1.ring-inset.ring-gray-300.placeholder:text-gray-400.focus:ring-2.focus:ring-inset.focus:ring-emerald-500.sm:text-sm.sm:leading-6{:class => "py-1.5", :name => "email", :placeholder => "Enter email...", :type => "email", 'data-publication-users-target': 'adminEmailInput'}/
+                %button.relative.-ml-px.inline-flex.items-center.rounded-r-md.px-3.py-2.text-sm.font-medium.text-gray-900.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#addAdmin"}               
+                  Add as Admin
 
-    
-        %button.flex.ml-auto.btn-primary{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#getFinalEditors"}               
-          Save
+        - if policy(@publication).current_user_is_admin?
+         
+          %button.flex.ml-auto.btn-primary{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#getFinalEditors"}               
+            Save
 
+        - else
+          = f.button :submit, value: 'Save', class: 'flex ml-auto btn-primary {type: "submit"}'
         -# .flex.flex-row.mt-3
         -#   .text-end.w-full.text-red-500
         -#     Delete Publication
 
+      -  if policy(@publication).current_user_is_admin?
+        %hr.mt-10.mb-5 
+        
+        .flex.flex-row.justify-end.items-center.gap-2
+          %svg.feather.feather-trash{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+            %polyline{:points => "3 6 5 6 21 6"}
+            %path{:d => "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}
 
-      %hr.mt-10.mb-5 
-      
-      .flex.flex-row.justify-end.items-center.gap-2
-        %svg.feather.feather-trash{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
-          %polyline{:points => "3 6 5 6 21 6"}
-          %path{:d => "M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"}
-
-        = link_to 'Delete Publication', @publication, data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this publication?'}, class: "block text-left  py-2 text-sm text-red-400 hover:text-red-600", role: "menuitem", tabindex: "-1"
-          
+          = link_to 'Delete Publication', @publication, data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this publication?'}, class: "block text-left  py-2 text-sm text-red-400 hover:text-red-600", role: "menuitem", tabindex: "-1"
+            
 

@@ -37,6 +37,7 @@
   end
 
   def destroy
+    authorize @publication
     @publication.destroy
 
     respond_to do |format|

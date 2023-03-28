@@ -24,7 +24,7 @@ class PublicationPolicy < ApplicationPolicy
     end
   
     def destroy?
-      false
+      current_user_is_admin?
     end
 
     def current_user_is_admin?
