@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_post, only: %i[ show edit update destroy publish unpublish ]
-  
-  before_action :set_user, except: [:index, :new]
+  before_action :set_post, except: %i[index new create]
+  before_action :set_user, except: %i[index new]
 
   # GET /posts or /posts.json
   def index
@@ -26,7 +25,7 @@ class PostsController < ApplicationController
     else
       @post = current_user.posts.build
       if @post.save
-         redirect_to edit_post_path(@post), notice: 'Post was successfully created.'
+        redirect_to edit_post_path(@post), notice: 'Post was successfully created.'
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
