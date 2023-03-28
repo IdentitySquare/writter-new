@@ -28,11 +28,11 @@ class PostPolicy < ApplicationPolicy
     end
 
     def publish?
-      user_is_owner?
+      update?
     end
 
     def unpublish?
-      user_is_owner?
+      update?
     end
   
     def destroy?
@@ -52,8 +52,9 @@ class PostPolicy < ApplicationPolicy
     end
 
     def user_is_editing_member_of_publication?
-     
-      @record.publication.editors&.pluck(:user_id)&.include?(@user.id) ||@record.publication.admins&.pluck(:user_id)&.include?(@user.id)
+      if @record.publication.present?
+        @record.publication.editors&.pluck(:user_id)&.include?(@user.id) ||@record.publication.admins&.pluck(:user_id)&.include?(@user.id)        
+      end
     end
 
     def author_is_part_of_publication

@@ -4,7 +4,7 @@
       .flex
         .-ml-2.mr-2.flex.items-center.md:hidden
           / Mobile menu button
-          %button.inline-flex.items-center.justify-center.rounded-md.p-2.text-gray-400.hover:bg-gray-100.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-inset.focus:ring-indigo-500{"aria-controls" => "mobile-menu", "aria-expanded" => "false", type: "button", 'data-action': 'click->dropdown#toggleDropdown'}
+          %button.inline-flex.items-center.justify-center.rounded-md.p-2.text-gray-400.hover:bg-gray-100.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-inset.focus:ring-green-500{"aria-controls" => "mobile-menu", "aria-expanded" => "false", type: "button", 'data-action': 'click->dropdown#toggleDropdown'}
             %span.sr-only Open main menu
             /
               Icon when menu is closed.
@@ -43,7 +43,7 @@
           
           - if @post.published?
             .flex-shrink-0.mr-3
-              %button.relative.inline-flex.items-center.bg-gray-400.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-gray-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+              %button.relative.inline-flex.items-center.bg-gray-400.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button"}
 
                 = link_to 'Unpublish Post', unpublish_post_path(@post) 
             
@@ -113,7 +113,7 @@
 
 
         .hidden.md:ml-4.md:flex.md:flex-shrink-0.md:items-center
-          %button.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
+          %button.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button"}
             %span.sr-only View notifications
             / Heroicon name: outline/bell
             %svg.h-6.w-6{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
@@ -121,7 +121,7 @@
           / Profile dropdown desktop
           .relative.ml-3
             %div
-              %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
+              %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
                 %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
                   %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
                     %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}

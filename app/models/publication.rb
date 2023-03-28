@@ -9,11 +9,12 @@
 #  updated_at :datetime         not null
 #
 class Publication < ApplicationRecord
-  has_many :publication_users
-  has_many :users, through: :publication_users, dependent: :destroy
+  has_many :publication_users, dependent: :destroy
+  has_many :users, through: :publication_users
+
   has_many :posts, dependent: :nullify
 
-  has_many :received_follows, as: :followable, class_name: "Follow"
+  has_many :received_follows, as: :followable, class_name: "Follow", dependent: :destroy
   has_many :followers, through: :received_follows, source: :user
 
   attr_accessor :user_email, :editor_emails, :invited_by, :admin_emails
