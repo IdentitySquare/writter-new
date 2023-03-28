@@ -21,8 +21,6 @@ class Publication < ApplicationRecord
   after_update :add_users
 
   def add_users
-
-    
     revised_emails = editor_emails.split(',')
     existing_emails =  Publication.first.editors.pluck(:email)
     removed_emails = existing_emails - revised_emails

@@ -10,7 +10,7 @@ FactoryBot.define do
       notifications_freq { 1 }
       new_article_notifications_freq { 1 }
      
-     
+      
       factory :invited_user, class: User do
         invitation_token { Faker::Internet.device_token }
       end
