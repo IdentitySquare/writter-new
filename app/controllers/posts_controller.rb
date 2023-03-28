@@ -50,12 +50,8 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    if post_params.has_key?(:one)
-      authorize @post, :change_publication?
-    else
-      authorize @post
-    end
-    
+    authorize @post
+
     respond_to do |format|
       if @post.update(post_params)
         format.turbo_stream {}
