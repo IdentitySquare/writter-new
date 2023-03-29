@@ -27,13 +27,23 @@ class EmailingService
       mail_due = mail_due(user, mail_type)  
       if mail_due == 'daily_mail'
         posts = Post.published.where(published_at: 1.day.ago..Time.now)
-                .where.not(user: user)
-                .where(user: user.following)
-                .pluck(:id)
+                         .where.not(user: user)
+                         .where(
+                          "(user_id IN (:user_followed_ids) AND publication_id IS NULL)
+                          OR (publication_id IN (:publication_followed_ids) AND publication_id IS NOT NULL)",
+                          user_followed_ids: user.followed_users.pluck(:id),
+                          publication_followed_ids: user.followed_publications.pluck(:id))
+                         .pluck(:id)
+
+                              
       else
         posts = Post.published.where(published_at: 1.week.ago..Time.now)
                 .where.not(user: user)
-                .where(user: user.following)
+                .where(
+                  "(user_id IN (:user_followed_ids) AND publication_id IS NULL)
+                  OR (publication_id IN (:publication_followed_ids) AND publication_id IS NOT NULL)",
+                  user_followed_ids: user.followed_users.pluck(:id),
+                  publication_followed_ids: user.followed_publications.pluck(:id))
                 .pluck(:id)
       end
 

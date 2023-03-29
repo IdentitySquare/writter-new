@@ -1,22 +1,18 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: publication_users
 #
 #  id             :bigint           not null, primary key
-#  body           :text
-#  draft_body     :string
-#  published_at   :datetime
-#  status         :integer          default("draft"), not null
-#  title          :string
+#  role           :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  publication_id :bigint
+#  publication_id :bigint           not null
 #  user_id        :bigint           not null
 #
 # Indexes
 #
-#  index_posts_on_publication_id  (publication_id)
-#  index_posts_on_user_id         (user_id)
+#  index_publication_users_on_publication_id  (publication_id)
+#  index_publication_users_on_user_id         (user_id)
 #
 # Foreign Keys
 #
@@ -25,7 +21,7 @@
 #
 require "test_helper"
 
-class PostTest < ActiveSupport::TestCase
+class PublicationUserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

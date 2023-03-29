@@ -8,7 +8,7 @@ class UserProfilesController < ApplicationController
       
       respond_to do |format|
         format.turbo_stream { flash.now[:notice] = "settings change" }
-        format.html {redirect_back fallback_location: root_path}
+        format.html {redirect_to root_path}
       end 
     end
   end
@@ -24,19 +24,6 @@ class UserProfilesController < ApplicationController
   end
   
   def notifications_settings
-  end
-  
-  def follow
-    @follow = current_user.given_follows.new(follow_params)
-    @follow.save
-    redirect_back(fallback_location: root_path)
-  end
-  
-  def unfollow
-
-    @follow = current_user.given_follows.find_by(followable: @user)
-    @follow.destroy 
-    redirect_back(fallback_location: root_path)
   end
 
   def followers
@@ -70,10 +57,4 @@ class UserProfilesController < ApplicationController
     user_params[:performance_notifications_freq] = params[:user][:performance_notifications_freq].to_i
     return user_params
   end
-
-  private
-  def follow_params
-   params.require(:follow).permit(:followable_id, :followable_type)
-  end
-
 end

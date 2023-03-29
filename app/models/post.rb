@@ -26,10 +26,16 @@
 class Post < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
   #----- CONSTANTS -----#
-   enum status: { draft: 0, published: 1 }
+  enum status: { draft: 0, published: 1 }
+  
    #----- ASSOCIATIONS -----#
-   belongs_to :user
 
+  belongs_to :user
+  belongs_to :publication, optional: true
+
+  has_many :comments, dependent: :destroy
+
+  has_paper_trail
 
   def title
     return nil if empty?

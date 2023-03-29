@@ -110,7 +110,12 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.7)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.5.0)
+    discard (1.2.1)
+      activerecord (>= 4.2, < 8)
     erubi (1.12.0)
     erubis (2.7.0)
     factory_bot (6.2.1)
@@ -236,6 +241,9 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
+    paper_trail (14.0.0)
+      activerecord (>= 6.0)
+      request_store (~> 1.4)
     pg (1.4.5)
     postmark (1.23.0)
       json
@@ -401,6 +409,8 @@ DEPENDENCIES
   capybara
   debug
   devise
+  devise_invitable (~> 2.0.0)
+  discard (~> 1.2)
   factory_bot (~> 6.2)
   factory_bot_rails
   faker
@@ -419,6 +429,7 @@ DEPENDENCIES
   omniauth
   omniauth-google-oauth2 (~> 1.0)
   omniauth-rails_csrf_protection
+  paper_trail
   pg
   postmark-rails
   puma (~> 5.0)
