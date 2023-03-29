@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.0"
 
+
+gem 'paper_trail'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.1"
 
@@ -35,8 +37,13 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+
+# invites
+gem 'devise_invitable', '~> 2.0.0'
+
 # Soft Delete Records
 gem 'discard', '~> 1.2'
+
 
 gem 'simple_form'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

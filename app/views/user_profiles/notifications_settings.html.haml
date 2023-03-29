@@ -1,13 +1,8 @@
 .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
-  
-  = render 'settings_header'
+  = render 'settings_header', selected: 'notifications'
   .flex.flex-col.gap-3{"data-controller": "notifications"}
-
-
     = form_for(current_user, url: user_profile_path(current_user), method: :put, html: { class: 'space-y-6 inline', "data-notifications-target": 'form'}) do |f|
       %div
-        
-
         .flex.flex-row.py-2.justify-between
           .flex-flex-col
             .block.text-md.font-bold.text-gray-900 Email Notifications

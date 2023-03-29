@@ -1,0 +1,8 @@
+%p Hi #{@user.name},
+
+%p
+  You have been added as a #{@role} to the publication '#{@publication.name}'.
+%p
+  = link_to 'View Publication', publication_url(@publication)
+%p
+  If you have any questions, please contact the publication owner.

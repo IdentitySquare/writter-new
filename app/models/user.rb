@@ -53,7 +53,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and 
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :username, length: {minimum: 4 }, on: :update
@@ -63,13 +63,17 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
+  has_many :publication_users
+  has_many :publications, through: :publication_users
+
   has_many :received_follows, as: :followable, class_name: "Follow"
   has_many :followers, through: :received_follows, source: :user
 
-
   has_many :given_follows, class_name: "Follow"
-  has_many :following, through: :given_follows, source: :followable, source_type: "User"
-
+  has_many :followed_users, through: :given_follows, source: :followable, source_type: 'User', class_name: 'User'  
+  has_many :followed_publications, through: :given_follows, source: :followable, source_type: 'Publication', class_name: 'Publication'
+  
+  
   has_many :comments
   # notification preference stored as enum
   enum notifications_freq: { instantly: 0, daily: 1, weekly: 2, off: 3  }, _suffix: :notifications
@@ -90,6 +94,9 @@ class User < ApplicationRecord
     end
   end
 
+  def following
+    followed_users + followed_publications
+  end
 
   def onboarded?
     username.present?
@@ -103,10 +110,28 @@ class User < ApplicationRecord
     posts.draft
   end
 
+  def publications_as_editor
+    publications.where(publication_users: { role: "editor" })
+  end
+  
+  
+  def publications_as_admin
+    publications.where(publication_users: { role: "admin" })
+  end
+
+  def pending_invite?
+    invitation_created_at.present? && invitation_sent_at.blank? 
+  end
+
+  def pending_acceptance?
+    invitation_created_at.present? && invitation_accepted_at.blank?
+  end
+
   private
 
   def set_time_zone
     self.timezone = Time.zone.name
+
   end
   
 end

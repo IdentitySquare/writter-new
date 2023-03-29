@@ -12,38 +12,31 @@
         %a.hover:underline{href: user_profile_path(user)} #{user.name}
       %p.text-sm.text-gray-500
         #{@post.created_at.strftime('%b %Y')}
-    
-  
-    - if policy(@post).update?
+
+    - if policy(@post).user_is_owner? || policy(@post).user_is_editing_member_of_publication?
       
-      .flex.flex-shrink-0.self-center{'data-controller': 'dropdown'}
+      .flex.flex-shrink-0.self-center{"x-data": "{open: false, abc: false}"}
         .relative.inline-block.text-left
           %div
-            %button#menu-0-button.-m-2.flex.items-center.rounded-full.p-2.text-gray-400.hover:text-gray-600{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button",'data-action': 'click->dropdown#toggleDropdown'}
+            %button#menu-0-button.-m-2.flex.items-center.rounded-full.p-2.text-gray-400.hover:text-gray-600{"aria-expanded" => "false", "aria-haspopup" => "true", :type => "button","x-on:click": "abc = ! abc; open =  false"}
               %span.sr-only Open options
               / Heroicon name: mini/ellipsis-vertical
               %svg.h-5.w-5{"aria-hidden" => "true", :fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
                 %path{:d => "M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM10 8.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM11.5 15.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z"}
-          /
-            Dropdown menu, show/hide based on menu state.
-            
-            Entering: "transition ease-out duration-100"
-            From: "transform opacity-0 scale-95"
-            To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-            From: "transform opacity-100 scale-100"
-            To: "transform opacity-0 scale-95"
-          .hidden.absolute.right-0.z-10.mt-2.w-56.origin-top-right.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "menu-0-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1",'data-dropdown-target': 'dropdown'}
-            .py-1{:role => "none"}
+
+          .absolute.right-0.z-10.mt-2.w-56.origin-top-right.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "menu-0-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1","x-show": "abc"}
+            .py-1{:role => "none" }
               / Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700"
-              %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => edit_post_path(@post), :role => "menuitem", :tabindex => "-1"}
-          
-                %svg.feather.feather-edit-2.mr-2{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                  %path{:d => "M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"}
+              - if policy(@post).update?
+
+                %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => edit_post_path(@post), :role => "menuitem", :tabindex => "-1", :disabled => true}
+            
+                  %svg.feather.feather-edit-2.mr-2{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+                    %path{:d => "M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"}
 
 
-                %span Edit
-              
+                  %span Edit
+                
               - if @post.published?
                 %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm{:href => unpublish_post_path(@post), :data => { confirm: 'Your confirm message' }, :role => "menuitem", :tabindex => "-1"}
     
@@ -51,4 +44,74 @@
                     %path{:d => "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}
                     
                   %span.ml-2 Unpublish
+
+
+              - if @post.publication.present?
+
                 
+                %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm.cursor-pointer{:role => "menuitem", :tabindex => "-1"}
+        
+                  %svg.feather.feather-file-minus{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+                    %path{:d => "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}
+                    %polyline{:points => "14 2 14 8 20 8"}
+                    %line{:x1 => "9", :x2 => "15", :y1 => "15", :y2 => "15"}
+
+                  %span.ml-2{"x-on:click": "open = true"}
+                    Remove from Publication
+            
+              - else
+              
+                %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm.cursor-pointer{:role => "menuitem", :tabindex => "-1","x-on:click": "open = true"}
+                  %svg.feather.feather-plus{:fill => "none", :height => "18", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+                    %line{:x1 => "12", :x2 => "12", :y1 => "5", :y2 => "19"}
+                    %line{:x1 => "5", :x2 => "19", :y1 => "12", :y2 => "12"}
+                  %span.ml-2
+                    Add to a publication
+
+
+        
+          
+          
+          
+          
+          
+          .absolute.right-0.z-10.mt-2.w-56.origin-top-right.rounded-md.bg-white.ring-1.ring-black.ring-opacity-5.focus:outline-none.px-4.py-2{"aria-labelledby" => "menu-0-button", "aria-orientation" => "vertical", :role => "menu", :tabindex => "-1", "x-show": "open"}
+            
+            
+            - if @post.publication.present?
+
+              .text-gray-700.flex.text-sm.mb-5.text-center.pt-3
+                This article is currently published in #{@post.publication.name}.
+              
+              = simple_form_for(@post, "data-turbo": "false")  do |f|
+
+                
+                = f.input :publication_id, as: :hidden, input_html: { value: 0 }
+                
+                
+                .flex.flex-row.form-actions.my-5.items-center.justify-center
+                
+                  = f.button :submit , "Remove from #{@post.publication.name}",  class: "btn-small"
+
+              
+        
+  
+            - else
+                  
+                
+              = simple_form_for(@post, "data-turbo": "false", html: { class: "py-2"})  do |f|
+
+                = f.collection_radio_buttons :publication_id, current_user.publications, :id, :name do |b| 
+                  .flex.flex-row.py-2.justify-between.items-center
+                    = b.label class: 'text-gray-700 flex py-2 text-sm'       
+                    = b.radio_button class: 'h-6 w-6 border-gray-300 text-green-800 transition disabled:opacity-25'
+
+                .flex.flex-row.form-actions.mt-5.gap-5.items-center.justify-center
+
+                  = f.button :submit , 'Add Post',  class: "btn-small "
+
+                  .text-sm.text-green-900.cursor-pointer{"x-on:click": "open = false; abc = false"}
+                    Cancel
+
+                 
+

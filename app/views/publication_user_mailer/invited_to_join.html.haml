@@ -1,0 +1,9 @@
+
+%p 
+  Hi #{@user.name},
+%p
+  You have been invited as an #{@role} to the publication '#{@publication.name}'. To continue, please click the button below to create your account on Writter.
+%p 
+  = link_to 'Create Account', accept_user_invitation_url(@user, invitation_token: @token), class: 'button'
+%p
+  = t("devise.mailer.invitation_instructions.ignore")
