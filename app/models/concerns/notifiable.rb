@@ -5,7 +5,7 @@ module Notifiable
     def has_notifications
       has_many :notifications, as: :notifiable
       # after_create :send_email, if: -> { user.notifications_freq == 'instantly' }
-      after_create :create_notification
+      # after_create :create_notification
 
     end
   end
@@ -17,7 +17,8 @@ module Notifiable
   private
 
   def create_notification
-    Notification.create(notifiable: self, user: user)
+
+    Notification.create(notifiable: self, user: self.post.user)
   end
 
   def send_email

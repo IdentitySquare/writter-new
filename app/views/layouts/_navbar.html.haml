@@ -1,3 +1,4 @@
+= turbo_stream_from "notifications_#{current_user.id}"
 %nav.fixed.w-full.bg-white.shadow.z-20.font-sans-serif{'data-controller': 'dropdown'}
   .mx-auto.max-w-7xl.px-4.sm:px-6.lg:px-8
     .flex.h-16.justify-between
@@ -108,16 +109,21 @@
           .flex-shrink-0
 
             %button.relative.inline-flex.items-center.btn-primary{type: "button"}
-              = link_to 'Write', new_post_path
+              = link_to "notifications_#{current_user.id}", new_post_path
         
 
 
         .hidden.md:ml-4.md:flex.md:flex-shrink-0.md:items-center
-          %button.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button"}
+          
+          %button.relative.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button"}
             %span.sr-only View notifications
-            / Heroicon name: outline/bell
-            %svg.h-6.w-6{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
+            / Heroicon name: outline/bell-desktop
+            -# - if Notification.all.size > 0
+            -#   .absolute.bg-yellow-400.rounded-full{ class: ' top-0.5 right-1 w-2.5 h-2.5' }
+            
+            %svg.h-6.w-6{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg",id: 'icon'}
               %path{d: "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+              -# .absolute.bg-yellow-500.rounded-full{ class: ' top-0 right-0 w-2.5 h-2.5' }
           / Profile dropdown desktop
           .relative.ml-3
             %div
