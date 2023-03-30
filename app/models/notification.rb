@@ -37,7 +37,7 @@ class Notification < ApplicationRecord
     display = {"comment added"  => "left a comment on your post",
                "post removed from publication" => "removed your post from a publication",
                "editor removed from publication" => "Someone removed you as an editor from the publication",
-               "editor added to publication" => "added you as an editor to the publication"}
+               "editor added to publication" => "Someone added you as an editor to the publication"}
 
     display[text]
   end
