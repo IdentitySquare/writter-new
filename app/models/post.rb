@@ -25,6 +25,7 @@
 #
 class Post < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
+  include Notifiable
   #----- CONSTANTS -----#
   enum status: { draft: 0, published: 1 }
   
@@ -32,7 +33,6 @@ class Post < ApplicationRecord
 
   belongs_to :user
   belongs_to :publication, optional: true
-
   has_many :comments, dependent: :destroy
 
   has_paper_trail

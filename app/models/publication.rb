@@ -9,6 +9,8 @@
 #  updated_at :datetime         not null
 #
 class Publication < ApplicationRecord
+  include Notifiable
+  
   has_many :publication_users, dependent: :destroy
   has_many :users, through: :publication_users
 

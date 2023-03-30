@@ -33,7 +33,9 @@ class Comment < ApplicationRecord
   validates :body, length: { maximum: 1000, message: "is too long (maximum is 1000 characters)" }
 
   # callbacks
+  after_create :create_notification
 
+  private
   def create_notification
     Notification.create(notifiable: self, user: post.user, text: 'comment added', sender: user)
   end
