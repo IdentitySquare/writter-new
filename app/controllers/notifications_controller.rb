@@ -1,12 +1,13 @@
 class NotificationsController < ApplicationController
-    before_action :set_follow, only: %i[show ]
+    before_action :set_notification, only: %i[show ]
 
     def index
-        @notifications = Notification.all
+      @notifications = Notification.all
     end
     
     def show
-    # mark as read redirect to object
+      @notification.update(read_at: DateTime.now)
+      redirect_to @notification.notifiable
     end
   
     private

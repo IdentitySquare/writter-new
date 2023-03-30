@@ -26,7 +26,7 @@ Rails.application.routes.draw do
                invitations: 'devise/invitations'
   }
 
-  resources :comments, only: [:create, :destroy]
+  resources :comments
   resources :notifications
 
   resources   :users, only: [:update]

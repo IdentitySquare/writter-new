@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[destroy ]
+  before_action :set_comment, only: %i[destroy show ]
 
   def create
 
@@ -19,6 +19,10 @@ class CommentsController < ApplicationController
       redirect_to new_user_session_path 
     end
 
+  end
+
+  def show
+    redirect_to @comment.post
   end
 
   # DELETE /posts/1 or /posts/1.json

@@ -10,4 +10,5 @@
 
 
 = turbo_stream.prepend "notifications" do
-  = render partial: 'notifications/notification', formats: [:html], locals: { notification: notification }    
+  = link_to notification do
+    = render partial: 'notifications/notification', formats: [:html], locals: { notification: notification }    
