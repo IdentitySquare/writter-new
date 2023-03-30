@@ -20,7 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class PublicationUser < ApplicationRecord
-
+  
   #------- RELATIONS -------#
   belongs_to :user
   belongs_to :publication
@@ -34,10 +34,15 @@ class PublicationUser < ApplicationRecord
   before_validation :set_user
   after_create :send_mail
 
-  after_destroy :create_notification
+  after_create :create_notification
+  after_destroy :create_removed_notification
+
+  def create_removed_notification
+    Notification.create(notifiable: publication, user: user, text: "#{role} removed from publication")
+  end
 
   def create_notification
-    Notification.create(notifiable: publication, user: user, text: "#{role} removed from publication")
+    Notification.create(notifiable: publication, user: user, text: "#{role} added to publication")
   end
 
   def set_user
