@@ -130,7 +130,7 @@
             .absolute.right-0.z-10.mt-2.w-96.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", "x-show": "open"}
               / Active: "bg-gray-100", Not Active: ""
               #notifications.flex.flex-col
-                - Notification.all[0..5].each do |notification|
+                - Notification.includes(:sender).all[0..5].each do |notification|
                   = link_to notification_path(notification) do
                     = render 'notifications/notification', notification: notification
               

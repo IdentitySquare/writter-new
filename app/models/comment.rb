@@ -35,6 +35,6 @@ class Comment < ApplicationRecord
   # callbacks
 
   def create_notification
-    Notification.create(notifiable: self, user: post.user, text: 'comment added')
+    Notification.create(notifiable: self, user: post.user, text: 'comment added', sender: user)
   end
 end

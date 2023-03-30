@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
     before_action :set_notification, only: %i[show ]
 
     def index
-      @notifications = Notification.all
+      @notifications = Notification.all.includes(:sender)
     end
     
     def show
