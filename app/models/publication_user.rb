@@ -34,6 +34,12 @@ class PublicationUser < ApplicationRecord
   before_validation :set_user
   after_create :send_mail
 
+  after_destroy :create_notification
+
+  def create_notification
+    Notification.create(notifiable: publication, user: user, text: "#{role} removed from publication")
+  end
+
   def set_user
     return if user_id.present?
 

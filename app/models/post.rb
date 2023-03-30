@@ -42,7 +42,6 @@ class Post < ApplicationRecord
 
   def create_notification!
     changed_by = User.find(versions[-1].whodunnit)
-    debugger
     if changed_by != user
       Notification.create(user: user, sender: changed_by, notifiable: self, text: 'post removed from publication')
     end

@@ -30,7 +30,8 @@ class Notification < ApplicationRecord
 
   def display_text
     display = {"comment added"  => "left a comment on your post",
-               "post removed from publication" => "removed your post from a publication",}
+               "post removed from publication" => "removed your post from a publication",
+               "editor removed from publication" => "Someone removed you as an editor from the publication"}
 
     display[text]
   end

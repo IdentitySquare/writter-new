@@ -22,9 +22,9 @@ class Publication < ApplicationRecord
   after_update :add_or_remove_users
 
   def add_or_remove_users
-    if editor_emails.present? 
-      update_publication_users(editor_emails, 'editor')
-    end
+    
+    update_publication_users(editor_emails, 'editor')
+    
 
     if admin_emails.present?
       update_publication_users(admin_emails, 'admin')
@@ -33,7 +33,7 @@ class Publication < ApplicationRecord
 
   def update_publication_users(emails, role)
     
-    revised_emails = emails.split(',')
+    revised_emails = emails.present? ? emails.split(',') : []
     existing_emails = send(role.pluralize).pluck(:email)
     removed_emails = existing_emails - revised_emails
     
