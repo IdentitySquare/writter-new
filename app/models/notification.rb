@@ -31,7 +31,7 @@ class Notification < ApplicationRecord
   end
 
   def display_text
-    display = {"comment added"  => "left a comment on your article"}
+    display = {"comment added"  => "left a comment on your post"}
 
     display[text]
   end
