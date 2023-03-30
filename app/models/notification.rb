@@ -26,8 +26,13 @@ class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :notifiable, polymorphic: true, required: true
   belongs_to :sender, class_name: 'User', optional: true
-  after_create_commit -> { broadcast_render_to("notifications_#{user.id}",partial: "notifications/create", locals: { notification: self }) }
+  after_create_commit -> { broadcast_render_to("notifications_#{user.id}",partial: "notifications/create", locals: { notification: self, unread_count: user.notifications.unread.size }) }
 
+  #scope for unread notifications
+  scope :unread, -> { where(read_at: nil) }
+
+  
+  #display text for notification
   def display_text
     display = {"comment added"  => "left a comment on your post",
                "post removed from publication" => "removed your post from a publication",

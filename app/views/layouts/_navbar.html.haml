@@ -117,17 +117,19 @@
           
           .relative.ml-3{"x-data" => "{ open: false }"}
             %div
-              %button.relative.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button", "x-on:click": "open = ! open"}
+              %button.relative.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button", "x-on:click": "open = ! open",id: 'icon'}
                 %span.sr-only View notifications
                 / Heroicon name: outline/bell-desktop
-                -# - if Notification.all.size > 0
-                -#   .absolute.bg-yellow-400.rounded-full{ class: ' top-0.5 right-1 w-2.5 h-2.5' }
+   
+                - if current_user.notifications.unread.size > 0
+                  .absolute.bg-yellow-400.rounded-full{ class: ' top-0.5 right-1 w-4 h-4' }
+                    .text-xs.text-black#count #{current_user.notifications.unread.size}
                 
-                %svg.h-6.w-6{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg",id: 'icon'}
+                %svg.h-8.w-8{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
                   %path{d: "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
                   -# .absolute.bg-yellow-500.rounded-full{ class: ' top-0 right-0 w-2.5 h-2.5' }
               
-            .absolute.right-0.z-10.mt-2.w-96.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", "x-show": "open"}
+            .absolute.right-0.z-10.mt-2.w-96.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", "x-show": "open", "@click.outside": "open = false"}
               / Active: "bg-gray-100", Not Active: ""
               #notifications.flex.flex-col
                 - current_user.notifications.includes(:sender).all[0..5].each do |notification|
