@@ -24,5 +24,5 @@ class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :notifiable, polymorphic: true, required: true
 
-  after_create_commit -> { broadcast_render_to("notifications_#{user.id}",partial: "notifications/create")}
+  after_create_commit -> { broadcast_render_to("notifications_#{user.id}",partial: "notifications/create", locals: { notification: self }) }
 end

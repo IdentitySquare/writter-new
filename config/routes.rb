@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   }
 
   resources :comments, only: [:create, :destroy]
+  resources :notifications
 
   resources   :users, only: [:update]
 
