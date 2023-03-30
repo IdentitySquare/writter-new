@@ -1,1 +1,9 @@
-this is the big list of ntoificaitons
+.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
+  
+  .text-left.font-semibold.text-4xl.mb-5
+    Notifications
+  
+  - @notifications.each do |notification|
+    = link_to notification do
+      = render 'notifications/notification',notification: notification 
+    

@@ -134,8 +134,8 @@
                   = link_to notification_path(notification) do
                     = render 'notifications/notification', notification: notification
               
-              - if current_user
-                = link_to "See all notifications",  notifications_path, class: "dropdown-item", role: "menuitem", tabindex: "-1"
+             
+                = link_to "See all notifications",  notifications_path, class: "dropdown-item text-right", role: "menuitem", tabindex: "-1"
               
 
           / Profile dropdown desktop
