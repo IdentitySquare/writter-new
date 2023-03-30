@@ -7,7 +7,12 @@ class NotificationsController < ApplicationController
     
     def show
       @notification.update(read_at: DateTime.now)
-      redirect_to @notification.notifiable
+
+      if @notification.notifiable.is_a?(User)
+        redirect_to user_profile_path(@notification.notifiable)
+      else
+        redirect_to @notification.notifiable
+      end
     end
   
     private

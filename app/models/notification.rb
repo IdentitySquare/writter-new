@@ -28,17 +28,30 @@ class Notification < ApplicationRecord
   belongs_to :sender, class_name: 'User', optional: true
   after_create_commit -> { broadcast_render_to("notifications_#{user.id}",partial: "notifications/create", locals: { notification: self, unread_count: user.notifications.unread.size }) }
 
+  # after_create :send_email, if: -> { user.notifications_freq == 'instantly' }
+ 
   #scope for unread notifications
   scope :unread, -> { where(read_at: nil) }
 
-  
   #display text for notification
   def display_text
     display = {"comment added"  => "left a comment on your post",
                "post removed from publication" => "removed your post from a publication",
                "editor removed from publication" => "Someone removed you as an editor from the publication",
-               "editor added to publication" => "Someone added you as an editor to the publication"}
+               "editor added to publication" => "Someone added you as an editor to the publication",
+               "followed" => "started following you"
+              }
 
     display[text]
+  end
+
+  def send_email
+    NotificationsMailer.with(mailer_params(user)).instantly_mail.deliver_now
+  end
+
+  def mailer_params
+    { 
+      user_id: user.id,
+    }
   end
 end
