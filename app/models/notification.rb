@@ -37,7 +37,7 @@ class Notification < ApplicationRecord
                             followed: 4}
   #scope for unread notifications
   scope :unread, -> { where(read_at: nil) }
-
+    
   #display text for notification
   def display_text
     display = {"comment_added"  => "left a comment on your post",

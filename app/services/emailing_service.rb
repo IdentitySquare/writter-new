@@ -12,7 +12,13 @@ class EmailingService
                 .where.not(notifications_freq: 'off')
     mail_type = 'notifications_freq'
     users.each do |user|
-      NotificationsMailer.with(mailer_params(user)).send(mail_due(user, mail_type)).deliver_later
+      mail_due = mail_due(user, mail_type)  
+      if mail_due == 'daily_mail'
+        notifications = user.notifications.unseen.where(created_at: 1.day.ago..Time.now).pluck(:id)                              
+      else
+        notifications = user.notifications.unseen.where(created_at: 1.week.ago..Time.now).pluck(:id)                        
+      end
+      NotificationsMailer.with(notifications_mailer_params(user, notifications)).send(mail_due(user, mail_type)).deliver_later
     end
   end
 
@@ -25,28 +31,8 @@ class EmailingService
     mail_type = 'new_article_notifications_freq'
     users.each do |user|
       mail_due = mail_due(user, mail_type)  
-      if mail_due == 'daily_mail'
-        posts = Post.published.where(published_at: 1.day.ago..Time.now)
-                         .where.not(user: user)
-                         .where(
-                          "(user_id IN (:user_followed_ids) AND publication_id IS NULL)
-                          OR (publication_id IN (:publication_followed_ids) AND publication_id IS NOT NULL)",
-                          user_followed_ids: user.followed_users.pluck(:id),
-                          publication_followed_ids: user.followed_publications.pluck(:id))
-                         .pluck(:id)
-
-                              
-      else
-        posts = Post.published.where(published_at: 1.week.ago..Time.now)
-                .where.not(user: user)
-                .where(
-                  "(user_id IN (:user_followed_ids) AND publication_id IS NULL)
-                  OR (publication_id IN (:publication_followed_ids) AND publication_id IS NOT NULL)",
-                  user_followed_ids: user.followed_users.pluck(:id),
-                  publication_followed_ids: user.followed_publications.pluck(:id))
-                .pluck(:id)
-      end
-
+      range_start = mail_due == 'daily_mail' ?  1.day.ago : 1.week.ago   
+      posts = get_posts(user, 1.week.ago)
       next if posts.empty?
      
       PostsMailer.with(post_mailer_params(user,posts)).send(mail_due).deliver_later
@@ -62,11 +48,30 @@ class EmailingService
     # TODO: when new updates are released
   end
   
+  def get_posts(user, range_start)
+    Post.published
+        .where(published_at: range_start..Time.now)
+        .where.not(user: user)
+        .where(
+          "(user_id IN (:user_followed_ids) AND publication_id IS NULL)
+          OR (publication_id IN (:publication_followed_ids) AND publication_id IS NOT NULL)",
+          user_followed_ids: user.followed_users.pluck(:id),
+          publication_followed_ids: user.followed_publications.pluck(:id))
+        .pluck(:id)
+  end
   def post_mailer_params(user, posts)
     { 
       user_id: user.id,
       post_ids: posts
     }
+  end
+
+  def notifications_mailer_params(user, notifications)
+    {
+      user_id: user.id,
+      notification_ids: notifications
+    }
+  
   end
 
   def mailer_params(user)
