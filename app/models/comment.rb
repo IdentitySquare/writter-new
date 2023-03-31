@@ -38,7 +38,7 @@ class Comment < ApplicationRecord
   private
   def create_notification
     if user != post.user
-      Notification.create(notifiable: self, user: post.user, enum: 'comment_added', sender: user)
+      Notification.create(notifiable: self, user: post.user, notification_type: 'comment_added', sender: user)
     end
   end
 end
