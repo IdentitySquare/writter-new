@@ -16,6 +16,7 @@ class PostsController < ApplicationController
     if @post.draft?
       redirect_to edit_post_path(@post)
     end
+    ahoy.track "post viewed", post_id: @post.id
   end
 
   # GET /posts/new
