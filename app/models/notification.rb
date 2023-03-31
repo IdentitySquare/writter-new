@@ -35,7 +35,7 @@ class Notification < ApplicationRecord
                             editor_removed_from_publication: 2,
                             editor_added_to_publication: 3,
                             admin_added_to_publication: 4,
-                            followed: 4}
+                            followed: 5}
   #scope for unread notifications
   scope :unread, -> { where(read_at: nil) }
     

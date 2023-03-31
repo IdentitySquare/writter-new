@@ -5,8 +5,8 @@ describe 'EmailingService' do
 
   before do
 
-    @user = FactoryBot.create(:user, notifications: true, new_article_notifications_freq: 0)
-    @user2 = FactoryBot.create(:user, notifications: true, new_article_notifications_freq: 0)
+    @user = FactoryBot.create(:user, email_notifications: true, new_article_notifications_freq: 0)
+    @user2 = FactoryBot.create(:user, email_notifications: true, new_article_notifications_freq: 0)
 
     @followed_user = FactoryBot.create(:user)
 
@@ -31,7 +31,7 @@ describe 'EmailingService' do
       context 'when new posts exists from followed user' do
         it 'sends email when new post from follower' do
           @post = FactoryBot.create(:post, user: @followed_user, status: 1, published_at: 1.hour.ago, publication: nil)
-        
+          
           expect { EmailingService.new.send_new_posts_emails_at_6pm!(timezones: [@user.timezone]) }
             .to(
               have_enqueued_job.on_queue('default')
