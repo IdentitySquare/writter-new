@@ -21,7 +21,7 @@ RSpec.describe Publication, type: :model do
   end
  
   describe 'callbacks' do
-    it { should callback(:add_users).after(:update) }
+    it { should callback(:add_or_remove_users).after(:update) }
   end
 
   describe 'methods' do

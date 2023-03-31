@@ -27,7 +27,6 @@ class Publication < ApplicationRecord
     
     update_publication_users(editor_emails, 'editor')
     
-
     if admin_emails.present?
       update_publication_users(admin_emails, 'admin')
     end

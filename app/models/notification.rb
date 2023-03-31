@@ -34,6 +34,7 @@ class Notification < ApplicationRecord
                             post_removed_from_publication: 1,
                             editor_removed_from_publication: 2,
                             editor_added_to_publication: 3,
+                            admin_added_to_publication: 4,
                             followed: 4}
   #scope for unread notifications
   scope :unread, -> { where(read_at: nil) }
@@ -44,6 +45,7 @@ class Notification < ApplicationRecord
                "post_removed_from_publication" => "removed your post from a publication",
                "editor_removed_from_publication" => "Someone removed you as an editor from the publication",
                "editor_added_to_publication" => "Someone added you as an editor to the publication",
+               "admin_added_to_publication" => "Someone added you as an admin to the publication",
                "followed" => "started following you"
               }
 
