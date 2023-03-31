@@ -1,5 +1,5 @@
 .div{id: "notification_#{notification.id}"}
-  .flex.flex-row.px-3.drop-down-item.py-6.gap-3.text-sm
+  .flex.flex-row.px-3.drop-down-item.py-6.gap-3.text-sm.hover:bg-gray-50
     - if notification.sender.present?
       %img.w-10.h-10.rounded-full{ src: notification.sender.avatar_url, alt: "Avatar" }
     - else

@@ -27,7 +27,8 @@ Rails.application.routes.draw do
   }
 
   resources :comments
-  resources :notifications
+  resources :notifications 
+  post 'notifications/mark_as_read', to: 'notifications#mark_as_read'
 
   resources   :users, only: [:update]
 

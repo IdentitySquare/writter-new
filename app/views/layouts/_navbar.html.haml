@@ -109,7 +109,7 @@
           .flex-shrink-0
 
             %button.relative.inline-flex.items-center.btn-primary{type: "button"}
-              = link_to "notifications_#{current_user.id}", new_post_path
+              = link_to "Write", new_post_path
         
 
 
@@ -131,12 +131,23 @@
               
             .absolute.right-0.z-10.mt-2.w-96.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", "x-show": "open", "@click.outside": "open = false"}
               / Active: "bg-gray-100", Not Active: ""
-              #notifications.flex.flex-col
-                - current_user.notifications.includes(:sender).all[0..5].each do |notification|
-                  = link_to notification_path(notification) do
-                    = render 'notifications/notification', notification: notification
+              .flex.flex-col
+                .flex.flex-row.justify-between.px-4.py-2.text-gray-700.font-medium.inline-block.align-bottom
+                  
+                  .text-md
+                    Notifications
+                  .flex.flex-row.gap-2.text-emerald-800.text-sm.items-center
+                    %svg.feather.feather-check{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+                      %polyline{:points => "20 6 9 17 4 12"}
+
+                    = button_to " Mark all as read",  notifications_mark_as_read_path, method: :post, class: "text-emerald-800", role: "menuitem", tabindex: "-1"
+
+                #notifications.text-sm
+                  - current_user.notifications.includes(:sender).order(created_at: :desc)[0..2].each do |notification|
+                    = link_to notification_path(notification) do
+                      = render 'notifications/notification', notification: notification
               
-             
+
                 = link_to "See all notifications",  notifications_path, class: "dropdown-item text-right", role: "menuitem", tabindex: "-1"
               
 

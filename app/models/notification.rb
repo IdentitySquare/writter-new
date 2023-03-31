@@ -55,4 +55,12 @@ class Notification < ApplicationRecord
       notification_id: self.id
     }
   end
+
+  def seen?
+    read_at.present?
+  end
+
+  def unseen?
+    read_at.nil?
+  end
 end
