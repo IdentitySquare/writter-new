@@ -133,6 +133,11 @@ class User < ApplicationRecord
     invitation_created_at.present? && invitation_accepted_at.blank?
   end
 
+  def visited_posts
+    post_ids = Ahoy::Event.where(user_id: 2 , name: "post viewed").order(time: :desc).pluck(Arel.sql("properties ->> 'post_id'"))
+    Post.find(post_ids)
+  end
+
   private
 
   def set_time_zone
