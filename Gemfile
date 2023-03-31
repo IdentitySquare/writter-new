@@ -112,6 +112,9 @@ gem 'high_voltage', '~> 3.1'
 
 gem 'haml-rails'
 gem 'html2haml'
+
+# Analytics 
+gem 'ahoy_matey'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
