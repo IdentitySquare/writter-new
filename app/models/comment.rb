@@ -23,10 +23,22 @@
 #
 class Comment < ApplicationRecord
   include Discard::Model
+  include Notifiable
+  
   # associations
   belongs_to :user
   belongs_to :post
 
   # validations
   validates :body, length: { maximum: 1000, message: "is too long (maximum is 1000 characters)" }
+
+  # callbacks
+  after_create :create_notification
+
+  private
+  def create_notification
+    if user != post.user
+      Notification.create(notifiable: self, user: post.user, notification_type: 'comment_added', sender: user)
+    end
+  end
 end

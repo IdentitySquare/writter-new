@@ -106,7 +106,7 @@ class PostsController < ApplicationController
       post_params = params.require(:post).permit(:body, :title, :draft_body, :publication_id)
 
       if post_params[:publication_id].present?
-        post_params[:publication_id] = post_params[:publication_id].zero? ?  nil : post_params[:publication_id].to_i 
+        post_params[:publication_id] = post_params[:publication_id].to_i.zero? ?  nil : post_params[:publication_id].to_i 
       end
       post_params
     end

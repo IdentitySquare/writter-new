@@ -25,6 +25,7 @@
 #
 class Post < ApplicationRecord
   include ActionView::Helpers::SanitizeHelper
+  include Notifiable
   #----- CONSTANTS -----#
   enum status: { draft: 0, published: 1 }
   
@@ -32,10 +33,19 @@ class Post < ApplicationRecord
 
   belongs_to :user
   belongs_to :publication, optional: true
-
   has_many :comments, dependent: :destroy
 
   has_paper_trail
+
+  #callback if saved change to publication_id
+  after_update :create_notification!, if: -> { saved_change_to_publication_id? }
+
+  def create_notification!
+    changed_by = User.find(versions[-1].whodunnit)
+    if changed_by != user
+      Notification.create(user: user, sender: changed_by, notifiable: self, notification_type: 'post_removed_from_publication')
+    end
+  end
 
   def title
     return nil if empty?
@@ -63,5 +73,8 @@ class Post < ApplicationRecord
   def empty?
     draft_body.nil? || JSON.parse(draft_body)&.fetch('blocks').empty?
   end
+
+
+
 
 end

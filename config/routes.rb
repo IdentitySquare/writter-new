@@ -26,7 +26,9 @@ Rails.application.routes.draw do
                invitations: 'devise/invitations'
   }
 
-  resources :comments, only: [:create, :destroy]
+  resources :comments
+  resources :notifications 
+  post 'notifications/mark_as_read', to: 'notifications#mark_as_read'
 
   resources   :users, only: [:update]
 

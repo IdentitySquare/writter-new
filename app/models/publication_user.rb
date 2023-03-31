@@ -20,7 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class PublicationUser < ApplicationRecord
-
+  
   #------- RELATIONS -------#
   belongs_to :user
   belongs_to :publication
@@ -33,6 +33,17 @@ class PublicationUser < ApplicationRecord
   #------- CALLBACKS -------#
   before_validation :set_user
   after_create :send_mail
+
+  after_create :create_notification
+  after_destroy :create_removed_notification
+
+  def create_removed_notification
+    Notification.create(notifiable: publication, user: user, notification_type: "#{role}_removed_from_publication")
+  end
+
+  def create_notification
+    Notification.create(notifiable: publication, user: user, notification_type: "#{role}_added_to_publication")
+  end
 
   def set_user
     return if user_id.present?

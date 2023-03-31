@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: publications
+#
+#  id         :bigint           not null, primary key
+#  bio        :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 #
 require 'rails_helper'
 require 'spec_helper'
@@ -11,7 +21,7 @@ RSpec.describe Publication, type: :model do
   end
  
   describe 'callbacks' do
-    it { should callback(:add_users).after(:update) }
+    it { should callback(:add_or_remove_users).after(:update) }
   end
 
   describe 'methods' do

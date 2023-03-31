@@ -6,7 +6,7 @@ FactoryBot.define do
       username { Faker::Internet.user_name(specifier: 5..20) }
       password { password }
       password_confirmation { password }
-      notifications { true }
+      email_notifications { true }
       notifications_freq { 1 }
       new_article_notifications_freq { 1 }
      
