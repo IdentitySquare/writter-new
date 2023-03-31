@@ -29,7 +29,7 @@ class Follow < ApplicationRecord
   private
 
   def create_notification
-    Notification.create(notifiable: user, user: followable, text: 'followed', sender: user)
+    Notification.create(notifiable: user, user: followable,notification_type: 'followed', sender: user)
   end
 
   def destroy_notification

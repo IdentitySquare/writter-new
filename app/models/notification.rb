@@ -2,15 +2,15 @@
 #
 # Table name: notifications
 #
-#  id              :bigint           not null, primary key
-#  notifiable_type :string           not null
-#  read_at         :datetime
-#  text            :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  notifiable_id   :bigint           not null
-#  sender_id       :bigint
-#  user_id         :bigint           not null
+#  id                :bigint           not null, primary key
+#  notifiable_type   :string           not null
+#  notification_type :integer
+#  read_at           :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  notifiable_id     :bigint           not null
+#  sender_id         :bigint
+#  user_id           :bigint           not null
 #
 # Indexes
 #
@@ -29,20 +29,25 @@ class Notification < ApplicationRecord
   after_create_commit -> { broadcast_render_to("notifications_#{user.id}",partial: "notifications/create", locals: { notification: self, unread_count: user.notifications.unread.size }) }
 
   after_create :send_email, if: -> { user.notifications_freq == 'instantly' }
- 
+  
+  enum notification_type: { comment_added: 0, 
+                            post_removed_from_publication: 1,
+                            editor_removed_from_publication: 2,
+                            editor_added_to_publication: 3,
+                            followed: 4}
   #scope for unread notifications
   scope :unread, -> { where(read_at: nil) }
 
   #display text for notification
   def display_text
-    display = {"comment added"  => "left a comment on your post",
-               "post removed from publication" => "removed your post from a publication",
-               "editor removed from publication" => "Someone removed you as an editor from the publication",
-               "editor added to publication" => "Someone added you as an editor to the publication",
+    display = {"comment_added"  => "left a comment on your post",
+               "post_removed_from_publication" => "removed your post from a publication",
+               "editor_removed_from_publication" => "Someone removed you as an editor from the publication",
+               "editor_added_to_publication" => "Someone added you as an editor to the publication",
                "followed" => "started following you"
               }
 
-    display[text]
+    display[notification_type]
   end
 
   def send_email

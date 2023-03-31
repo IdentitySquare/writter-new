@@ -43,7 +43,7 @@ class Post < ApplicationRecord
   def create_notification!
     changed_by = User.find(versions[-1].whodunnit)
     if changed_by != user
-      Notification.create(user: user, sender: changed_by, notifiable: self, text: 'post removed from publication')
+      Notification.create(user: user, sender: changed_by, notifiable: self, notification_type: 'post_removed_from_publication')
     end
   end
 

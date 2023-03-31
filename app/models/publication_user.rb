@@ -38,11 +38,11 @@ class PublicationUser < ApplicationRecord
   after_destroy :create_removed_notification
 
   def create_removed_notification
-    Notification.create(notifiable: publication, user: user, text: "#{role} removed from publication")
+    Notification.create(notifiable: publication, user: user, notification_type: "#{role}_removed_from_publication")
   end
 
   def create_notification
-    Notification.create(notifiable: publication, user: user, text: "#{role} added to publication")
+    Notification.create(notifiable: publication, user: user, notification_type: "#{role}_added_to_publication")
   end
 
   def set_user
