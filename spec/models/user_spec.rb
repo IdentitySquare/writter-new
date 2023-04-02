@@ -7,27 +7,7 @@
 #  bio                            :string
 #  confirmation_sent_at           :datetime
 #  confirmation_token             :string
-#  confirmed_at                   :datetime
-#  current_sign_in_at             :datetime
-#  current_sign_in_ip             :string
-#  email                          :string           default(""), not null
-#  encrypted_password             :string           default(""), not null
-#  invitation_accepted_at         :datetime
-#  invitation_created_at          :datetime
-#  invitation_limit               :integer
-#  invitation_sent_at             :datetime
-#  invitation_token               :string
-#  invitations_count              :integer          default(0)
-#  invited_by_type                :string
-#  last_sign_in_at                :datetime
-#  last_sign_in_ip                :string
-#  location                       :string
-#  name                           :string
-#  new_article_notifications_freq :integer          default(0)
-#  notifications                  :boolean          default(TRUE)
-#  notifications_freq             :integer          default(0)
-#  performance_notifications_freq :integer          default(0)
-#  product_notifications          :boolean          default(TRUE)
+          :boolean          default(TRUE)
 #  provider                       :string
 #  remember_created_at            :datetime
 #  reset_password_sent_at         :datetime
@@ -57,6 +37,7 @@ RSpec.describe User, type: :model do
   
   describe 'associations' do
     it { should have_many(:posts).dependent(:destroy) }
+    it { should have_many(:comments) }
   end
 
   describe 'validations' do

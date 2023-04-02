@@ -1,15 +1,20 @@
 class UserProfilesController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: :notifications_settings
   skip_before_action :check_onboarding
 
   def update 
+
     if @user.update(user_params)
-      redirect_to root_path
+      
+      respond_to do |format|
+        format.turbo_stream { flash.now[:notice] = "settings change" }
+        format.html {redirect_to root_path}
+      end 
     end
   end
 
-  def show
 
+  def show
     if params[:status].nil?
       @posts = @user.posts.published
     else
@@ -18,18 +23,7 @@ class UserProfilesController < ApplicationController
     end
   end
   
-
-  def follow
-    @follow = current_user.given_follows.new(follow_params)
-    @follow.save
-    redirect_back(fallback_location: root_path)
-  end
-  
-  def unfollow
-
-    @follow = current_user.given_follows.find_by(followable: @user)
-    @follow.destroy 
-    redirect_back(fallback_location: root_path)
+  def notifications_settings
   end
 
   def followers
@@ -49,12 +43,18 @@ class UserProfilesController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name,:username,:bio, :website)
+    user_params = params.require(:user).permit(:name,
+                                               :username,
+                                               :bio, 
+                                               :website,
+                                               :email_notifications, 
+                                               :notifications_freq,
+                                               :new_article_notifications_freq,
+                                               :performance_notifications_freq,
+                                               :product_notifications)
+    user_params[:notifications_freq] = params[:user][:notifications_freq].to_i
+    user_params[:new_article_notifications_freq] = params[:user][:new_article_notifications_freq].to_i
+    user_params[:performance_notifications_freq] = params[:user][:performance_notifications_freq].to_i
+    return user_params
   end
-
-  private
-  def follow_params
-   params.require(:follow).permit(:followable_id, :followable_type)
-  end
-
 end

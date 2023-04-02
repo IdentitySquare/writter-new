@@ -1,0 +1,16 @@
+.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
+  
+  .flex.flex-row.justify-between.font-medium
+    .text-left.text-4xl.mb-5
+      Notifications
+
+    .flex.flex-row.gap-2.text-emerald-800.text-sm.hover:underline.font-medium.items-center
+      %svg.feather.feather-check{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+        %polyline{:points => "20 6 9 17 4 12"}
+
+      = button_to " Mark all as read",  notifications_mark_as_read_path, method: :post,class: "text-emerald-800 hover:underline", role: "menuitem", tabindex: "-1"
+
+  - @notifications.each do |notification|
+    = link_to notification do
+      = render 'notifications/notification',notification: notification 
+    

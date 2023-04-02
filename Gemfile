@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.0"
 
+
+gem 'paper_trail'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.1"
 
@@ -34,6 +36,13 @@ gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
+
+
+# invites
+gem 'devise_invitable', '~> 2.0.0'
+
+# Soft Delete Records
+gem 'discard', '~> 1.2'
 
 
 gem 'simple_form'
@@ -103,6 +112,9 @@ gem 'high_voltage', '~> 3.1'
 
 gem 'haml-rails'
 gem 'html2haml'
+
+# Analytics 
+gem 'ahoy_matey'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -155,3 +167,5 @@ gem "pundit", "~> 2.3"
 gem "image_processing", "~> 1.12"
 
 gem "aws-sdk-s3", "~> 1.119"
+
+gem "timecop", "~> 0.9.6"

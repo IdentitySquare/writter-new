@@ -1,0 +1,16 @@
+= link_to notification_url(notification) do
+  .div{id: "notification_#{notification.id}"}
+    .flex.flex-row.notification-item
+      - if notification.sender.present?
+        %img.notification-image{ src: notification.sender.avatar_url, alt: "Avatar" }
+      - else
+        %img.notification-image{ src: "sfd", alt: "Avatar" }
+      .flex.flex-col
+        - if notification.sender.present?
+          %span.font-semibold.text-slate-700 #{notification.sender.name} 
+        
+        %span.text-slate-500 #{notification.display_text}
+
+        %span.text-slate-500.text-xs #{time_ago_in_words(notification.created_at)} ago
+          
+    

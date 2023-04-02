@@ -1,0 +1,13 @@
+.text-left.font-semibold.text-4xl.mb-5  Settings
+.border-b.border-gray-200.mb-10
+  %nav.-mb-px.flex.space-x-8{"aria-label" => "Tabs"}
+    - current = 'border-green-800 font-semibold text-black'
+    - non_selected = 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+
+    - publications = selected == 'publications' ? current : non_selected
+    - notifications = selected == 'notifications' ? current : non_selected
+    / Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+    %a.text-gray-500.hover:text-gray-700.hover:border-gray-300.whitespace-nowrap.py-4.px-1.border-b-2.font-medium.text-sm{class: "#{non_selected }"} Account
+    %a.text-gray-500.hover:text-gray-700.hover:border-gray-300.whitespace-nowrap.py-4.px-1.border-b-2.font-medium.text-sm{class: "#{notifications}", href: notifications_settings_path(id: current_user.id) } Notifications
+    %a.text-gray-500.hover:text-gray-700.hover:border-gray-300.whitespace-nowrap.py-4.px-1.border-b-2.font-medium.text-sm{class: "#{publications}", href: publications_path} Publications
+

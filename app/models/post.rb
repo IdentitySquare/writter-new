@@ -24,13 +24,31 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
-    
+  include ActionView::Helpers::SanitizeHelper
+  include Notifiable
   #----- CONSTANTS -----#
-   enum status: { draft: 0, published: 1 }
-   #----- ASSOCIATIONS -----#
-   belongs_to :user
+  enum status: { draft: 0, published: 1 }
   
-   has_many_attached :images
+   #----- ASSOCIATIONS -----#
+
+  belongs_to :user
+  
+  has_many_attached :images
+
+  belongs_to :publication, optional: true
+  has_many :comments, dependent: :destroy
+
+  has_paper_trail
+
+  #callback if saved change to publication_id
+  after_update :create_notification!, if: -> { saved_change_to_publication_id? }
+
+  def create_notification!
+    changed_by = User.find(versions[-1].whodunnit)
+    if changed_by != user
+      Notification.create(user: user, sender: changed_by, notifiable: self, notification_type: 'post_removed_from_publication')
+    end
+  end
 
   def title
     return nil if empty?
@@ -49,12 +67,23 @@ class Post < ApplicationRecord
     return nil if empty?
 
     block_index = title.present? ? 1 : 0
-
-    body_block
+    
+    body_block = JSON.parse(body)&.fetch('blocks')[block_index]
+    
+    return strip_tags(body_block['data']['text'])
   end
 
   def empty?
     draft_body.nil? || JSON.parse(draft_body)&.fetch('blocks').empty?
   end
+
+
+  def views(range = Time.at(0))
+    page_views = Ahoy::Event.where(name: 'post viewed')
+                            .where(properties: { post_id: id })
+                            .where(time: range..Time.now)
+                            .count
+  end
+
 
 end

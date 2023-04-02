@@ -1,0 +1,10 @@
+%turbo-stream{:action => "prepend", :target => "comments"}
+  %template
+    = render partial: 'comments/comment', formats: [:html], locals: { comment: @comment }    
+    
+%turbo-stream{:action => "replace", :target => "commentsForm"}
+  %template
+    = render partial: 'comments/form', formats: [:html], locals: { post: @comment.post, comment: Comment.new }
+
+
+  

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
   before_action :check_onboarding, except: [:check_onboarding, :onboarding]
+  before_action :set_paper_trail_whodunnit
   protect_from_forgery unless: -> { request.format.json? }
 
   layout :layout_by_resource
