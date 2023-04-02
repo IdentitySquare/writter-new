@@ -3,8 +3,8 @@
 
   = render 'banner', user: @user
 
-  = render 'post', post: @post
 
+  = render partial: 'post_content', locals: { content_html: RenderEditorjs.render(@post.body) }
 
   %hr.mb-5.mt-5
 

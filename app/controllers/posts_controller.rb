@@ -15,14 +15,7 @@ class PostsController < ApplicationController
   def show
     if @post.draft?
       redirect_to edit_post_path(@post)
-    else
-     
-      @content = @post.body # assuming your JSON content is stored in a 'content' column
-
-      render html: RenderEditorjs.render(@content).html_safe
-      # RenderEditorjs.render(json)
     end
-    
     ahoy.track "post viewed", post_id: @post.id
   end
 
