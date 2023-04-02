@@ -40,7 +40,18 @@ class EmailingService
   end
 
   def send_new_performance_emails_at_6pm!
-    # TODO: When analytics are set up, send a weekly email with performance updates
+        # for new posts from people you follow
+    users = User.where(timezone: ['UTC'], email_notifications: true)
+                .where.not(performance_notifications_freq: nil)
+                .where.not(performance_notifications_freq: 'off')
+
+    mail_type = 'performance_notifications_freq'
+    users.each do |user|
+      mail_due = mail_due(user, mail_type)  
+      range_start = mail_due == 'daily_mail' ?  1.day.ago : 1.week.ago   
+     
+      PerformanceMailer.with({user_id: user.id}).send(mail_due).deliver_later
+    end
   end
 
 
@@ -59,6 +70,7 @@ class EmailingService
           publication_followed_ids: user.followed_publications.pluck(:id))
         .pluck(:id)
   end
+
   def post_mailer_params(user, posts)
     { 
       user_id: user.id,
@@ -70,8 +82,7 @@ class EmailingService
     {
       user_id: user.id,
       notification_ids: notifications
-    }
-  
+    } 
   end
 
   def mailer_params(user)

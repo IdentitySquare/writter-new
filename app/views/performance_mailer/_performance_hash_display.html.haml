@@ -1,0 +1,15 @@
+.flex.flex-col
+
+  .flex.flex-row.justify-between.mb-8.mt-5
+      
+    .font-bold Article
+    .font-bold Views
+
+  - performance_hash.keys.each do |id|
+
+    .flex.flex-row.justify-between.mb-8.mt-5
+      
+      .font-semibold #{Post.find(id).title}
+      .font-semibold #{performance_hash[id]}
+
+  
