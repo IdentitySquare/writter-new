@@ -75,6 +75,12 @@ class Post < ApplicationRecord
   end
 
 
+  def views(range = Time.at(0))
+    page_views = Ahoy::Event.where(name: 'post viewed')
+                            .where(properties: { post_id: id })
+                            .where(time: range..Time.now)
+                            .count
+  end
 
 
 end

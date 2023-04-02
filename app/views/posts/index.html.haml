@@ -1,14 +1,22 @@
-.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
-  
-  .text-center.text-sm.mb-5
-    Your Reading List 
-  .text-center.font-semibold.text-4xl.mb-5
-    Stories & Ideas for Today
+.grid.grid-cols-8.mt-10.px-5.divide-x.h-full
+  .col-span-5.px-10
+    .flex.flex-col
+      
+      .text-left.font-semibold.text-2xl.mb-2
+        Stories & Ideas for Today
 
-  .text-center.text-sm.uppercase.mb-5
-    #{Date.today.strftime("%A, %d %B")}
+      .text-left.text-sm.uppercase.mb-5
+        #{Date.today.strftime("%A, %d %B")}
 
+      
+      
+      = render 'shared/public_user_posts', posts: @non_authored_posts
   
-  
-  = render 'shared/public_user_posts', posts: @non_authored_posts
-  
+  .col-span-3.px-10
+    .flex.flex-col
+      
+      .text-left.font-semibold.text-2xl.mb-5
+        What you've been reading...
+
+      
+      = render 'shared/public_user_posts', posts: current_user.visited_posts

@@ -133,6 +133,33 @@ class User < ApplicationRecord
     invitation_created_at.present? && invitation_accepted_at.blank?
   end
 
+  def visited_posts
+    post_ids = Ahoy::Event.where(user_id: 2 , name: "post viewed").order(time: :desc).pluck(Arel.sql("properties ->> 'post_id'"))
+    Post.find(post_ids)
+  end
+
+  def get_views(start_time)
+    post_ids = posts.published.pluck(:id)
+    end_time = Time.now
+
+    result = ActiveRecord::Base.connection.execute("
+              SELECT properties->>'post_id' AS post_id, COUNT(*) AS visit_count
+              FROM ahoy_events
+              WHERE name = 'post viewed'
+                AND properties->>'post_id' IN ('1', '2', '3')
+                AND time BETWEEN '#{start_time}' AND '#{end_time}'
+              GROUP BY properties->>'post_id'
+            ")
+
+    @post_views = {}
+
+    result.values.each do |row|
+      @post_views[row[0]] = row[1]
+    end
+    
+    @post_views
+  end
+
   private
 
   def set_time_zone
