@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_post, except: %i[index new create]
   before_action :set_user, except: %i[index new]
-
+  require 'render_editorjs'
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -15,7 +15,14 @@ class PostsController < ApplicationController
   def show
     if @post.draft?
       redirect_to edit_post_path(@post)
+    else
+     
+      @content = @post.body # assuming your JSON content is stored in a 'content' column
+
+      render html: RenderEditorjs.render(@content).html_safe
+      # RenderEditorjs.render(json)
     end
+    
     ahoy.track "post viewed", post_id: @post.id
   end
 

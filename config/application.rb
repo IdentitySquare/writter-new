@@ -2,6 +2,7 @@ require_relative "boot"
 
 require "rails/all"
 
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -12,6 +13,8 @@ module WritterNew
     config.load_defaults 7.0
     config.action_view.preload_links_header = false
     config.autoload_paths
+    
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
