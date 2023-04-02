@@ -1,4 +1,4 @@
-.h-40.mx-auto.bg-white.max-w-xl.border.border-neutral-300.rounded-md.px-4.py-5.sm:px-6
+.mx-auto.bg-white.max-w-xl.border.border-neutral-300.rounded-md.px-4.py-5.sm:px-6
 
   .flex.flex-row.justify-between.mb-3
     .flex.flex-row.gap-3
@@ -10,7 +10,7 @@
         
         = User.find(post.user_id).name
       
-    %span.text-sm.uppercase
+    %span.text-sm.uppercase.text-gray-500
       = post.created_at.strftime('%d %b %Y')
   .flex.flex-row.justify-between
     .text-lg.font-bold.text-neutral-800
@@ -22,4 +22,12 @@
 
     
 
-  .text-sm
+  .flex.flex-row.gap-1.text-sm.text-gray-500.items-end.mt-10
+
+    %svg.feather.feather-bar-chart-2{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+      %line{:x1 => "18", :x2 => "18", :y1 => "20", :y2 => "10"}
+      %line{:x1 => "12", :x2 => "12", :y1 => "20", :y2 => "4"}
+      %line{:x1 => "6", :x2 => "6", :y1 => "20", :y2 => "14"}
+
+    .text-center
+      #{post.views} views
