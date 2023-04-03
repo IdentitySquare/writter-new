@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   before_action :set_post, except: %i[index new create]
   before_action :set_user, except: %i[index new]
   
+  
   # GET /posts or /posts.json
   def index
     @posts = Post.all
@@ -89,11 +90,10 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy
+    @post.discard
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to posts_path}
     end
   end
 

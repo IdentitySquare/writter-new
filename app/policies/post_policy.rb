@@ -36,7 +36,7 @@ class PostPolicy < ApplicationPolicy
     end
   
     def destroy?
-      false
+      user_is_owner? 
     end
 
     def remove_from_publication?
