@@ -6,9 +6,9 @@
       - current = 'border-green-300 font-semibold text-black'
       - non_selected = 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
       / Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
-      %a.border-transparent.text-gray-500.hover:text-gray-700.hover:border-gray-300.whitespace-nowrap.py-4.px-1.border-b-2.font-medium.text-sm{class: "#{selected == 'Followers' ? current : non_selected }", href: followers_user_profile_path}
+      %a.tab{class: "#{selected == 'Followers' ? current : non_selected }", href: followers_user_profile_path}
         Followers
-      %a.border-transparent.text-gray-500.hover:text-gray-700.hover:border-gray-300.whitespace-nowrap.py-4.px-1.border-b-2.font-medium.text-sm{class: "#{selected == 'Following' ? current : non_selected }", href: following_user_profile_path} 
+      %a.tab{class: "#{selected == 'Following' ? current : non_selected }", href: following_user_profile_path} 
         Following
 
 

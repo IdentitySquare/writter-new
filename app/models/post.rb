@@ -4,6 +4,7 @@
 #
 #  id             :bigint           not null, primary key
 #  body           :text
+#  discarded_at   :datetime
 #  draft_body     :string
 #  published_at   :datetime
 #  status         :integer          default("draft"), not null
@@ -15,6 +16,7 @@
 #
 # Indexes
 #
+#  index_posts_on_discarded_at    (discarded_at)
 #  index_posts_on_publication_id  (publication_id)
 #  index_posts_on_user_id         (user_id)
 #
@@ -40,6 +42,8 @@ class Post < ApplicationRecord
   #callback if saved change to publication_id
   after_update :create_notification!, if: -> { saved_change_to_publication_id? }
 
+  include Discard::Model
+  default_scope -> { kept }
   def create_notification!
     changed_by = User.find(versions[-1].whodunnit)
     if changed_by != user

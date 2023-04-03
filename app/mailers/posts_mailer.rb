@@ -23,6 +23,6 @@ class PostsMailer < ApplicationMailer
   end
 
   def set_posts
-    @posts = Post.find(params[:post_ids])
+    @posts = Post.with_discarded.find(params[:post_ids])
   end
 end
