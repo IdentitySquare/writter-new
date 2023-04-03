@@ -10,6 +10,7 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
 
+    %link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/minimal/_all.css"}
     %script{:src => "https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/header@latest"}
@@ -26,11 +27,12 @@
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/editorjs-html@3.4.0/build/edjsHTML.js"}   
     %script{src: "https://cdn.jsdelivr.net/npm/@albatarnik/editorjs-table@2.0.4/dist/table.min.js"}
+     
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"}
     
    
 
   %body.h-full.font-sans-serif
-
     = render 'layouts/navbar'
     .z-0.pt-14.pb-20.h-full{class: ("bg-neutral-50 h-full" if controller_name == 'posts' && action_name == 'edit')}
 
