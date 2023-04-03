@@ -115,6 +115,10 @@ gem 'html2haml'
 
 # Analytics 
 gem 'ahoy_matey'
+
+# rendering 
+gem 'render_editorjs'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

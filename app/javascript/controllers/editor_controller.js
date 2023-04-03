@@ -39,13 +39,13 @@ export default class extends Controller {
             placeholder: 'Write your idea here...'
           },
         },
-        list: {
-          class: NestedList,
-          inlineToolbar: true,
-          config: {
-            defaultStyle: 'ordered'
-          },
-        },
+        // list: {
+        //   class: NestedList,
+        //   inlineToolbar: true,
+        //   config: {
+        //     defaultStyle: 'ordered'
+        //   },
+        // },
         checklist: {
           class: Checklist,
           inlineToolbar: true,
@@ -53,28 +53,28 @@ export default class extends Controller {
         Marker: {
           class: Marker,
         },
-        delimiter: Delimiter,
-        quote: {
-          class: Quote,
-          inlineToolbar: true,
-          config: {
-            quotePlaceholder: 'Enter a quote',
-            captionPlaceholder: 'Quote\'s author',
-          },
-        },
-        code: CodeTool,
-        inlineCode: {
-          class: InlineCode
-        },
+        // delimiter: Delimiter,
+        // quote: {
+        //   class: Quote,
+        //   inlineToolbar: true,
+        //   config: {
+        //     quotePlaceholder: 'Enter a quote',
+        //     captionPlaceholder: 'Quote\'s author',
+        //   },
+        // },
+        // code: CodeTool,
+        // inlineCode: {
+        //   class: InlineCode
+        // },
         underline: Underline,
-        table: {
-          class: Table,
-          inlineToolbar: true,
-          config: {
-            rows: 2,
-            cols: 3,
-          },
-        },
+        // table: {
+        //   class: Table,
+        //   inlineToolbar: true,
+        //   config: {
+        //     rows: 2,
+        //     cols: 3,
+        //   },
+        // },
 
         image: {
           class: ImageTool,
