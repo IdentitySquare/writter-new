@@ -1,5 +1,5 @@
 .flex.flex-row.justify-between
-  .text-left.font-semibold.text-4xl
+  .text-left.font-semibold.md:text-4xl.text-xl
     #{@user.name}
   - if current_user && current_user == @user
     %button.relative.inline-flex.items-center.rounded-full.border.border-gray.px-4.py-2.text-sm.font-medium.shadow-sm.hover:bg-green-200.hover:border.hover:border-black.focus:outline-none.focus:ring-2.focus:ring-indigo-500.focus:ring-offset-2{type: "button"}
@@ -28,6 +28,8 @@
     .flex.flex-row.gap-1
       %i{"data-feather" => "link-2",class: 'w-5'}
       #{@user.website}
+
+
 
 - if action_name != 'followers' && action_name != 'following'
   .flex.flex-row.text-slate-400.mb-3.gap-5
