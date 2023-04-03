@@ -114,7 +114,7 @@
         
 
 
-        .hidden.md:ml-4.md:flex.md:flex-shrink-0.md:items-center
+        .md:ml-4.md:flex.md:flex-shrink-0.md:items-center
           
           .relative.ml-3{"x-data" => "{ open: false }"}
             %div
@@ -159,7 +159,7 @@
                   No notifications to see here yet!
 
           / Profile dropdown desktop
-          .relative.ml-3
+          .relative.ml-3.hidden.md:block
             %div
               %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
                 %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
