@@ -6,9 +6,13 @@
       url: omniauth_authorize_path(resource_name, provider), |
       method: :post,                                         |
       data: {turbo: "false"} do |f|   
-      .text-center                      
-        = f.submit "#{omni_auth_text} with #{provider}", type: 'image', src: url_for('/assets/g_icon')
-
+      .text-center  
+        = button_tag :submit, class: 'w-full 'do
+          .flex.flex-row.items-center.border.border-gray-100.py-1.rounded-md.justify-center.font-medium.gap-2
+            = image_tag("g_icon.png", size: "30")
+            .text-gray-600.text-sm
+              Sign in with Google
+     
 
 
 / - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
