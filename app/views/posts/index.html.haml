@@ -1,22 +1,31 @@
-.grid.grid-cols-8.mt-10.px-5.divide-x.h-full
-  .col-span-5.px-10
-    .flex.flex-col
+.grid.grid-cols-8.divide-x.h-full.max-w-6xl.mx-auto
+  .col-span-5
+    .flex.flex-col.mt-10.pr-10
       
-      .text-left.font-semibold.text-2xl.mb-2
+      .text-left.font-semibold.text-2xl.mb-1
         Stories & Ideas for Today
 
-      .text-left.text-sm.uppercase.mb-5
+      .text-left.text-sm.mb-5.text-neutral-600
         #{Date.today.strftime("%A, %d %B")}
+
+
+      .border.bg-neutral-50.p-10.flex.flex-col
+        = image_tag 'empty.png', class: 'mx-auto w-48 w-auto'
+        .text-center.text-neutral-800.font-semibold.text-xl.mt-7
+          Looks like there are no posts for you yet.
+        .text-center.text-neutral-500.text-md.mt-1
+          Why not follow some writters to get started.
 
       
       
       = render 'shared/public_user_posts', posts: @non_authored_posts
   
   .col-span-3.px-10
-    .flex.flex-col
+    .flex.flex-col.mt-10
       
       .text-left.font-semibold.text-2xl.mb-5
         What you've been reading...
+
 
       
       = render 'shared/public_user_posts', posts: current_user.visited_posts
