@@ -34,26 +34,26 @@
 
 @layer base {
   h1 {
-    @apply font-serif text-5xl font-bold mb-5;
+    @apply  text-5xl font-bold mb-5;
   }
   h2 {
-    @apply font-serif text-4xl font-bold mb-5;
+    @apply text-4xl font-bold mb-5;
   }
 
   h3 {
-    @apply font-serif font-serif text-3xl font-bold mb-5;
+    @apply text-3xl font-bold mb-5;
   }
   h3 {
-    @apply font-serif text-2xl font-bold mb-5;
+    @apply  text-2xl font-bold mb-5;
   }
   h4 {
-    @apply font-serif text-xl font-bold mb-5;
+    @apply text-xl font-bold mb-5;
   }
   h5 {
-    @apply font-serif text-lg font-bold mb-5;
+    @apply  text-lg font-bold mb-5;
   }
   h6 {
-    @apply font-serif text-sm font-bold mb-5;
+    @apply text-sm font-bold mb-5;
   }
   /* ... */
 

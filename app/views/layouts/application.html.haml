@@ -10,7 +10,10 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
 
-   
+    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
+    %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+    %link{:href => "https://fonts.googleapis.com/css2?family=Manrope"}/
+
     %script{:src => "https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/header@latest"}
