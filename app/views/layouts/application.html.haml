@@ -36,7 +36,7 @@
 
   %body.h-full.font-sans-serif
     = render 'layouts/navbar'
-    .z-0.pt-14.pb-20.h-full{class: ("bg-neutral-50 h-full" if controller_name == 'posts' && action_name == 'edit')}
+    .z-0.h-full{class: ("bg-neutral-50 h-full" if controller_name == 'posts' && action_name == 'edit')}
 
       = yield
 
