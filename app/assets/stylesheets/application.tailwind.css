@@ -34,10 +34,10 @@
 
 @layer base {
   h1 {
-    @apply  text-5xl font-bold mb-5;
+    @apply  text-5xl font-bold;
   }
   h2 {
-    @apply text-4xl font-bold mb-5;
+    @apply text-4xl font-bold;
   }
 
   h3 {

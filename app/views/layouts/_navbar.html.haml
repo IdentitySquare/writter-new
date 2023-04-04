@@ -1,6 +1,6 @@
 - if current_user 
   = turbo_stream_from "notifications_#{current_user.id}"
-%nav.fixed.w-full.bg-white.shadow.z-20.font-sans-serif{'data-controller': 'dropdown'}
+%nav.fixed.w-full.bg-white.border-b.border-neutral-200.z-20.font-sans-serif{'data-controller': 'dropdown'}
   .mx-auto.max-w-7xl.px-4.sm:px-6.lg:px-8
     .flex.h-16.justify-between
       .flex
@@ -26,8 +26,7 @@
               %path{d: "M6 18L18 6M6 6l12 12", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
         .flex.flex-shrink-0.items-center
           = link_to root_path do
-            %img.block.h-8.w-auto.lg:hidden{alt: "Your Company", src: url_for('/assets/logo_black.png')}/
-            %img.hidden.h-8.w-auto.lg:block{alt: "Your Company",src: url_for('/assets/logo_black.png')}/
+            = image_tag 'neo-logo.png', class: 'h-9 w-auto'
       .flex.items-center
         - if controller_name == 'posts' && action_name == 'edit'
           .flex-shrink-0.mr-3
@@ -55,8 +54,7 @@
         - else
           .flex-shrink-0
 
-            %button.relative.inline-flex.items-center.btn-primary{type: "button"}
-              = link_to "Write", new_post_path
+            = link_to "Start writing", new_post_path, class: 'bg-emerald-500 text-white text-sm px-4 py-2 text-white transition hover:text-white'
         
 
 
