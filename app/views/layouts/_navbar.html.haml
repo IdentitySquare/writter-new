@@ -1,6 +1,6 @@
 - if current_user 
   = turbo_stream_from "notifications_#{current_user.id}"
-%nav.w-full.border-b.border-neutral-200.bg-white.z-20.font-sans-serif{'data-controller': 'dropdown'}
+%nav.w-full.border-b.border-neutral-200.z-20.font-sans-serif{'data-controller': 'dropdown'}
   .mx-auto.max-w-6xl
     .flex.h-16.justify-between
       .flex
@@ -54,7 +54,7 @@
         - else
           .flex-shrink-0
 
-            = link_to "Start writing", new_post_path, class: 'uppercase text-xs font-bold border border-emerald-700 text-emerald-700 px-2 py-2 text-white transition hover:text-white hover:bg-emerald-700'
+            = link_to "Start writing", new_post_path, class: 'text-sm font-base rounded-full bg-gradient-to-r from-sky-500 to-purple-500 px-4 py-2 text-white transition hover:scale-105 transform duration-300 ease-in-out'
         
 
 
@@ -70,7 +70,7 @@
                   .absolute.bg-yellow-400.rounded-full{ class: ' top-0.5 right-1 w-4 h-4' }
                     .text-xs.text-black#count #{current_user.notifications.unread.size}
                 
-                %svg.h-8.w-8{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
+                %svg.h-6.w-6{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
                   %path{d: "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
                   -# .absolute.bg-yellow-500.rounded-full{ class: ' top-0 right-0 w-2.5 h-2.5' }
               
@@ -106,7 +106,7 @@
           .relative.ml-3.hidden.md:block
             %div
               %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
-                %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
+                %span.inline-block.h-7.w-7.overflow-hidden.rounded-full.bg-gray-100
                   %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
                     %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
             /

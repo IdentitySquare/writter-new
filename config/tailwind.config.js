@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Manrope', ...defaultTheme.fontFamily.sans],
+        serif: ['Zilla Slab', ...defaultTheme.fontFamily.serif],
       },
     },
   },
