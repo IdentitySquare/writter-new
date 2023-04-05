@@ -88,7 +88,6 @@ gem 'rack-attack'
 # Log in
 gem 'devise'
 
-
 # Checking email format
 gem "valid_email2"
 
@@ -118,6 +117,9 @@ gem 'ahoy_matey'
 
 # rendering 
 gem 'render_editorjs'
+
+# meta tags
+gem "meta-tags"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
