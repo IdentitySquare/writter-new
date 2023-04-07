@@ -57,8 +57,24 @@
   }
   /* ... */
 
+  ul{
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+  
 
 
+  ol{
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+
+  .cdx-nested-list__item::before{
+    font-size: 0.8em;
+    width: 0.8em;
+    height: 0.8em;
+    margin-right: 0.5em;
+  }
   
 
 }

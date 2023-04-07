@@ -38,16 +38,12 @@ export default class extends Controller {
             placeholder: 'Write your idea here...'
           },
         },
-        // list: {
-        //   class: NestedList,
-        //   inlineToolbar: true,
-        //   config: {
-        //     defaultStyle: 'ordered'
-        //   },
-        // },
-        checklist: {
-          class: Checklist,
+        list: {
+          class: NestedList,
           inlineToolbar: true,
+          config: {
+            defaultStyle: 'ordered'
+          },
         },
         Marker: {
           class: Marker,
