@@ -1,3 +1,4 @@
+- title "#{@publication.name} Settings"
 .flex.min-h-full.flex-col.justify-center.py-12.sm:px-6.lg:px-8
   .sm:mx-auto.sm:w-full.sm:max-w-md
     %h2.mt-6.text-center.text-3xl.tracking-tight.text-gray-900 
@@ -76,7 +77,10 @@
                   .div{style: "display: inline-block"}(Requested)
                 
                 
-
+                - if policy(@publication).current_user_is_admin? && admin.user != current_user
+                  %svg.feather.feather-x{:fill => "none", :height => "14", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1", :viewbox => "0 0 24 24", :width => "14", :xmlns => "http://www.w3.org/2000/svg", :style => 'display: inline-block',"data-action": "click->publication-users#removeEditor"}
+                    %line{:x1 => "18", :x2 => "6", :y1 => "6", :y2 => "18"}
+                    %line{:x1 => "6", :x2 => "18", :y1 => "6", :y2 => "18"}
               
               -# this is where the new emails will be added
 

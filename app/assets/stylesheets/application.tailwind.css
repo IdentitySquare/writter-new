@@ -26,40 +26,76 @@
 }
 
 
+
 @layer base {
   p {
     @apply font-serif
   }
-}
+  
+  .post_content > p {
+    margin-bottom: 25px;
+  }
 
-@layer base {
   h1 {
-    @apply  text-5xl font-bold;
+    @apply  font-serif text-5xl font-bold;
   }
   h2 {
-    @apply text-4xl font-bold;
+    @apply font-serif text-4xl font-bold;
   }
 
   h3 {
-    @apply text-3xl font-bold mb-5;
+    @apply font-serif text-3xl font-bold mb-5;
   }
   h3 {
-    @apply  text-2xl font-bold mb-5;
+    @apply  font-serif text-2xl font-bold mb-5;
   }
   h4 {
-    @apply text-xl font-bold mb-5;
+    @apply font-serif text-xl font-bold mb-5;
   }
   h5 {
-    @apply  text-lg font-bold mb-5;
+    @apply  font-serif text-lg font-bold mb-5;
   }
   h6 {
-    @apply text-sm font-bold mb-5;
+    @apply font-serif text-sm font-bold mb-5;
   }
-  /* ... */
+  
+  .post_content h1 {
+    @apply  mb-5;
+  }
+  .post_content h2 {
+    @apply  mb-5;
+  }
 
+  .post_content h3 {
+    @apply mb-5;
+  }
+  .post_content h3 {
+    @apply mb-5;
+  }
+  .post_content h4 {
+    @apply  mb-5;
+  }
+  .post_content h5 {
+    @apply  mb-5;
+  }
+  .post_content h6 {
+    @apply  mb-5;
+  }
 
+  ul{
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+
+  ol{
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+   
+  .cdx-nested-list--unordered .cdx-nested-list__item::before {
+    font-size: 8px;
+  }
 
   
-
 }
 

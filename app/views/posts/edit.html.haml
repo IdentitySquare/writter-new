@@ -1,3 +1,7 @@
+- if @post.body.nil?
+  - title "New Post #{@post.title}"
+- else
+  - title "Editing #{@post.title}"
 .bg-white.h-screen.font-serif.px-5.sm:px-0
   .div.mx-auto.py-2.max-w-3xl.bg-white.rounded-lg.h-full
     .max-w-xl.mx-auto
