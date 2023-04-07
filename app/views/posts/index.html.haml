@@ -1,32 +1,27 @@
-.grid.grid-cols-8.divide-x.h-full.max-w-6xl.mx-auto
+.grid.grid-cols-8.h-full.max-w-6xl.mx-auto.divide-x.divide-neutral-200
   .col-span-5
     .flex.flex-col.mt-10.pr-10
       
-      .text-left.font-semibold.text-2xl.mb-1
+      .text-left.font-semibold.text-2xl.mb-1{class: 'w-max'}
         Stories & Ideas for Today
 
-      .text-left.text-sm.mb-5.text-neutral-600
+      .text-left.text-sm.text-neutral-600
         #{Date.today.strftime("%A, %d %B")}
 
 
-      .border.bg-neutral-50.p-10.flex.flex-col
-        = image_tag 'empty.png', class: 'mx-auto w-48 w-auto'
-        .text-center.text-neutral-800.font-semibold.text-xl.mt-7
-          Looks like there are no posts for you yet.
-        .text-center.text-neutral-500.text-md.mt-1
-          Why not follow some writters to get started.
+      - if @posts.any?
+        = render 'shared/public_user_posts', posts: @posts
+      - else
+        .p-10.flex.flex-col.rounded-md.border.border-neutral-200.mt-7.bg-neutral-50
+          = image_tag 'shy.png', class: 'mx-auto w-52 w-auto'
+          .text-center.text-neutral-800.font-semibold.text-xl.mt-7
+            Looks like there are no posts for you yet.
+          .text-center.text-neutral-500.text-md.mt-1
+            Why not follow some writters to get started.
 
-      
-      
-  
-  .col-span-3.px-10
-    .flex.flex-col.mt-10
-      
-      .text-left.font-semibold.text-2xl
-        What you've been reading...
-
-      
-
-
+  .col-span-3
+    .flex.flex-col.mt-10.pl-10.border-b.pb-10
+      .text-left.font-semibold.text-lg
+        What you've read recently
       
       = render 'shared/public_user_posts', posts: current_user.visited_posts
