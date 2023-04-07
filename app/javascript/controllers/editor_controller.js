@@ -40,10 +40,7 @@ export default class extends Controller {
         },
         list: {
           class: NestedList,
-          inlineToolbar: true,
-          config: {
-            defaultStyle: 'ordered'
-          },
+          inlineToolbar: true
         },
         Marker: {
           class: Marker,
