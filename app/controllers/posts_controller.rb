@@ -19,7 +19,9 @@ class PostsController < ApplicationController
     if @post.draft?
       redirect_to edit_post_path(@post)
     end
-    ahoy.track "post viewed", post_id: @post.id
+    if current_user.nil? ||  @post.user != current_user
+      ahoy.track "post viewed", post_id: @post.id
+    end
   end
 
   # GET /posts/new
