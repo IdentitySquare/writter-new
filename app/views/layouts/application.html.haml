@@ -46,6 +46,10 @@
 
       = yield
 
+    - unless controller_name == 'posts' && (action_name == 'edit' || action_name == 'index')
+      = render partial: "shared/footer"
 
     :javascript
       feather.replace()
+  
+       
