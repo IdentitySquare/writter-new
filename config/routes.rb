@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root to: "home#index" 
+  root to: "posts#index" 
   
   resources :user_profiles, only: [:update, :show] do
     member do
