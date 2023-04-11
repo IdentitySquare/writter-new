@@ -13,7 +13,7 @@
       %p.text-sm.text-gray-500
         #{@post.created_at.strftime('%b %Y')}
 
-    - if policy(@post).user_is_owner? || policy(@post).user_is_editing_member_of_publication?
+    - if current_user.present? && (policy(@post).user_is_owner? || policy(@post).user_is_editing_member_of_publication?)
       
       .flex.flex-shrink-0.self-center{"x-data": "{open: false, abc: false}"}
         .relative.inline-block.text-left

@@ -10,7 +10,10 @@
     
   .absolute.top-0.right-0 
 
-    - if current_user.followed_users.include?(user)    
+    - if current_user.nil?
+      = link_to 'Follow', new_user_session_path,  class: 'btn-secondary'
+
+    - elsif current_user.followed_users.include?(user)    
       - follow = Follow.find_by(followable_id: user.id, followable_type: user.class.to_s, user:current_user.id)
       = button_to '', follow_path(follow), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray  px-5 py-2 text-xs font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
     
