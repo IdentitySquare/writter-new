@@ -9,15 +9,25 @@
       %a.tab{class: "#{selected == 'Followers' ? current : non_selected }", href: followers_user_profile_path}
         Followers
       %a.tab{class: "#{selected == 'Following' ? current : non_selected }", href: following_user_profile_path} 
-        Following
+        Following 
 
 
   .flex.flex-col.gap-3
     
-    - if users.any?
-      - users&.each do |user|
-        = link_to user_profile_path(user) do
-          = render 'user_card_small', user: user
+    - if accounts.any? && selected == 'Following'
+      - accounts.includes([:followable]).each do |follow|
+        - if follow.followable_type == 'User'
+          
+          = render 'user_card_small', user: follow.followable
+        - else
+        
+          
+          = render 'shared/publication_card_small', publication: follow.followable
+
+    - elsif accounts.any? && selected == 'Followers'
+      - accounts.each do |user|
+        
+        = render 'user_card_small', user: user
     - elsif selected == 'Followers'
       .py-10
         .text-bold.text-xl.text-center
