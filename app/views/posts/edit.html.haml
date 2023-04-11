@@ -4,7 +4,7 @@
   - title "Editing #{@post.title}"
 .bg-white.h-screen.font-serif.px-5.sm:px-0
   .div.mx-auto.py-2.max-w-3xl.bg-white.rounded-lg.h-full
-    .max-w-xl.mx-auto
+    .max-w-xl.mx-auto.post_content
       #editor.mt-20.font-serif{"data-controller": "editor", "data-editor-value" => "#{@post.draft_body}", "data-editor-read-only" => "false"}  
         
         .flex.flex-row.gap-2.items-center

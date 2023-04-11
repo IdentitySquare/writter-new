@@ -16,10 +16,11 @@ class UserProfilesController < ApplicationController
 
   def show
     if params[:status].nil?
-      @posts = @user.posts.published
+      
+      @posts = @user.posts.published.page(params[:page]).per(10)
     else
       
-      @posts = @user.posts.where(status: params[:status])
+      @posts = @user.posts.where(status: params[:status]).page(params[:page]).per(10)
     end
   end
   

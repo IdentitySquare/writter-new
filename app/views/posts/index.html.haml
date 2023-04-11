@@ -10,7 +10,8 @@
 
       
       
-      = render 'shared/public_user_posts', posts: @non_authored_posts
+      = render 'shared/public_user_posts', posts: @posts
+      = paginate @posts
   
   .col-span-3.px-10
     .flex.flex-col
@@ -19,4 +20,8 @@
         What you've been reading...
 
       
-      = render 'shared/public_user_posts', posts: current_user.visited_posts
+      = render 'shared/public_user_posts', posts: current_user.visited_posts.first(5)
+      
+
+
+

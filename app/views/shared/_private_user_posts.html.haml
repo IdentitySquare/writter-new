@@ -12,9 +12,12 @@
   
   .flex.flex-col.gap-3
     
-    - @posts&.each do |post|
-
+    - @posts.page(params[:page]).per(5)&.each do |post|
+      
       - next if post.empty?
       = link_to post do
         = render 'posts/card', post: post
-      
+    
+
+
+  

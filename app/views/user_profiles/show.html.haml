@@ -5,3 +5,5 @@
     = render 'shared/private_user_posts'
   - else
     = render 'shared/public_user_posts', posts: @posts
+  
+  = paginate @posts
