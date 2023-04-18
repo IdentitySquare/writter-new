@@ -5,7 +5,7 @@
 
 @layer components {
   .btn-primary {
-    @apply justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 cursor-pointer;
+    @apply justify-center  rounded-full bg-gradient-to-r from-sky-500 to-purple-500 px-4 py-2 text-white transition hover:scale-105 transform duration-300 ease-in-out cursor-pointer;
   }
 
   .btn-secondary {
@@ -37,26 +37,26 @@
   }
 
   h1 {
-    @apply  font-serif text-5xl font-bold;
+    @apply   text-5xl font-bold;
   }
   h2 {
-    @apply font-serif text-4xl font-bold;
+    @apply  text-4xl font-bold;
   }
 
   h3 {
-    @apply font-serif text-3xl font-bold mb-5;
+    @apply  text-3xl font-bold mb-5;
   }
   h3 {
-    @apply  font-serif text-2xl font-bold mb-5;
+    @apply  text-2xl font-bold mb-5;
   }
   h4 {
-    @apply font-serif text-xl font-bold mb-5;
+    @apply text-xl font-bold mb-5;
   }
   h5 {
-    @apply  font-serif text-lg font-bold mb-5;
+    @apply text-lg font-bold mb-5;
   }
   h6 {
-    @apply font-serif text-sm font-bold mb-5;
+    @apply text-sm font-bold mb-5;
   }
   
   .post_content h1 {
