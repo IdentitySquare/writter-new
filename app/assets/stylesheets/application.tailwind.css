@@ -28,12 +28,11 @@
 
 
 @layer base {
-  p {
-    @apply font-serif
-  }
+
+  
   
   .post_content > p {
-    margin-bottom: 25px;
+    @apply font-serif mb-6
   }
 
   h1 {
