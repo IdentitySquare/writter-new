@@ -38,13 +38,13 @@
           
           
           .flex-shrink-0.mr-3
-            %button.relative.inline-flex.btn-primary{type: "button"}
+            %button.relative.inline-flex.btn-primary.text-sm{type: "button"}
 
               = link_to label, publish_post_path
           
           - if @post.published?
             .flex-shrink-0.mr-3
-              %button.relative.inline-flex.items-center.bg-gray-400.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button"}
+              %button.relative.inline-flex.items-center.py-2.btn-secondary{type: "button"}
 
                 = link_to 'Unpublish Post', unpublish_post_path(@post) 
             
