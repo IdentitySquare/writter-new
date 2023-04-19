@@ -61,7 +61,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         format.turbo_stream {}
-        format.html {redirect_to root_path}
+        format.html {redirect_to post_path(@post)}
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
