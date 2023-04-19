@@ -58,28 +58,28 @@
                     
                   %span.ml-2 Unpublish
 
+              - if current_user.publications.any?
+                - if @post.publication.present?
 
-              - if @post.publication.present?
+                  
+                  %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm.cursor-pointer{:role => "menuitem", :tabindex => "-1","x-on:click": "open = true; abc = false"}
+          
+                    %svg.feather.feather-file-minus.self-center{:fill => "none", :height => "16", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+                      %path{:d => "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}
+                      %polyline{:points => "14 2 14 8 20 8"}
+                      %line{:x1 => "9", :x2 => "15", :y1 => "15", :y2 => "15"}
 
-                
-                %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm.cursor-pointer{:role => "menuitem", :tabindex => "-1","x-on:click": "open = true; abc = false"}
-        
-                  %svg.feather.feather-file-minus.self-center{:fill => "none", :height => "16", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                    %path{:d => "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}
-                    %polyline{:points => "14 2 14 8 20 8"}
-                    %line{:x1 => "9", :x2 => "15", :y1 => "15", :y2 => "15"}
-
-                  %span.ml-2{"x-on:click": "open = true"}
-                    Remove from Publication
-            
-              - else
+                    %span.ml-2{"x-on:click": "open = true"}
+                      Remove from Publication
               
-                %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm.cursor-pointer{:role => "menuitem", :tabindex => "-1","x-on:click": "open = true; abc = false"}
-                  %svg.feather.feather-plus.self-center{:fill => "none", :height => "16", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
-                    %line{:x1 => "12", :x2 => "12", :y1 => "5", :y2 => "19"}
-                    %line{:x1 => "5", :x2 => "19", :y1 => "12", :y2 => "12"}
-                  %span.ml-2
-                    Add to a publication
+                - else
+                
+                  %a#menu-0-item-0.text-gray-700.flex.px-4.py-2.text-sm.cursor-pointer{:role => "menuitem", :tabindex => "-1","x-on:click": "open = true; abc = false"}
+                    %svg.feather.feather-plus.self-center{:fill => "none", :height => "16", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+                      %line{:x1 => "12", :x2 => "12", :y1 => "5", :y2 => "19"}
+                      %line{:x1 => "5", :x2 => "19", :y1 => "12", :y2 => "12"}
+                    %span.ml-2
+                      Add to a publication
 
 
         
