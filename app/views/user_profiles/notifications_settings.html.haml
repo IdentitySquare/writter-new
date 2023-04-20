@@ -22,7 +22,7 @@
             = f.collection_radio_buttons :notifications_freq, User.notifications_freqs, :second, :first , checked: current_user.notifications_freq_before_type_cast do |b| 
               .flex.flex-row.py-2.justify-between
                 = b.label class: 'capitalize text-gray-700'       
-                = b.radio_button class: 'h-6 w-6 border-gray-300 text-sky-500 transition  disabled:opacity-25' , "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
+                = b.radio_button class: 'h-6 w-6 radio' , "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
 
         %div
           %label.block.text-md.font-bold.text-gray-900 When someone you follow publishes a new article
