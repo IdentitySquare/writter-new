@@ -17,13 +17,23 @@
           .text-center.text-neutral-800.font-semibold.text-xl.mt-7
             Looks like there are no posts for you yet.
           .text-center.text-neutral-500.text-md.mt-1
-            Why not follow some writters to get started.
+            Why not follow some writters to get started?
 
   .col-span-3
-    .flex.flex-col.mt-10.pl-10.border-b.pb-10
+    .flex.flex-col.mt-10.pl-10.pb-10
       .text-left.font-bold.text-lg
         What you've read recently
+
+      - if current_user.visited_posts.any?
+        = render 'shared/public_user_posts', posts: current_user.visited_posts[0..2]
+      - else
+        .p-10.flex.flex-col
+          = image_tag 'shy.png', class: 'mx-auto w-28 w-auto'
+          .text-center.text-neutral-800.font-medium.text-xl.mt-7
+            You have yet to start reading.
+          .text-center.text-neutral-500.text-md.mt-1
+            
+
       
-      = render 'shared/public_user_posts', posts: current_user.visited_posts
 
       

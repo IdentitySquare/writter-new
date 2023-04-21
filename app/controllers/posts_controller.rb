@@ -8,10 +8,11 @@ class PostsController < ApplicationController
   
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
-    if current_user
-      @non_authored_posts = RecommendationService.new(current_user).recommended_posts(10)
-    end
+    # @posts = Post.all
+    # if current_user
+    #   @non_authored_posts = RecommendationService.new(current_user).recommended_posts(10)
+    # end
+    @posts = []
   end
 
   # GET /posts/1 or /posts/1.json

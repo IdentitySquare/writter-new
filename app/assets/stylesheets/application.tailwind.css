@@ -9,7 +9,7 @@
   }
 
   .btn-secondary {
-    @apply justify-center rounded-full border border-fuchsia-600 hover:shadow-md px-4 text-sm  text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-purple-500 hover:shadow-sm focus:outline-none  focus:ring-offset-2 cursor-pointer;
+    @apply justify-center  rounded-full bg-gradient-to-r from-sky-500 to-purple-500 px-4 py-2 text-white transition hover:scale-105 transform duration-300 ease-in-out cursor-pointer;
   }
   
   .btn-small {
@@ -24,7 +24,7 @@
     @apply text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm  px-4 py-2 text-sm text-gray-700 ;
   }
 
-  .radio {
+  .radio-custom {
     @apply border-gray-300 text-sky-500 transition  disabled:opacity-25;
   }
   
