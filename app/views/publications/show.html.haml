@@ -5,10 +5,7 @@
   = render 'publication_card'
 
 
-
-  - @publication.posts.each do |post|
-    = link_to post do
-      = render 'posts/card', post: post
+  = render 'shared/public_user_posts', posts: @publication.posts
 
   - if @publication.posts.empty?
 

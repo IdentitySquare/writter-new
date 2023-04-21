@@ -33,7 +33,7 @@
                 
                 
                 = b.label class: 'capitalize text-gray-700'       
-                = b.radio_button class: 'h-6 w-6 border-gray-300 text-sky-500  disabled:opacity-25' , "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
+                = b.radio_button class: 'h-6 w-6 radio' , "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
 
 
         %div
@@ -43,7 +43,7 @@
             = f.collection_radio_buttons :performance_notifications_freq, User.performance_notifications_freqs, :second, :first, checked: current_user.performance_notifications_freq_before_type_cast,  "data-action": "change->notifications#submitForm"  do |b| 
               .flex.flex-row.py-2.justify-between
                 = b.label class: 'capitalize text-gray-700'
-                = b.radio_button class: "h-6 w-6 border-gray-300 text-sky-500 disabled:opacity-25"  ,  "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
+                = b.radio_button class: "h-6 w-6 radio"  ,  "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
         
         %div
           .flex.flex-row.py-2.justify-between
