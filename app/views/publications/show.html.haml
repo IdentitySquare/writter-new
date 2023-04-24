@@ -1,35 +1,13 @@
--# .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
--#   .text-center.font-sans-serif.text-4xl.mb-5
--#     = @publication.name
-
--# -# -link to edit publication
-
--# - if policy(@publication).update?
--#   = link_to 'Edit Publication', edit_publication_path(@publication)
- 
-
 - title "#{@publication.name}"
-.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5.text-center
-  %h1.mb-5
-    = @publication.name
-  
-  - if current_user.nil?
-    = link_to 'Follow', new_user_session_path, class: 'relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-sm font-medium shadow-sm hover:bg-green-200 hover:border hover:border-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 '
-  - elsif current_user.following.include?(@publication)
-    - follow = Follow.find_by(followable_id: @publication.id, followable_type: @publication.class.to_s, user: current_user.id)
-    = button_to '', follow_path(follow), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
-    
-  - else
-      
-    = button_to "Follow", follows_path, params:{ follow: {followable_id: @publication.id, followable_type: @publication.class.to_s}}, method: :post, class: ' relative inline-flex items-center rounded-full border border-gray px-4 py-2 text-sm font-medium shadow-sm hover:bg-green-200 hover:border hover:border-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 
-  - @publication.posts.each do |post|
-    = link_to post do
-      = render 'posts/card', post: post
+
+.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
+  = render 'publication_card'
+
+
+  = render 'shared/public_user_posts', posts: @publication.posts
 
   - if @publication.posts.empty?
 
     There are no posts on this publication yet!
-
-
-    
+ 

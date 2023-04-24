@@ -24,7 +24,9 @@ class PostsController < ApplicationController
     if @post.draft?
       redirect_to edit_post_path(@post)
     end
-    ahoy.track "post viewed", post_id: @post.id
+    if current_user.nil? ||  @post.user != current_user
+      ahoy.track "post viewed", post_id: @post.id
+    end
   end
 
   # GET /posts/new
@@ -64,7 +66,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         format.turbo_stream {}
-        format.html {redirect_to root_path}
+        format.html {redirect_to post_path(@post)}
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }

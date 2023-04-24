@@ -1,34 +1,36 @@
 .flex.min-h-full.flex-col.justify-center.py-12.sm:px-6.lg:px-8
   .sm:mx-auto.sm:w-full.sm:max-w-md
-    %img.mx-auto.h-12.w-auto{alt: "Your Company", src: url_for('/assets/logo_black.png')}
-    %h2.mt-6.text-center.text-3xl.tracking-tight.text-gray-900.font-serif Sign in
-    %p.mt-2.text-center.text-sm.text-gray-600
+    = image_tag 'neo-logo.png', class: 'h-12 w-auto mx-auto'
+    
+    .mt-6.text-center.text-3xl.tracking-tight.text-gray-900 Sign in
+    .mt-2.text-center.text-sm.text-gray-600
       Or
-      %a.font-medium.text-emerald-700.hover:text-emerald-500{href: new_user_registration_path} Create your Account
+      %a.font-medium.text-purple-500.hover:text-indigo-500{href: new_user_registration_path} Create your account
+     
   .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
-    .bg-white.py-8.px-4.shadow.sm:rounded-lg.sm:px-10
+    .bg-white.py-8.px-4.sm:px-10.border.border-neutral-200
       = form_for(resource, as: resource_name, url: session_path(resource_name),data: { turbo: false }, html: { class: 'space-y-6'}) do |f|
         = render "devise/shared/error_messages", resource: resource
         %div
-          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Email address
+          %label.block.text-sm.font-medium.text-neutral-700{for: "email"} Email address
           .mt-1
-            = f.email_field :email, autofocus: true, autocomplete: "email",class: '#block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm{autocomplete: "email", name: "email", required: "", type: "email"}'
+            = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'john@doe.com', class: 'block rounded-full text-sm w-full appearance-none border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm'
             
         %div
           %label.block.text-sm.font-medium.text-gray-700{for: "password"} Password
           .mt-1
 
-            = f.password_field :password, autocomplete: "new-password",class: '#block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm{autocomplete: "current-password", name: "password", required: "", type: "password"}'
+            = f.password_field :password, autocomplete: "new-password",placeholder: 'Your password', class: 'block rounded-full text-sm w-full appearance-none border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm{autocomplete: "current-password", name: "password", required: "", type: "password"}'
           
         .flex.items-center.justify-between
           .flex.items-center
-            = f.check_box :remember_me, id: 'remember-me', class: 'h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500{name: "remember-me", type: "checkbox"}'
+            = f.check_box :remember_me, id: 'remember-me', class: 'h-4 w-4 rounded border-gray-300 text-lime-400 focus:ring-lime-400{name: "remember-me", type: "checkbox"}'
             
-            %label.ml-2.block.text-sm.text-gray-900{for: "remember-me"} Remember me
+            %label.ml-2.block.text-sm.text-gray-900.cursor-pointer{for: "remember-me"} Remember me
           .text-sm
-            %a.font-medium.text-emerald-700.hover:text-emerald-500{href: new_password_path(resource_name)} Forgot your password?
+            %a.text-gray-800.transition.hover:text-gray-900.cursor-pointer{href: new_password_path(resource_name)} Forgot your password?
         %div
-          %button.flex.w-full.justify-center.rounded-md.border.border-transparent.bg-emerald-800.py-2.px-4.text-sm.font-medium.text-white.shadow-sm.hover:bg-emerald-900.focus:outline-none.focus:ring-2.focus:ring-emerald-500.focus:ring-offset-2{type: "submit"} Sign in
+          = f.submit "Sign in", class: 'btn-primary w-full '
       .mt-6
         .relative
           .absolute.inset-0.flex.items-center
