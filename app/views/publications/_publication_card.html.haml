@@ -5,12 +5,19 @@
     
     .flex.flex-row.gap-2 
       - if policy(@publication).update?
-        = link_to '// Edit', edit_publication_path(@publication), class: 'btn-secondary  ml-auto'
+        .btn-secondary
+          .btn-secondary-inner
+            = link_to '// Edit', edit_publication_path(@publication)
        
          
       - if action_name == 'editor_view'
-        = link_to  '↗ Public view', publication_path(@publication), class: 'btn-secondary ml-auto', target: :_blank
+        .btn-secondary
+          .btn-secondary-inner
+            = link_to  '↗ Public view', publication_path(@publication), class: 'btn-secondary-inner', target: :_blank
 
 
   .text-sm.text-slate-800 
     = @publication.bio
+
+
+    = link_to 'Edit Profile', edit_user_registration_path(@user)

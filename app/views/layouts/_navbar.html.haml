@@ -44,9 +44,10 @@
           
           - if @post.published?
             .flex-shrink-0.mr-3
-              %button.relative.inline-flex.items-center.py-2.btn-secondary{type: "button"}
-
-                = link_to 'Unpublish Post', unpublish_post_path(@post) 
+              %button.relative.inline-flex.items-center.btn-secondary{type: "button"}
+                   
+                .btn-secondary-inner.py-2
+                  = link_to 'Unpublish Post', unpublish_post_path(@post) 
             
           
       
