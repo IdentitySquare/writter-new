@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  require 'render_editorjs'
-  
+
   skip_before_action :verify_authenticity_token
   before_action :set_post, except: %i[index new create]
   before_action :set_user, except: %i[index new]

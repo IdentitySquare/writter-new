@@ -4,11 +4,6 @@
 
   = render 'banner', user: @user
 
-
-  - renderer = RenderEditorjs::DefaultRenderer.new("checklist" => ChecklistBlockRenderer.new)
-  - document = RenderEditorjs::Document.new(@post.body, renderer)
-  = render partial: 'post_content', locals: { content_html: document.render }
-
   %hr.mb-5.mt-5
 
   .block.text-gray-700.font-bold.mb-5

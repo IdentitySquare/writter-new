@@ -115,9 +115,6 @@ gem 'html2haml'
 # Analytics 
 gem 'ahoy_matey'
 
-# rendering 
-gem 'render_editorjs'
-
 # meta tags
 gem "meta-tags"
 
