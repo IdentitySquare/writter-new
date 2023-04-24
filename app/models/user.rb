@@ -134,7 +134,7 @@ class User < ApplicationRecord
   end
 
   def visited_posts
-    post_ids = Ahoy::Event.where(user_id: 2 , name: "post viewed").order(time: :desc).pluck(Arel.sql("properties ->> 'post_id'"))
+    post_ids = Ahoy::Event.where(user_id: id , name: "post viewed").order(time: :desc).pluck(Arel.sql("properties ->> 'post_id'"))
     Post.with_discarded.where(id: post_ids).where(discarded_at: nil)
   end
 

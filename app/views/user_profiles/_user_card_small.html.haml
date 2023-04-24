@@ -9,7 +9,6 @@
 
     
   .absolute.top-0.right-0 
-
     - if current_user.nil?
       = link_to 'Follow', new_user_session_path,  class: 'btn-secondary'
 
@@ -17,9 +16,9 @@
       - follow = Follow.find_by(followable_id: user.id, followable_type: user.class.to_s, user:current_user.id)
       = button_to '', follow_path(follow), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray  px-5 py-2 text-xs font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
     
-    - else
-
-      = button_to "Follow", follows_path, params:{ follow: {followable_id: user.id, followable_type: user.class.to_s}}, method: :post, class: 'btn-secondary z-40'
+    - elsif current_user != user
+          
+      = button_to "Follow", follows_path, params:{ follow: {followable_id: user.id, followable_type: user.class.to_s}}, method: :post, class: 'btn-primary py-1 text-sm z-40'
 
 %p.text-slate-500.mb-3.text-sm{class: 'md:w-3/4'}
   #{user.bio}
