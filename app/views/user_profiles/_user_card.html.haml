@@ -1,7 +1,11 @@
 .flex.flex-row.justify-between.items-center
   .text-left.font-semibold.md:text-4xl.text-xl
     #{@user.name}
-  - if current_user && current_user == @user
+
+  - if current_user.nil?
+    = link_to 'Follow', new_user_session_path,  class: 'btn-secondary'
+
+  - elsif current_user && current_user == @user
     .btn-secondary
       .btn-secondary-inner
         = link_to 'Edit Profile', edit_user_registration_path(@user)

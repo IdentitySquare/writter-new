@@ -8,15 +8,19 @@ class PostsController < ApplicationController
   
   # GET /posts or /posts.json
   def index
-    # @posts = Post.all
-    # if current_user
-    #   @non_authored_posts = RecommendationService.new(current_user).recommended_posts(10)
-    # end
-    @posts = []
+    @posts = Post.all
+    if current_user
+      # non authored posts
+      @posts = RecommendationService.new(current_user).recommended_posts(10).page(params[:page]).per(5)
+    else
+      @posts = Post.published.page(params[:page]).per(5)
+      
+    end
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    
     if @post.draft?
       redirect_to edit_post_path(@post)
     end
