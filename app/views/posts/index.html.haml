@@ -8,9 +8,8 @@
       .text-left.text-sm.text-neutral-600
         #{Date.today.strftime("%A, %d %B")}
 
-
       - if @posts.any?
-        = render 'shared/public_user_posts', posts: @non_authored_posts
+        = render 'shared/public_user_posts', posts: @posts
       - else
         .p-10.flex.flex-col.rounded-md.border.border-neutral-200.mt-7.bg-neutral-50
           = image_tag 'shy.png', class: 'mx-auto w-52 w-auto'
@@ -19,21 +18,22 @@
           .text-center.text-neutral-500.text-md.mt-1
             Why not follow some writters to get started?
 
-  .col-span-3
-    .flex.flex-col.mt-10.pl-10.pb-10
-      .text-left.font-bold.text-lg
-        What you've read recently
+  - if current_user 
+    .col-span-3
+      .flex.flex-col.mt-10.pl-10.pb-10
+        .text-left.font-bold.text-lg
+          What you've read recently
 
-      - if current_user.visited_posts.any?
-        = render 'shared/public_user_posts', posts: current_user.visited_posts[0..2]
-      - else
-        .p-10.flex.flex-col
-          = image_tag 'shy.png', class: 'mx-auto w-28 w-auto'
-          .text-center.text-neutral-800.font-medium.text-xl.mt-7
-            You have yet to start reading.
-          .text-center.text-neutral-500.text-md.mt-1
-            
+        - if current_user.visited_posts.any?
+          = render 'shared/public_user_posts', posts: current_user.visited_posts[0..2]
+        - else
+          .p-10.flex.flex-col
+            = image_tag 'shy.png', class: 'mx-auto w-28 w-auto'
+            .text-center.text-neutral-800.font-medium.text-xl.mt-7
+              You have yet to start reading.
+            .text-center.text-neutral-500.text-md.mt-1
+              
 
-      
+        
 
-      
+        
