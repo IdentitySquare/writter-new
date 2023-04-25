@@ -5,23 +5,15 @@
 
 @layer components {
   .btn-primary {
-    @apply justify-center rounded-full bg-gradient-to-r from-sky-500 to-purple-500 px-4 py-2 text-white transition hover:scale-105 transform duration-300 ease-in-out cursor-pointer;
+    @apply justify-center rounded-md border border-transparent bg-emerald-800 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 cursor-pointer;
   }
 
   .btn-secondary {
-    @apply justify-center  rounded-full bg-gradient-to-r from-sky-500 to-purple-500 px-0.5 py-0.5 text-blue-500 transition hover:scale-105 transform duration-300 ease-in-out cursor-pointer;
+    @apply justify-center rounded-full border border-emerald-800  py-2 px-4 text-sm font-medium text-emerald-900 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 cursor-pointer;
   }
   
-
-  .btn-secondary-inner {
-    @apply bg-white rounded-full px-3 text-sm;
-  }
-  
-  
-
-
   .btn-small {
-    @apply justify-center rounded-full border border-fuchsia-600 py-2 px-4 text-xs font-medium  shadow-sm  focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 cursor-pointer hover:border-fuchsia-700;
+    @apply justify-center rounded-md border border-emerald-800  py-2 px-4 text-xs font-medium text-emerald-900 shadow-sm hover:bg-emerald-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 cursor-pointer;
   }
 
   .dropdown-item {
@@ -31,71 +23,33 @@
   .tab {
     @apply text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm  px-4 py-2 text-sm text-gray-700 ;
   }
-
-  .radio-custom {
-    @apply border-gray-300 text-sky-500 transition  disabled:opacity-25;
-  }
-  
-  .input-custom {
-    @apply  block w-full appearance-none rounded-full border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm;
-  }
 }
 
 
-
 @layer base {
-
-  
-  
-  .post_content > p {
-    @apply font-serif mb-6
-  }
-
-  h1 {
-    @apply   text-5xl font-bold;
-  }
-  h2 {
-    @apply  text-4xl font-bold;
-  }
-
-  h3 {
-    @apply  text-3xl font-bold mb-5;
-  }
-  h3 {
-    @apply  text-2xl font-bold mb-5;
-  }
-  h4 {
-    @apply text-xl font-bold mb-5;
-  }
-  h5 {
-    @apply text-lg font-bold mb-5;
-  }
-  h6 {
-    @apply text-sm font-bold mb-5;
-  }
-  
   .post_content h1 {
-    @apply font-serif  mb-5;
+    @apply font-serif text-5xl font-bold mb-5;
   }
   .post_content h2 {
-    @apply font-serif  mb-5;
+    @apply font-serif text-4xl font-bold mb-5;
   }
 
   .post_content h3 {
-    @apply font-serif mb-5;
+    @apply font-serif font-serif text-3xl font-bold mb-5;
   }
   .post_content h3 {
-    @apply font-serif mb-5;
+    @apply font-serif text-2xl font-bold mb-5;
   }
   .post_content h4 {
-    @apply font-serif mb-5;
+    @apply font-serif text-xl font-bold mb-5;
   }
   .post_content h5 {
-    @apply font-serif mb-5;
+    @apply font-serif text-lg font-bold mb-5;
   }
   .post_content h6 {
-    @apply font-serif mb-5;
+    @apply font-serif text-sm font-bold mb-5;
   }
+  /* ... */
 
   ul{
     list-style-type: disc;
@@ -111,6 +65,8 @@
     font-size: 8px;
   }
 
-  
+  .post_content > p {
+    margin-bottom: 25px;
+  }
 }
 

@@ -10,8 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Manrope', ...defaultTheme.fontFamily.sans],
-        serif: ['Zilla Slab', ...defaultTheme.fontFamily.serif],
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
   },

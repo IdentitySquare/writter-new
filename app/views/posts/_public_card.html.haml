@@ -1,28 +1,30 @@
-.rounded-md.border.border-neutral-200.px-4.py-5.sm:px-6{class: 'transition hover:shadow-lg'}
+.bg-white.max-w-xl.border.border-neutral-300.rounded-md.px-4.py-5.sm:px-6
 
-  .flex.flex-row.justify-between.mb-3.items-center
-    .flex.flex-row.gap-3.items-center
+  .flex.flex-row.justify-between.mb-3
+    .flex.flex-row.gap-3
       %span.inline-block.h-6.w-6.overflow-hidden.rounded-md.bg-gray-100.col-span-1
         %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
           %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
 
-      %span.text-sm.col-span-2.text-neutral-500.font-medium
+      %span.text-sm.col-span-2.text-neutral-500
         
         = User.find(post.user_id).name
       
-    %span.text-xs.text-gray-500
+    %span.text-sm.uppercase.text-gray-500
       = post.created_at.strftime('%d %b %Y')
   .flex.flex-row.justify-between
-    .text-lg.font-bold.text-neutral-800.font-serif
+    .text-lg.font-bold.text-neutral-800
       = post.title
 
   .justify-between
-    .text-ellipsis.line-clamp-3.text-neutral-500.font-serif
+    .text-sm.text-ellipsis.line-clamp-3.text-neutral-500
       = post.body_content
 
-  .flex.flex-row.gap-1.text-sm.text-gray-500.items-end.mt-5
+    
 
-    %svg.feather.feather-bar-chart-2{class: "text-[#f1b041]", :fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
+  .flex.flex-row.gap-1.text-sm.text-gray-500.items-end.mt-10
+
+    %svg.feather.feather-bar-chart-2{:fill => "none", :height => "24", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "24", :xmlns => "http://www.w3.org/2000/svg"}
       %line{:x1 => "18", :x2 => "18", :y1 => "20", :y2 => "10"}
       %line{:x1 => "12", :x2 => "12", :y1 => "20", :y2 => "4"}
       %line{:x1 => "6", :x2 => "6", :y1 => "20", :y2 => "14"}
