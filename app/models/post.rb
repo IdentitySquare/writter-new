@@ -37,6 +37,8 @@ class Post < ApplicationRecord
   belongs_to :publication, optional: true
   has_many :comments, dependent: :destroy
 
+  has_rich_text :body
+
   has_paper_trail
 
   #callback if saved change to publication_id

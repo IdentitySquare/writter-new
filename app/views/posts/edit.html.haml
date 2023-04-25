@@ -1,10 +1,10 @@
 - if @post.body.nil?
-  - title "New Post #{@post.title}"
+  - title "bla Post #{@post.title}"
 - else
   - title "Editing #{@post.title}"
 .bg-white.h-screen.font-serif.px-5.sm:px-0
   .div.mx-auto.py-2.max-w-3xl.bg-white.rounded-lg.h-full
-    .max-w-xl.mx-auto
+    .mx-auto
       #editor.mt-20.font-serif
         
         .flex.flex-row.gap-2.items-center
@@ -14,8 +14,12 @@
           #saveStatus.text-gray-400.font-sans.text-sm
             
         
+        = form_for(@post, url: edit_post_path(@post), html: { method: :put }) do |form|
+          .field
+            = form.label :body
+            = form.rich_text_area :body
 
-        
+              
   
 
       
