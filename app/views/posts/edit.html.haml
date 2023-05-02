@@ -5,7 +5,7 @@
 .bg-white.h-screen.font-serif.px-5.sm:px-0
   .div.mx-auto.py-2.max-w-3xl.bg-white.rounded-lg.h-full
     .mx-auto
-      #editor.mt-20.font-serif
+      #editor.mt-20.font-serif{"data-controller": "post"}
         
         .flex.flex-row.gap-2.items-center
           .h-2.w-2.bg-green-300.rounded-full
@@ -16,9 +16,8 @@
         
         = form_for(@post, url: edit_post_path(@post), html: { method: :put }) do |form|
           .field
-            = form.label :body
-            = form.rich_text_area :body
-
+   
+            = form.rich_text_area :draft_body, data: { action: 'keyup->post#saveChange', target: 'post' }
               
   
 
