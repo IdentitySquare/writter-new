@@ -75,7 +75,7 @@ class PostsController < ApplicationController
 
   def publish
     authorize @post
-    @post.body = @post.draft_body
+    @post.published_body = @post.draft_body
     @post.status = "published"
     @post.published_at = Time.now
     if @post.save

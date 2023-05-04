@@ -92,18 +92,19 @@ export default class extends Controller {
 //     });
 //   }
   
-saveChange() {
-  var timeoutId;
-  console.log('hi')
-  document.getElementById('saveStatus').innerHTML = ""
-  
-  clearTimeout(timeoutId);
-  timeoutId = setTimeout(this.savePost(), 1000)
-}
+  saveChange() {
+    var timeoutId;
+    console.log('yo')
+    document.getElementById('saveStatus').innerHTML = ""
+    
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(this.savePost(), 1000)
+  }
   savePost () { 
     console.log('should save')
     document.getElementById('saveStatus').innerHTML = "- Saving..."
     const postForm = document.querySelector(".simple_form")
+    console.log(postForm)
     postForm.requestSubmit();
     
   }

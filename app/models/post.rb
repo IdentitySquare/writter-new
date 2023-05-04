@@ -37,7 +37,8 @@ class Post < ApplicationRecord
   belongs_to :publication, optional: true
   has_many :comments, dependent: :destroy
 
-  has_rich_text :body
+  has_rich_text :draft_body
+  has_rich_text :published_body
 
   has_paper_trail
 
@@ -69,11 +70,12 @@ class Post < ApplicationRecord
   def body_content
     return nil if empty?
 
-    block_index = title.present? ? 1 : 0
+    return 'blah'
+    # block_index = title.present? ? 1 : 0
     
-    body_block = JSON.parse(body)&.fetch('blocks')[block_index]
+    # body_block = JSON.parse(body)&.fetch('blocks')[block_index]
     
-    return strip_tags(body_block['data']['text'])
+    # return strip_tags(body_block['data']['text'])
   end
 
   def empty?

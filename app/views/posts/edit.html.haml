@@ -14,12 +14,23 @@
           #saveStatus.text-gray-400.font-sans.text-sm
             
         
-        = form_for(@post, url: edit_post_path(@post), html: { method: :put }) do |form|
-          .field
+        -# = form_for(@post) do |form|
+        -#   .field
    
-            = form.rich_text_area :draft_body, data: { action: 'keyup->post#saveChange', target: 'post' }
+        -#     = form.rich_text_area :draft_body
+
+        -#   = form.submit "submit", class: 'flex w-full btn-primary {type: "submit"}'
               
   
-
+        = simple_form_for(@post, publish: true) do |f|
+          -# = f.rich_text_area :draft_body
       
+          .form-inputs
+            = f.rich_text_area :draft_body, data: { action: 'keyup->post#saveChange', target: 'post' }
+
+          .form-actions
+          
+            = f.button :submit , 'Save Changels',  id: 'update_post', class: "hidden relative inline-flex cursor-pointer items-center  border px-4 py-2 text-sm font-medium text-black shadow-sm  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mr-2" do
+              \#{f.icon :edit}
+
 
