@@ -137,7 +137,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_135803) do
     t.bigint "user_id", null: false
     t.integer "status", default: 0, null: false
     t.datetime "published_at"
-    t.string "draft_body"
     t.bigint "publication_id"
     t.datetime "discarded_at"
     t.string "published_title"
