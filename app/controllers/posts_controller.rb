@@ -5,16 +5,22 @@ class PostsController < ApplicationController
   before_action :set_post, except: %i[index new create]
   before_action :set_user, except: %i[index new]
   
+  
   # GET /posts or /posts.json
   def index
     @posts = Post.all
     if current_user
-      @non_authored_posts = RecommendationService.new(current_user).recommended_posts(10)
+      # non authored posts
+      @posts = RecommendationService.new(current_user).recommended_posts(10).page(params[:page]).per(5)
+    else
+      @posts = Post.published.page(params[:page]).per(5)
+      
     end
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    
     if @post.draft?
       redirect_to edit_post_path(@post)
     end
@@ -89,11 +95,10 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy
+    @post.discard
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to posts_path}
     end
   end
 

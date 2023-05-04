@@ -35,12 +35,12 @@ class Follow < ApplicationRecord
   end
 
   def destroy_notification
-    Notification.where(notifiable: user)
-                .where(user: followable)
-                .where(notification_type: 'followed')
-                .where(sender: user)
-                .first
-                .destroy
+    notification = Notification.where(notifiable: user)
+                                .where(user: followable)
+                                .where(notification_type: 'followed')
+                                .where(sender: user)
+                                .first
+    notification.destroy if notification.present?
   end
 
 

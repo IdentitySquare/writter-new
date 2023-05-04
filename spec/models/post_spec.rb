@@ -4,6 +4,7 @@
 #
 #  id             :bigint           not null, primary key
 #  body           :text
+#  discarded_at   :datetime
 #  draft_body     :string
 #  published_at   :datetime
 #  status         :integer          default("draft"), not null
@@ -15,6 +16,7 @@
 #
 # Indexes
 #
+#  index_posts_on_discarded_at    (discarded_at)
 #  index_posts_on_publication_id  (publication_id)
 #  index_posts_on_user_id         (user_id)
 #

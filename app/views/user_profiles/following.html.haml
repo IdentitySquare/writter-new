@@ -1,4 +1,4 @@
 .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
   = render 'user_card'
  
-  = render 'follow_list', users: @following, selected: 'Following'
+  = render 'follow_list', accounts: Follow.where(user_id: @user.id).order(created_at: :desc), selected: 'Following'

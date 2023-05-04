@@ -2,6 +2,7 @@ class FollowsController < ApplicationController
     before_action :set_follow, only: %i[destroy ]
 
     def create
+      
       @follow = current_user.given_follows.new(follow_params)
       
       respond_to do |format|
