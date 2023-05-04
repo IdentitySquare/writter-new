@@ -1,4 +1,4 @@
-- if @post.body.nil?
+- if @post.draft_body.nil?
   - title "bla Post #{@post.title}"
 - else
   - title "Editing #{@post.title}"
@@ -21,11 +21,12 @@
 
         -#   = form.submit "submit", class: 'flex w-full btn-primary {type: "submit"}'
               
-  
+
         = simple_form_for(@post, publish: true) do |f|
           -# = f.rich_text_area :draft_body
       
           .form-inputs
+            = f.text_field :draft_title, placeholder: 'Your title goes here...', class: 'block w-full bg-transparent border-none text-3xl focus:border-none  focus:outline-none mb-10 mt-5', data: { action: 'keyup->post#saveChange'}
             = f.rich_text_area :draft_body, data: { action: 'keyup->post#saveChange', target: 'post' }
 
           .form-actions

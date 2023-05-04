@@ -18,8 +18,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1 or /posts/1.json
-  def show
-    
+  def show  
     if @post.draft?
       redirect_to edit_post_path(@post)
     end
@@ -76,6 +75,7 @@ class PostsController < ApplicationController
   def publish
     authorize @post
     @post.published_body = @post.draft_body
+    @post.published_title = @post.draft_title
     @post.status = "published"
     @post.published_at = Time.now
     if @post.save
@@ -112,7 +112,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      post_params = params.require(:post).permit(:body, :title, :draft_body, :publication_id)
+      post_params = params.require(:post).permit(:body, :title, :draft_body, :publication_id, :draft_title)
 
       if post_params[:publication_id].present?
         post_params[:publication_id] = post_params[:publication_id].to_i.zero? ?  nil : post_params[:publication_id].to_i 
