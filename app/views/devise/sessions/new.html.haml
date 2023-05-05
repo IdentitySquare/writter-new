@@ -29,6 +29,10 @@
             %label.ml-2.block.text-sm.text-gray-900.cursor-pointer{for: "remember-me"} Remember me
           .text-sm
             %a.text-gray-800.transition.hover:text-gray-900.cursor-pointer{href: new_password_path(resource_name)} Forgot your password?
+        
+        - if alert == I18n.t('devise.failure.invalid', authentication_keys: 'Email')
+          .text-red-600.text-xs.text-center
+            Incorrect email or password entered.
         %div
           = f.submit "Sign in", class: 'btn-primary w-full '
       .mt-6
