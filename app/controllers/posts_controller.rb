@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  require 'render_editorjs'
-  
+
   skip_before_action :verify_authenticity_token
   before_action :set_post, except: %i[index new create]
   before_action :set_user, except: %i[index new]
@@ -19,8 +18,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1 or /posts/1.json
-  def show
-    
+  def show  
     if @post.draft?
       redirect_to edit_post_path(@post)
     end
@@ -31,8 +29,8 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    if current_user.posts.where(draft_body: nil).any?
-      redirect_to edit_post_path(current_user.posts.where(draft_body: nil).first)
+    if current_user.empty_post.present?
+      redirect_to edit_post_path(current_user.empty_post)
     else
       @post = current_user.posts.build
       if @post.save
@@ -76,7 +74,8 @@ class PostsController < ApplicationController
 
   def publish
     authorize @post
-    @post.body = @post.draft_body
+    @post.published_body = @post.draft_body
+    @post.published_title = @post.draft_title
     @post.status = "published"
     @post.published_at = Time.now
     if @post.save
@@ -113,7 +112,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      post_params = params.require(:post).permit(:body, :title, :draft_body, :publication_id)
+      post_params = params.require(:post).permit(:body, :title, :draft_body, :publication_id, :draft_title)
 
       if post_params[:publication_id].present?
         post_params[:publication_id] = post_params[:publication_id].to_i.zero? ?  nil : post_params[:publication_id].to_i 

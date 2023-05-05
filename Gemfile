@@ -115,17 +115,11 @@ gem 'html2haml'
 # Analytics 
 gem 'ahoy_matey'
 
-# rendering 
-gem 'render_editorjs'
-
-# meta tags
-gem "meta-tags"
-
 # Use Sass to process CSS
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -171,3 +165,5 @@ gem "factory_bot", "~> 6.2"
 gem "pundit", "~> 2.3"
 
 gem "timecop", "~> 0.9.6"
+
+gem "aws-sdk-s3", "~> 1.122"

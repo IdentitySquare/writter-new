@@ -2,17 +2,17 @@
 #
 # Table name: posts
 #
-#  id             :bigint           not null, primary key
-#  body           :text
-#  discarded_at   :datetime
-#  draft_body     :string
-#  published_at   :datetime
-#  status         :integer          default("draft"), not null
-#  title          :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  publication_id :bigint
-#  user_id        :bigint           not null
+#  id              :bigint           not null, primary key
+#  discarded_at    :datetime
+#  draft_body      :string
+#  draft_title     :string
+#  published_at    :datetime
+#  published_title :string
+#  status          :integer          default("draft"), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  publication_id  :bigint
+#  user_id         :bigint           not null
 #
 # Indexes
 #
@@ -37,6 +37,9 @@ class Post < ApplicationRecord
   belongs_to :publication, optional: true
   has_many :comments, dependent: :destroy
 
+  has_rich_text :draft_body
+  has_rich_text :published_body
+
   has_paper_trail
 
   #callback if saved change to publication_id
@@ -51,31 +54,9 @@ class Post < ApplicationRecord
     end
   end
 
-  def title
-    return nil if empty?
-    
-    if body.present?
-      first_block = JSON.parse(body)&.fetch('blocks')[0]
-      return first_block['data']['text'] if first_block&.fetch('type') == 'header'
-    else
-      first_block = JSON.parse(draft_body)&.fetch('blocks')[0]
-      return first_block['data']['text'] if first_block&.fetch('type') == 'header'
-    end
-    return nil
-  end
-
-  def body_content
-    return nil if empty?
-
-    block_index = title.present? ? 1 : 0
-    
-    body_block = JSON.parse(body)&.fetch('blocks')[block_index]
-    
-    return strip_tags(body_block['data']['text'])
-  end
 
   def empty?
-    draft_body.nil? || JSON.parse(draft_body)&.fetch('blocks').empty?
+    rich_text_draft_body.nil? && draft_title.nil?
   end
 
 

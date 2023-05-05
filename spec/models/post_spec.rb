@@ -2,17 +2,16 @@
 #
 # Table name: posts
 #
-#  id             :bigint           not null, primary key
-#  body           :text
-#  discarded_at   :datetime
-#  draft_body     :string
-#  published_at   :datetime
-#  status         :integer          default("draft"), not null
-#  title          :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  publication_id :bigint
-#  user_id        :bigint           not null
+#  id              :bigint           not null, primary key
+#  discarded_at    :datetime
+#  draft_title     :string
+#  published_at    :datetime
+#  published_title :string
+#  status          :integer          default("draft"), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  publication_id  :bigint
+#  user_id         :bigint           not null
 #
 # Indexes
 #

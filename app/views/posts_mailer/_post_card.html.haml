@@ -2,10 +2,10 @@
   .d-flex
     .post-card.align-left.w-fit
       .font-bold
-        #{post.title}
+        #{post.published_title}
 
       .text-sm
         = post.user.name
 
       .body-text.mt-5
-        = post.body_content
+        = post.published_body

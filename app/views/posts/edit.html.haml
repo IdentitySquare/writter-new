@@ -1,11 +1,11 @@
-- if @post.body.nil?
-  - title "New Post #{@post.title}"
+- if @post.empty?
+  - title "New Post"
 - else
-  - title "Editing #{@post.title}"
+  - title "Editing #{@post.published_title}"
 .bg-white.h-screen.font-serif.px-5.sm:px-0
   .div.mx-auto.py-2.max-w-3xl.bg-white.rounded-lg.h-full
-    .max-w-xl.mx-auto
-      #editor.mt-20.font-serif{"data-controller": "editor", "data-editor-value" => "#{@post.draft_body}", "data-editor-read-only" => "false"}  
+    .mx-auto
+      #editor.mt-20.font-serif{"data-controller": "post"}
         
         .flex.flex-row.gap-2.items-center
           .h-2.w-2.bg-green-300.rounded-full
@@ -13,10 +13,15 @@
             Draft 
           #saveStatus.text-gray-400.font-sans.text-sm
             
-        %div{"data-editor-target": "render" }
+        = simple_form_for(@post, publish: true) do |f|
 
-        
-  
+          .form-inputs
+            = f.text_field :draft_title, placeholder: 'Title', class: 'border border-white focus:border-white focus:outline-none focus:ring-white block w-full bg-transparent rounded-none text-4xl mb-5', data: { action: 'keyup->post#saveChange'}
+            = f.rich_text_area :draft_body, placeholder: 'Start your great story...',class: 'border border-white',data: { action: 'input->post#saveChange', target: 'post' }
 
-      
+          .form-actions
+          
+            = f.button :submit , 'Save Changels',  id: 'update_post', class: "hidden relative inline-flex cursor-pointer items-center  border px-4 py-2 text-sm font-medium text-black shadow-sm  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mr-2" do
+              \#{f.icon :edit}
+
 
