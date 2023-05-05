@@ -1,7 +1,7 @@
-- if @post.draft_body.nil?
-  - title "bla Post #{@post.title}"
+- if @post.empty?
+  - title "New Post"
 - else
-  - title "Editing #{@post.title}"
+  - title "Editing #{@post.published_title}"
 .bg-white.h-screen.font-serif.px-5.sm:px-0
   .div.mx-auto.py-2.max-w-3xl.bg-white.rounded-lg.h-full
     .mx-auto
