@@ -8,7 +8,7 @@
       #editor.mt-20.font-serif{"data-controller": "post"}
         
         .flex.flex-row.gap-2.items-center
-          .h-2.w-2.bg-green-300.rounded-full
+          .h-2.w-2.bg-blue-300.rounded-full
           .text-gray-400.font-sans.text-sm
             Draft 
           #saveStatus.text-gray-400.font-sans.text-sm
@@ -17,7 +17,7 @@
 
           .form-inputs
             = f.text_field :draft_title, placeholder: 'Title', class: 'border border-white focus:border-white focus:outline-none focus:ring-white block w-full bg-transparent rounded-none text-4xl mb-5', data: { action: 'keyup->post#saveChange'}
-            = f.rich_text_area :draft_body, placeholder: 'Start your great story...',class: 'border border-white',data: { action: 'input->post#saveChange', target: 'post' }
+            = f.rich_text_area :draft_body, placeholder: 'Start your great story...',class: 'border border-white',data: { action: 'input->post#saveChange ', target: 'post' }
 
           .form-actions
           
