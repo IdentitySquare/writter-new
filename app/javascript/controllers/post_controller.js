@@ -2,9 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = [ "body"]
-  connect(){
-    console.log("hi");
-  }
 
   saveChange() {
     var timeoutId;
@@ -18,6 +15,5 @@ export default class extends Controller {
     document.getElementById('saveStatus').innerHTML = "- Saving..."
     const postForm = document.querySelector(".simple_form")
     postForm.requestSubmit();
-    
   }
 }
