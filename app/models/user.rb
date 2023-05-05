@@ -138,6 +138,14 @@ class User < ApplicationRecord
     Post.with_discarded.where(id: post_ids).where(discarded_at: nil)
   end
 
+  def empty_post
+    
+    posts.where(draft_title:nil).each do |post|
+      return post if post.rich_text_draft_body.nil?
+    end
+    return nil
+  end
+
   def get_views(start_time)
     post_ids = posts.published.pluck(:id)
     end_time = Time.now

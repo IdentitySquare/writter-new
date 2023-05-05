@@ -29,8 +29,8 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    if true
-      redirect_to edit_post_path(8)
+    if current_user.empty_post.present?
+      redirect_to edit_post_path(current_user.empty_post)
     else
       @post = current_user.posts.build
       if @post.save

@@ -26,8 +26,8 @@
           -# = f.rich_text_area :draft_body
       
           .form-inputs
-            = f.text_field :draft_title, placeholder: 'Your title goes here...', class: 'block w-full bg-transparent border-none text-3xl focus:border-none  focus:outline-none mb-10 mt-5', data: { action: 'keyup->post#saveChange'}
-            = f.rich_text_area :draft_body, data: { action: 'keyup->post#saveChange', target: 'post' }
+            = f.text_field :draft_title, placeholder: 'Title', class: 'border border-white focus:border-white focus:outline-none focus:ring-white block w-full bg-transparent rounded-none text-4xl mb-5', data: { action: 'keyup->post#saveChange'}
+            = f.rich_text_area :draft_body, placeholder: 'Start your great story...',class: 'border border-white',data: { action: 'keyup->post#saveChange', target: 'post' }
 
           .form-actions
           
