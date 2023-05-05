@@ -4,7 +4,10 @@
 
   = render 'banner', user: @user
 
-  = @post.published_body
+  .font-semibold.text-4xl.mb-10.text-center
+    = @post.published_title 
+  .text-justify
+    = @post.published_body
   %hr.mb-5.mt-5
 
   .block.text-gray-700.font-bold.mb-5
