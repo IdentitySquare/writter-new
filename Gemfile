@@ -115,9 +115,6 @@ gem 'html2haml'
 # Analytics 
 gem 'ahoy_matey'
 
-# meta tags
-gem "meta-tags"
-
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -168,3 +165,5 @@ gem "factory_bot", "~> 6.2"
 gem "pundit", "~> 2.3"
 
 gem "timecop", "~> 0.9.6"
+
+gem "aws-sdk-s3", "~> 1.122"
