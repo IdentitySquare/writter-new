@@ -54,33 +54,9 @@ class Post < ApplicationRecord
     end
   end
 
-  def title
-    return nil if empty?
-    
-    # if body.present?
-    #   first_block = JSON.parse(body)&.fetch('blocks')[0]
-    #   return first_block['data']['text'] if first_block&.fetch('type') == 'header'
-    # else
-    #   first_block = JSON.parse(draft_body)&.fetch('blocks')[0]
-    #   return first_block['data']['text'] if first_block&.fetch('type') == 'header'
-    # end
-    return nil
-  end
-
-  def body_content
-    return nil if empty?
-
-    return 'blah'
-    # block_index = title.present? ? 1 : 0
-    
-    # body_block = JSON.parse(body)&.fetch('blocks')[block_index]
-    
-    # return strip_tags(body_block['data']['text'])
-  end
 
   def empty?
-    draft_body.nil?
-    # draft_body.nil? || JSON.parse(draft_body)&.fetch('blocks').empty?
+    rich_text_draft_body.nil? && draft_title.nil?
   end
 
 

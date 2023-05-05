@@ -13,18 +13,8 @@
             Draft 
           #saveStatus.text-gray-400.font-sans.text-sm
             
-        
-        -# = form_for(@post) do |form|
-        -#   .field
-   
-        -#     = form.rich_text_area :draft_body
-
-        -#   = form.submit "submit", class: 'flex w-full btn-primary {type: "submit"}'
-              
-
         = simple_form_for(@post, publish: true) do |f|
-          -# = f.rich_text_area :draft_body
-      
+
           .form-inputs
             = f.text_field :draft_title, placeholder: 'Title', class: 'border border-white focus:border-white focus:outline-none focus:ring-white block w-full bg-transparent rounded-none text-4xl mb-5', data: { action: 'keyup->post#saveChange'}
             = f.rich_text_area :draft_body, placeholder: 'Start your great story...',class: 'border border-white',data: { action: 'keyup->post#saveChange', target: 'post' }

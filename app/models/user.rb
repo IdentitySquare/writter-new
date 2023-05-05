@@ -140,7 +140,7 @@ class User < ApplicationRecord
 
   def empty_post
     
-    posts.where(draft_title:nil).each do |post|
+    posts.includes([:rich_text_draft_body]).where(draft_title:nil).each do |post|
       return post if post.rich_text_draft_body.nil?
     end
     return nil

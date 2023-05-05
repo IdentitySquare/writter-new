@@ -5,11 +5,11 @@
       = post.created_at.strftime('%d %b %Y')
   .flex.flex-row.justify-between
     .text-lg.font-bold.text-neutral-800.font-serif
-      = post.title
+      = post.published_title
 
   .justify-between
     .text-ellipsis.line-clamp-3.text-neutral-500.font-serif
-      = post.body_content
+      = post.published_body
 
   .flex.flex-row.gap-1.text-sm.text-gray-500.items-end.mt-5
 
