@@ -5,10 +5,11 @@ export default class extends Controller {
   connect(){
     console.log("hi");
   }
-  
+
   saveChange() {
     var timeoutId;
     document.getElementById('saveStatus').innerHTML = ""
+
     clearTimeout(timeoutId);
     timeoutId = setTimeout(this.savePost(), 1000)
   }
@@ -16,7 +17,6 @@ export default class extends Controller {
   savePost () { 
     document.getElementById('saveStatus').innerHTML = "- Saving..."
     const postForm = document.querySelector(".simple_form")
-    console.log(postForm)
     postForm.requestSubmit();
     
   }
