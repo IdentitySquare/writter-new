@@ -11,10 +11,7 @@
     = javascript_importmap_tags
     = display_meta_tags site: "Writter"
 
-    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
-    %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
-    %link{:href => "https://fonts.googleapis.com/css2?family=Manrope"}/
-
+   
     %script{:src => "https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/header@latest"}
@@ -31,25 +28,19 @@
     %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"}
     %script{src: "https://cdn.jsdelivr.net/npm/editorjs-html@3.4.0/build/edjsHTML.js"}   
     %script{src: "https://cdn.jsdelivr.net/npm/@albatarnik/editorjs-table@2.0.4/dist/table.min.js"}
+    %script{src: "https://cdn.jsdelivr.net/npm/@editorjs/image@2.3.0"}
 
-    %link{:href => "https://fonts.googleapis.com", :rel => "preconnect"}/
-    %link{:crossorigin => "", :href => "https://fonts.gstatic.com", :rel => "preconnect"}/
-    %link{:href => "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Zilla+Slab:wght@400;600&display=swap", :rel => "stylesheet"}/
+   
 
-     
     
    
 
   %body.h-full.font-sans-serif
     = render 'layouts/navbar'
-    .z-0.mb-20{class: ("bg-neutral-50 h-full" if controller_name == 'posts' && action_name == 'edit')}
+    .z-0.pt-14.pb-20.h-full{class: ("bg-neutral-50 h-full" if controller_name == 'posts' && action_name == 'edit')}
 
       = yield
 
-    - unless controller_name == 'posts' && (action_name == 'edit' || action_name == 'index')
-      = render partial: "shared/footer"
 
     :javascript
       feather.replace()
-  
-       

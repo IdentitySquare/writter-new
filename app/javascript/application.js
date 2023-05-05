@@ -2,8 +2,11 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+import "@rails/activestorage"
+
 import Alpine from 'alpinejs'
  
 window.Alpine = Alpine
  
 Alpine.start()
+

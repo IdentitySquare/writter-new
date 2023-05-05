@@ -34,6 +34,9 @@ class Post < ApplicationRecord
    #----- ASSOCIATIONS -----#
 
   belongs_to :user
+  
+  has_many_attached :images
+
   belongs_to :publication, optional: true
   has_many :comments, dependent: :destroy
 

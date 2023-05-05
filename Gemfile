@@ -170,4 +170,8 @@ gem "factory_bot", "~> 6.2"
 
 gem "pundit", "~> 2.3"
 
+gem "image_processing", "~> 1.12"
+
+gem "aws-sdk-s3", "~> 1.119"
+
 gem "timecop", "~> 0.9.6"

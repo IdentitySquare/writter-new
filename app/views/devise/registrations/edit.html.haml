@@ -1,53 +1,45 @@
 - title "Settings"
+.flex.min-h-full.flex-col.justify-center.py-12.sm:px-6.lg:px-8
+  .sm:mx-auto.sm:w-full.sm:max-w-md
+    %h2.mt-6.text-center.text-3xl.tracking-tight.text-gray-900.font-serif Update your profile
 
-.flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
-  = render 'user_profiles/settings_header', selected: 'account'
+  .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
+    .py-8.px-4.shadow{class: 'sm:rounded-lg.sm:px-10', "data-controller": "onboarding"}
   
-  
-          
+      = simple_form_for @user , url: registration_path(@user), method: :put do |f|
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Name
+          .mt-1
+   
+            = f.input :name, label:false, input_html:{ class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
+
+        %div
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Username
+          .mt-1
+      
+            = f.input :username, required: true, label: false, id: 'username' , wrapper_html: {"data-action": 'keyup->onboarding#checkUsername'}, input_html:{'data-onboarding-target': 'username', class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
+
+            %div#username-taken.invisible.text-xs.mt-2.text-rose-500.pl-1{"data-onboarding-target" => "errorMessage"} Username already taken
+
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "location"} Location
+          .mt-1
+      
+            = f.input :location, label: false, input_html:{rows: 5, class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
+
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Bio
+          .mt-1
+      
+            = f.input :bio, as: :text,maxlength: 160, label: false, input_html:{rows: 5, class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
 
 
-  .flex.min-h-full.flex-col.justify-center.pb-12.sm:px-6.lg:px-8
-    .sm:mx-auto.sm:w-full.sm:max-w-md
-      %h2.mt-6.text-center.text-3xl.tracking-tight.text-gray-900 Update your profile
+        %div.mb-6
+          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Website
+          .mt-1
+      
+            = f.input :website,label: false, input_html:{ class: 'block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm  focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm'}
 
-    .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
-      .py-8.px-4.shadow{class: 'sm:rounded-lg.sm:px-10', "data-controller": "onboarding"}
-    
-        = simple_form_for @user , url: registration_path(@user), method: :put do |f|
-          %div.mb-6
-            %label.block.text-sm.font-medium.text-gray-700{for: "email"} Name
-            .mt-1
-    
-              = f.input :name, label:false, input_html:{ class: 'input-custom'}
-
-          %div
-            %label.block.text-sm.font-medium.text-gray-700{for: "email"} Username
-            .mt-1
         
-              = f.input :username, required: true, label: false, id: 'username' , wrapper_html: {"data-action": 'keyup->onboarding#checkUsername'}, input_html:{'data-onboarding-target': 'username', class: 'input-custom'}
 
-              %div#username-taken.invisible.text-xs.mt-2.text-rose-500.pl-1{"data-onboarding-target" => "errorMessage"} Username already taken
-
-          %div.mb-6
-            %label.block.text-sm.font-medium.text-gray-700{for: "location"} Location
-            .mt-1
-        
-              = f.input :location, label: false, input_html:{rows: 5, class: 'input-custom'}
-
-          %div.mb-6
-            %label.block.text-sm.font-medium.text-gray-700{for: "email"} Bio
-            .mt-1
-        
-              = f.input :bio, as: :text,maxlength: 160, label: false, input_html:{rows: 5, class: 'input-custom rounded-md'}
-
-
-          %div.mb-6
-            %label.block.text-sm.font-medium.text-gray-700{for: "email"} Website
-            .mt-1
-        
-              = f.input :website,label: false, input_html:{ class: 'input-custom'}
-
-          
-
-          = f.button :submit, value: 'Update', 'data-onboarding-target': 'saveButton', input_html: {"data-action": 'click->onboarding#checkUsername'},class: 'flex w-full justify-center btn-primary {type: "submit"}'
+        = f.button :submit, value: 'Update', 'data-onboarding-target': 'saveButton', input_html: {"data-action": 'click->onboarding#checkUsername'},class: 'flex w-full justify-center btn-primary {type: "submit"}'

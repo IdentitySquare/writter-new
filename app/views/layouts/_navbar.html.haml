@@ -1,7 +1,7 @@
 - if current_user 
   = turbo_stream_from "notifications_#{current_user.id}"
-%nav.w-full.border-b.border-neutral-200.z-20.font-sans-serif{'data-controller': 'dropdown'}
-  .mx-auto.max-w-6xl
+%nav.fixed.w-full.bg-white.shadow.z-20.font-sans-serif{'data-controller': 'dropdown'}
+  .mx-auto.max-w-7xl.px-4.sm:px-6.lg:px-8
     .flex.h-16.justify-between
       .flex
         .-ml-2.mr-2.flex.items-center.md:hidden
@@ -26,7 +26,8 @@
               %path{d: "M6 18L18 6M6 6l12 12", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
         .flex.flex-shrink-0.items-center
           = link_to root_path do
-            = image_tag 'neo-logo.png', class: 'h-9 w-auto'
+            %img.block.h-8.w-auto.lg:hidden{alt: "Your Company", src: url_for('/assets/logo_black.png')}/
+            %img.hidden.h-8.w-auto.lg:block{alt: "Your Company",src: url_for('/assets/logo_black.png')}/
       .flex.items-center
         - if controller_name == 'posts' && action_name == 'edit'
           .flex-shrink-0.mr-3
@@ -38,16 +39,15 @@
           
           
           .flex-shrink-0.mr-3
-            %button.relative.inline-flex.btn-primary.text-sm{type: "button"}
+            %button.relative.inline-flex.btn-primary{type: "button"}
 
               = link_to label, publish_post_path
           
           - if @post.published?
             .flex-shrink-0.mr-3
-              %button.relative.inline-flex.items-center.btn-secondary{type: "button"}
-                   
-                .btn-secondary-inner.py-2
-                  = link_to 'Unpublish Post', unpublish_post_path(@post) 
+              %button.relative.inline-flex.items-center.bg-gray-400.px-4.py-2.text-sm.font-medium.text-white.shadow-sm.hover:bg-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button"}
+
+                = link_to 'Unpublish Post', unpublish_post_path(@post) 
             
           
       
@@ -55,7 +55,7 @@
         - else
           .flex-shrink-0
 
-            %button.relative.inline-flex.items-center.btn-primary.text-sm{type: "button"}
+            %button.relative.inline-flex.items-center.btn-primary{type: "button"}
               - path = current_user.present? ?  new_post_path : new_user_session_path
               = link_to "Write", path
         
@@ -73,7 +73,7 @@
                     .absolute.bg-yellow-400.rounded-full{ class: ' top-0.5 right-1 w-4 h-4' }
                       .text-xs.text-black#count #{current_user.notifications.unread.size}
                   
-                  %svg.h-7.w-7{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
+                  %svg.h-8.w-8{"aria-hidden" => "true", fill: "none", stroke: "currentColor", "stroke-width" => "1.5", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
                     %path{d: "M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
                     -# .absolute.bg-yellow-500.rounded-full{ class: ' top-0 right-0 w-2.5 h-2.5' }
                 
@@ -86,11 +86,11 @@
                       
                       .text-md
                         Notifications
-                      .flex.flex-row.gap-2.text-blue-800.text-sm.items-center
+                      .flex.flex-row.gap-2.text-emerald-800.text-sm.items-center
                         %svg.feather.feather-check{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2", :viewbox => "0 0 24 24", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
                           %polyline{:points => "20 6 9 17 4 12"}
 
-                        = button_to " Mark all as read",  notifications_mark_as_read_path, method: :post, class: "text-blue-800", role: "menuitem", tabindex: "-1"
+                        = button_to " Mark all as read",  notifications_mark_as_read_path, method: :post, class: "text-emerald-800", role: "menuitem", tabindex: "-1"
 
                     #notifications.text-sm
                       
@@ -109,7 +109,7 @@
           .relative.ml-3.hidden.md:block
             %div
               %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
-                %span.inline-block.h-7.w-7.overflow-hidden.rounded-full.bg-gray-100
+                %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
                   %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
                     %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
             /
@@ -122,7 +122,7 @@
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
 
-            .absolute.hidden.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.pt-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", 'data-dropdown-target': 'dropdown'}
+            .absolute.hidden.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.py-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", 'data-dropdown-target': 'dropdown'}
               / Active: "bg-gray-100", Not Active: ""
               - if current_user
                 = link_to "Your Profile", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"

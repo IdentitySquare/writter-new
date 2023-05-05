@@ -1,4 +1,4 @@
-.flex.flex-row.justify-between.items-center
+.flex.flex-row.justify-between
   .text-left.font-semibold.md:text-4xl.text-xl
     #{@user.name}
 
@@ -7,16 +7,15 @@
 
   - elsif current_user && current_user == @user
     .btn-secondary
-      .btn-secondary-inner
-        = link_to 'Edit Profile', edit_user_registration_path(@user)
+      = link_to 'Edit Profile', edit_user_registration_path(@user)
   - else
     - if current_user.following.include?(@user)
       - follow = Follow.find_by(followable_id: @user.id, followable_type: @user.class.to_s, user: current_user.id)
-      = button_to '', follow_path(follow), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-1 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
+      = button_to '', follow_path(follow), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-2 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
     
     - else
       
-      = button_to "Follow", follows_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post, class: 'btn-primary py-1 text-sm '
+      = button_to "Follow", follows_path, params:{ follow: {followable_id: @user.id, followable_type: @user.class.to_s}}, method: :post, class: 'btn-secondary'
 .text-slate-400.mb-3.flex.flex-row.gap-3
   @#{@user.username}
 
