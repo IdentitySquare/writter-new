@@ -4,7 +4,6 @@
 #
 #  id              :bigint           not null, primary key
 #  discarded_at    :datetime
-#  draft_body      :string
 #  draft_title     :string
 #  published_at    :datetime
 #  published_title :string
