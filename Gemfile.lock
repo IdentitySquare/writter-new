@@ -246,6 +246,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.14.0-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.14.0-x86_64-linux)
+      racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
@@ -386,12 +388,15 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.6.0-arm64-darwin)
+    sqlite3 (1.6.0-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     strong_migrations (1.4.1)
       activerecord (>= 5.2)
     strong_password (0.0.10)
     tailwindcss-rails (2.0.21-arm64-darwin)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.21-x86_64-linux)
       railties (>= 6.0.0)
     temple (0.10.0)
     thor (1.2.1)
@@ -430,6 +435,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   ahoy_matey
