@@ -61,6 +61,8 @@ gem "bootsnap", require: false
 # Postgres
 gem 'pg'
 
+# Email Delivery
+gem 'postmark-rails'
 
 # Omniauth
 
