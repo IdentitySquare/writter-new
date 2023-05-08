@@ -4,12 +4,8 @@ export default class extends Controller {
     static targets = [ "username", "usernameTaken", "saveButton", "errorMessage"]
 
     checkUsername(event) {
-        console.log('inher')
         const target = this.saveButtonTarget;
-        console.log(this.usernameTarget.value.length )
         if (this.usernameTarget.value.length < 4 ) {
-            console.log('less than 4');
-            console.log(this.usernameTarget.value);
             this.errorMessageTarget.classList.remove("invisible")
             this.errorMessageTarget.innerHTML = 'Username must contain atleast 4 characters'
             target.disabled = true;
@@ -17,7 +13,6 @@ export default class extends Controller {
             target.classList.remove("btn-primary");
             return;
         } else {
-            console.log('more than 4');
             this.errorMessageTarget.classList.add("invisible")
             target.disabled = false;
             target.classList.remove("btn-disabled");
