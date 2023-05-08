@@ -5,16 +5,16 @@ class UserProfilesController < ApplicationController
   def update 
 
     if @user.update(user_params)
-      
       respond_to do |format|
         format.turbo_stream { flash.now[:notice] = "settings change" }
-        format.html {redirect_to root_path}
+        format.html {redirect_to user_profile_path(@user)}
       end 
     end
   end
 
 
   def show
+    
     if params[:status].nil?
       @posts = @user.posts.published
     else
