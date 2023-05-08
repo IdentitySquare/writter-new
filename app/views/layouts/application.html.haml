@@ -37,7 +37,17 @@
     %link{:href => "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Zilla+Slab:wght@400;600&display=swap", :rel => "stylesheet"}/
 
      
-    
+    - if Rails.env.production?
+      -# JS Error Tracking 
+      %script{crossorigin: "anonymous", integrity: "sha384-davt05dZyy9wSVcYU+nxmOaNugUmN7v0WYFUlbE6d6kVDbYxqWKzJXY7ZM04YbJf", src: "https://browser.sentry-cdn.com/7.8.0/bundle.tracing.min.js"}
+
+      :javascript
+        Sentry.init({
+          dsn: "https://74294bc2504a418aa7e80b47871d80d7@o1339088.ingest.sentry.io/6610803",
+          integrations: [new Sentry.BrowserTracing()],
+          tracesSampleRate: 0.25,
+        });
+
    
 
   %body.h-full.font-sans-serif
