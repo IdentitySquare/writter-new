@@ -167,3 +167,6 @@ gem "pundit", "~> 2.3"
 gem "timecop", "~> 0.9.6"
 
 gem "aws-sdk-s3", "~> 1.122"
+
+gem "sentry-ruby"
+gem "sentry-rails"
