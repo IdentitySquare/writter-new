@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"editorjs-html@^3.4.2":
-  "integrity" "sha512-Gy8FV4oHMvnPDXLsdpZYW0Dgjaagff9bPd28/WW9aFdy87FvktJxQz8H+NKpxiGcGoNY27MmjFffurK2yhXjEg=="
-  "resolved" "https://registry.npmjs.org/editorjs-html/-/editorjs-html-3.4.2.tgz"
-  "version" "3.4.2"
+caniuse-lite@^1.0.30001486:
+  version "1.0.30001486"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001486.tgz"
+  integrity sha512-uv7/gXuHi10Whlj0pp5q/tsK/32J2QSqVRKQhs2j8VsDCjgyruAh/eEXHF822VqO9yT6iZKw3nRwZRSPBE9OQg==
