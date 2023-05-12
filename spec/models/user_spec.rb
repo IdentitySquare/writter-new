@@ -62,6 +62,7 @@ RSpec.describe User, type: :model do
 
   describe 'validations' do
     it { should validate_length_of(:username).is_at_least(4).on(:update) }
+    it { should validate_presence_of(:name).on(:update) }
   end
 
   describe 'followers' do
