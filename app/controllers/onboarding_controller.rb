@@ -8,7 +8,7 @@ class OnboardingController < ApplicationController
   end
 
   def checkUsername
-    status = User.find_by(username: params[:username]) ? "error" : "success"  
+    status = User.where("lower(username) = ?", params[:username].downcase).any? ? "error" : "success"  
     render json: {status: status}
   end
 end
