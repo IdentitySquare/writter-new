@@ -25,14 +25,6 @@
           .mt-1
       
             = f.input :bio, as: :text,maxlength: 160, label: false, input_html:{rows: 5, class: 'block w-full input-custom rounded-md sm:text-sm'}
-
-
-        %div.mb-6
-          %label.block.text-sm.font-medium.text-gray-700{for: "email"} Website
-          .mt-1
-      
-            = f.input :website,label: false, input_html:{ class: 'block w-full input-custom sm:text-sm'}
-
         
 
         = f.button :submit, value: 'Finish', 'data-onboarding-target': 'saveButton', class: 'disabled  btn-disabled flex w-full  {type: "submit"}'
