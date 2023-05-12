@@ -128,7 +128,7 @@
                 = link_to "Your Posts", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"
                 = link_to "Your Publications", publications_path, class: "dropdown-item", role: "menuitem", tabindex: "-1"
 
-                %hr.mt-2.mb-2
+                
                 = link_to "Settings", notifications_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
                 = link_to "Sign out", destroy_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
               - else            
@@ -155,9 +155,9 @@
         - if current_user 
           = link_to "Your Posts", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"
           = link_to "Your Publications", publications_path, class: "dropdown-item", role: "menuitem", tabindex: "-1"
-          %hr.mt-2.mb-2
-            = link_to "Settings", notifications_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
-            = link_to "Sign out", destroy_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+         
+          = link_to "Settings", notifications_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+          = link_to "Sign out", destroy_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
         - else            
           = link_to 'Sign in', new_user_session_path,  class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
 
