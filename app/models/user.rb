@@ -60,6 +60,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :username, length: {minimum: 4 }, on: :update
+  validates :name, presence: true, on: :update
   validates :timezone, presence: true
 
   before_save :set_time_zone
