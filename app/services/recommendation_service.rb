@@ -5,7 +5,7 @@ class RecommendationService
   
   def recommended_accounts(sample)
     # Get the first sample number of users that the user is not following and is not the user
-    User.where.not(id: @user.followed_user_ids).where.not(id: @user.id).limit(sample)
+    User.where.not(id: @user.followed_user_ids).where.not(id: @user.id).where.not(username: nil).limit(sample)
   end
 
   def recommended_posts(sample)

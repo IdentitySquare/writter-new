@@ -42,7 +42,7 @@
           = own_profile ? "You're not following anyone yet!" : "This user isn't following anyone yet!"
 
         .text-bold.text-md.text-center
-          = own_profile ? "Here are some writers who might interest you." : ""
+          = own_profile && @recommendations.any? ? "Here are some writers who might interest you." : ""
 
     
     - if selected == 'Following' && current_user == @user && @recommendations.present?

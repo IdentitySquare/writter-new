@@ -16,6 +16,13 @@ export default class extends Controller {
             target.classList.add("btn-disabled");
             target.classList.remove("btn-primary");
             return;
+        } else if (/^[a-zA-Z0-9_]+$/.test(this.usernameTarget.value) == false) {
+            this.errorMessageTarget.classList.remove("invisible")
+            this.errorMessageTarget.innerHTML = 'Username can only contain letters,numbers or underscores'
+            target.disabled = true;
+            target.classList.add("btn-disabled");
+            target.classList.remove("btn-primary");
+            return;
         } else {
             console.log('more than 4');
             this.errorMessageTarget.classList.add("invisible")
