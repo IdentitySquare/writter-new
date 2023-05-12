@@ -1,22 +1,22 @@
 .flex.min-h-full.flex-col.justify-center.py-12.sm:px-6.lg:px-8
   .sm:mx-auto.sm:w-full.sm:max-w-md
-    .mt-6.text-center.text-3xl.tracking-tight.text-gray-900.font-serif Set up your profile
+    .mt-6.text-center.text-3xl.tracking-tight.text-gray-900 Set up your profile
 
-  .mt-8.sm:mx-auto.sm:w-full.sm:max-w-md
-    .py-8.px-4.shadow{class: 'sm:rounded-lg.sm:px-10', "data-controller": "onboarding"}
-  
+  .mt-8.sm:mx-auto.mx-3.sm:w-full.sm:max-w-md
+    .py-8.px-4.sm:px-10.rounded-md.border.border-neutral-200{class: 'sm:rounded-lg.sm:px-10', "data-controller": "onboarding"}
+   
       = simple_form_for @user , url: user_profile_path(@user), method: :put, data: { turbo: "false" } do |f|
         %div.mb-6
           %label.block.text-sm.font-medium.text-gray-700{for: "email"} Name
           .mt-1
    
-            = f.input :name, label:false, input_html:{ class: 'block w-full input-custom sm:text-sm'}
+            = f.input :name, label:false,placeholder: 'Your Name', input_html:{ class: 'block w-full input-custom sm:text-sm'}
 
         %div
           %label.block.text-sm.font-medium.text-gray-700{for: "email"} Username
           .mt-1
       
-            = f.input :username, required: true, label: false, id: 'username' , wrapper_html: {"data-action": 'keyup->onboarding#checkUsername'}, input_html:{'data-onboarding-target': 'username', class: 'block w-full input-custom sm:text-sm'}
+            = f.input :username, required: true, placeholder: 'Your @',label: false, id: 'username' , wrapper_html: {"data-action": 'keyup->onboarding#checkUsername'}, input_html:{'data-onboarding-target': 'username', class: 'block w-full input-custom sm:text-sm'}
 
             %div#username-taken.invisible.text-xs.mt-2.text-rose-500.pl-1{"data-onboarding-target" => "errorMessage"} Username already taken
             
@@ -24,7 +24,7 @@
           %label.block.text-sm.font-medium.text-gray-700{for: "email"} Bio
           .mt-1
       
-            = f.input :bio, as: :text,maxlength: 160, label: false, input_html:{rows: 5, class: 'block w-full input-custom rounded-md sm:text-sm'}
+            = f.input :bio, as: :text,maxlength: 160, label: false, input_html:{rows: 5, class: 'block w-full input-custom rounded-md sm:text-sm'}, placeholder: 'You in 160 characters...'
         
 
         = f.button :submit, value: 'Finish', 'data-onboarding-target': 'saveButton', class: 'disabled  btn-disabled flex w-full  {type: "submit"}'
