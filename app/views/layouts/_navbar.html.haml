@@ -125,7 +125,7 @@
             .absolute.hidden.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", 'data-dropdown-target': 'dropdown'}
               / Active: "bg-gray-100", Not Active: ""
               - if current_user
-                = link_to "Your Profile", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"
+                = link_to "Your Profile", user_profile_path(username: current_user.username), class: "dropdown-item", role: "menuitem", tabindex: "-1"
                 = link_to "Your Publications", publications_path, class: "dropdown-item", role: "menuitem", tabindex: "-1"
 
                 
@@ -153,7 +153,7 @@
          
       .mt-3.space-y-1
         - if current_user 
-          = link_to "Your Posts", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"
+          = link_to "Your Posts", user_profile_path(current_user.username), class: "dropdown-item", role: "menuitem", tabindex: "-1"
           = link_to "Your Publications", publications_path, class: "dropdown-item", role: "menuitem", tabindex: "-1"
          
           = link_to "Settings", notifications_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
