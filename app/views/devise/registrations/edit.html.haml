@@ -48,6 +48,11 @@
         
               = f.input :website,label: false, input_html:{ class: 'input-custom'}
 
+          %div.mb-6
+            %label.block.text-sm.font-medium.text-gray-700{for: "email"} Website
+            .mt-1
+
+              = f.file_field :avatar_url
           
 
           = f.button :submit, value: 'Update', 'data-onboarding-target': 'saveButton', input_html: {"data-action": 'click->onboarding#checkUsername'},class: 'flex w-full justify-center btn-primary {type: "submit"}'
