@@ -2,7 +2,11 @@
   .flex.flex-col.items-start.mb-4.gap-5.py-5.pr-3{'data-controller': 'dropdown'}
     .flex.flex-row.gap-2.items-center.w-full
       
-      %img.w-10.h-10.rounded-full{ src: comment.user.avatar_url, alt: "Avatar" }
+      = link_to user_profile_path(username: @user.username) do
+        %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
+          %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
+            %path{:d => "M24
+            20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
       .text-gray-700.text-sm.font-medium= comment.user.name
 
       %span.text-xs.uppercase.text-gray-500 #{comment.created_at.strftime('%d %b %Y')}
