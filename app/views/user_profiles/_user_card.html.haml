@@ -32,9 +32,7 @@
   -if @user.website.present?
     .flex.flex-row.gap-1
       %i{"data-feather" => "link-2",class: 'w-5'}
-      #{@user.website}
-
-
+      = link_to @user.website, "http://#{@user.website}", target: "_blank"
 
 - if action_name != 'followers' && action_name != 'following'
   .flex.flex-row.text-slate-400.mb-3.gap-5
