@@ -3,7 +3,7 @@
     - if notification.sender.present?
       %img.w-10.h-10.rounded-full{ src: notification.sender.avatar_url, alt: "Avatar" }
     - else
-      %img.w-10.h-10.rounded-full{ src: "sfd", alt: "Avatar" }
+      %img.w-10.h-10.rounded-full
     .flex.flex-col
       - if notification.sender.present?
         %span.font-semibold.text-slate-700 #{notification.sender.name} 
