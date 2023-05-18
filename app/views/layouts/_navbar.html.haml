@@ -27,6 +27,12 @@
         .flex.flex-shrink-0.items-center
           = link_to root_path do
             = image_tag 'neo-logo.png', class: 'h-9 w-auto'
+
+        = link_to :back, class: 'flex flex-row items-center text-md text-blue-400 gap-1 ml-5' do
+          
+          %svg.w-6.h-6{:fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M15.75 19.5L8.25 12l7.5-7.5", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+          Back
       .flex.items-center
         - if controller_name == 'posts' && action_name == 'edit'
           .flex-shrink-0.mr-3
