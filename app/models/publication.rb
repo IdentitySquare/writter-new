@@ -40,13 +40,14 @@ class Publication < ApplicationRecord
     
     revised_emails.each do |email|
       next if publication_users.where(user: User.find_by(email: email.strip)).any?
-      
       PublicationUser.create(publication: self, email: email, executor: executor,  role: role)
     end
     
     
     removed_emails.each do |email|
-      publication_users.find_by(user: User.find_by(email: email.strip)).destroy
+      user_to_remove = publication_users.find_by(user: User.find_by(email: email.strip))
+      user_to_remove.executor = executor
+      user_to_remove.destroy
     end
   end
 

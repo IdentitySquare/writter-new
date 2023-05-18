@@ -35,15 +35,15 @@ class PublicationUser < ApplicationRecord
   after_create :send_mail, unless: -> { executor == user_id}
 
   after_create :create_notification, unless: -> { executor == user_id}
-  after_destroy :create_removed_notification
+  after_destroy :create_removed_notification, unless: -> { executor == user_id}
 
   def create_removed_notification
     
-    Notification.create(notifiable: publication, user: user, notification_type: "#{role}_removed_from_publication")
+    Notification.create(notifiable: publication, user: user, sender: User.find(executor), notification_type: "#{role}_removed_from_publication")
   end
 
   def create_notification
-    Notification.create(notifiable: publication, user: user, notification_type: "#{role}_added_to_publication")
+    Notification.create(notifiable: publication, user: user,sender: User.find(executor), notification_type: "#{role}_added_to_publication")
   end
 
   def set_user
@@ -65,17 +65,10 @@ class PublicationUser < ApplicationRecord
   end
 
   def send_mail
-    if pending_invite?
-      
+    if user.pending_acceptance?
       PublicationUserMailer.with(user: user, publication: publication, role: role).invited_to_join.deliver_now
     else
-      
       PublicationUserMailer.with(user: user, publication: publication, role: role).added_to_publication.deliver_now
     end
   end
-
-  def pending_invite?
-    user.pending_invite?
-  end
-
 end

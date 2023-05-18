@@ -129,10 +129,6 @@ class User < ApplicationRecord
     publications.where(publication_users: { role: "admin" })
   end
 
-  def pending_invite?
-    invitation_created_at.present? && invitation_sent_at.blank? 
-  end
-
   def pending_acceptance?
     invitation_created_at.present? && invitation_accepted_at.blank?
   end

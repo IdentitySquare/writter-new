@@ -44,10 +44,10 @@ class Notification < ApplicationRecord
   def display_text
     display = {"comment_added"  => "left a comment on your post",
                "post_removed_from_publication" => "removed your post from a publication",
-               "editor_removed_from_publication" => "Someone removed you as an editor from the publication",
-               "editor_added_to_publication" => "Someone added you as an editor to the publication",
-               "admin_removed_from_publication" => "Someone removed you as an admin to the publication",
-               "admin_added_to_publication" => "Someone added you as an admin to the publication",
+               "editor_removed_from_publication" => "removed you as an editor from the publication",
+               "editor_added_to_publication" => "added you as an editor to the publication",
+               "admin_removed_from_publication" => "removed you as an admin to the publication",
+               "admin_added_to_publication" => "added you as an admin to the publication",
                "followed" => "started following you"
               }
 
