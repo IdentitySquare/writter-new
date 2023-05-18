@@ -46,24 +46,32 @@ class PublicationUser < ApplicationRecord
   end
 
   def set_user
+    debugger
     return if user_id.present?
 
     # self.user = User.with_deleted.where(email: email)&.first
     self.user = User.where(email: email)&.first
     # User.restore(user.id) if user&.deleted?
     
+    debugger
     if user.blank?
+
       new_user = User.invite!({ email: email }, User.find(invited_by)) do |u|
         u.skip_invitation = true
       end
+      raw_invitation_token = new_user.raw_invitation_token
+      debugger
       self.user = new_user
     end
   end
 
   def send_mail
+    debugger
     if pending_invite?
+      
       PublicationUserMailer.with(user: user, publication: publication, role: role).invited_to_join.deliver_now
     else
+      
       PublicationUserMailer.with(user: user, publication: publication, role: role).added_to_publication.deliver_now
     end
   end

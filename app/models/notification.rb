@@ -28,7 +28,7 @@ class Notification < ApplicationRecord
   belongs_to :sender, class_name: 'User', optional: true
   after_create_commit -> { broadcast_render_to("notifications_#{user.id}",partial: "notifications/create", locals: { notification: self, unread_count: user.notifications.unread.size }) }
 
-  after_create :send_email, if: -> { user.notifications_freq == 'instantly' }
+  after_create :send_email, if: -> { user.email_notifications == true &&  user.notifications_freq == 'instantly' }
   
   enum notification_type: { comment_added: 0, 
                             post_removed_from_publication: 1,

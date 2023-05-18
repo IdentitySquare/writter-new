@@ -34,15 +34,16 @@ class Publication < ApplicationRecord
 
   def update_publication_users(emails, role)
     
-    revised_emails = emails.present? ? emails.split(',') : []
+    revised_emails = emails.present? ? emails.split(',').map { |address| address.strip.downcase } : []
     existing_emails = send(role.pluralize).pluck(:email)
     removed_emails = existing_emails - revised_emails
     
     revised_emails.each do |email|
       next if publication_users.where(user: User.find_by(email: email.strip)).any?
       
-      PublicationUser.create(publication: self, email: email, invited_by:,  role: role)
+      PublicationUser.create(publication: self, email: email, invited_by: invited_by,  role: role)
     end
+    
     
     removed_emails.each do |email|
       publication_users.find_by(user: User.find_by(email: email.strip)).destroy
