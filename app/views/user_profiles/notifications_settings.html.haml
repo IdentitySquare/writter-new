@@ -49,7 +49,7 @@
           .flex.flex-row.py-2.justify-between
             %label.block.text-md.font-bold.text-gray-900 Be alerted when new product and feature updates are released
             .mt-1
-              = f.check_box :product_notifications, class: 'h-4 w-4 rounded border-gray-300 text-sky-500 disabled:opacity-25 focus:ring-sky-500{name: "product-notifications", type: "checkbox"}', "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
+              = f.check_box :product_notifications, class: 'h-5 w-5 rounded border-gray-300 text-sky-500 disabled:opacity-25 focus:ring-sky-500{name: "product-notifications", type: "checkbox"}', "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
 
         %div
           = f.submit "Update Values", class: 'hidden {type: "submit"}'
