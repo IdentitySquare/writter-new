@@ -6,7 +6,7 @@
       .flex
         .-ml-2.mr-2.flex.items-center.md:hidden
           / Mobile menu button
-          %button.inline-flex.items-center.justify-center.rounded-md.p-2.text-gray-400.hover:bg-gray-100.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-inset.focus:ring-green-500{"aria-controls" => "mobile-menu", "aria-expanded" => "false", type: "button", 'data-action': 'click->dropdown#toggleDropdown'}
+          %button.inline-flex.items-center.justify-center.rounded-md.p-2.text-gray-400.hover:bg-gray-100.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-inset{"aria-controls" => "mobile-menu", "aria-expanded" => "false", type: "button", 'data-action': 'click->dropdown#toggleDropdown'}
             %span.sr-only Open main menu
             /
               Icon when menu is closed.
@@ -65,7 +65,7 @@
           - if current_user
             .relative.ml-3{"x-data" => "{ open: false }"}
               %div
-                %button.relative.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button", "x-on:click": "open = ! open",id: 'icon'}
+                %button.relative.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-offset-2{type: "button", "x-on:click": "open = ! open",id: 'icon'}
                   %span.sr-only View notifications
                   / Heroicon name: outline/bell-desktop
     
@@ -108,7 +108,7 @@
           / Profile dropdown desktop
           .relative.ml-3.hidden.md:block
             %div
-              %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
+              %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
                 %span.inline-block.h-7.w-7.overflow-hidden.rounded-full.bg-gray-100
                   %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
                     %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
@@ -145,7 +145,11 @@
         .flex.row.px-4.sm:px-6
 
           .flex-shrink-0
-            %img.w-10.h-10.rounded-full{ src: current_user.avatar_url, alt: "Avatar" }
+     
+
+            %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
+              %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
+                %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
           .ml-3
             .text-base.font-medium.text-gray-800 #{current_user.name}
             .text-sm.font-medium.text-gray-500 #{current_user.email}
@@ -162,4 +166,4 @@
           = link_to 'Sign in', new_user_session_path,  class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
 
 
-
+           
