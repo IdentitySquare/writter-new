@@ -45,7 +45,7 @@
               -# this is where the new emails will be added
 
           - if policy(@publication).current_user_is_admin?
-            = f.hidden_field :invited_by, value: current_user.id
+            = f.hidden_field :executor, value: current_user.id
             = f.hidden_field :editor_emails, 'data-publication-users-target': 'editorEmails', value: []
 
          
@@ -85,7 +85,7 @@
               -# this is where the new emails will be added
 
           - if policy(@publication).current_user_is_admin?
-            = f.hidden_field :invited_by, value: current_user.id
+            = f.hidden_field :executor, value: current_user.id
             = f.hidden_field :admin_emails, 'data-publication-users-target': 'adminEmails', value: []
 
             

@@ -31,7 +31,7 @@
     Publication.transaction do
       
       @publication.save!
-      @publication_user = PublicationUser.new(publication: @publication, user: current_user, role: 'admin')
+      @publication_user = PublicationUser.new(publication: @publication, user: current_user, executor: current_user.id, role: 'admin')
       @publication_user.save!
       redirect_to publication_path(@publication)
     end
@@ -55,7 +55,7 @@
   private
   
   def publication_params
-    params.require(:publication).permit(:name, :bio, :editor_emails, :invited_by, :admin_emails)
+    params.require(:publication).permit(:name, :bio, :editor_emails, :executor, :admin_emails)
   end
 
   def set_publication

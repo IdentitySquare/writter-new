@@ -19,7 +19,7 @@ class Publication < ApplicationRecord
   has_many :received_follows, as: :followable, class_name: "Follow", dependent: :destroy
   has_many :followers, through: :received_follows, source: :user
 
-  attr_accessor :user_email, :editor_emails, :invited_by, :admin_emails
+  attr_accessor :user_email, :editor_emails, :executor, :admin_emails
 
   after_update :add_or_remove_users
 
@@ -41,7 +41,7 @@ class Publication < ApplicationRecord
     revised_emails.each do |email|
       next if publication_users.where(user: User.find_by(email: email.strip)).any?
       
-      PublicationUser.create(publication: self, email: email, invited_by: invited_by,  role: role)
+      PublicationUser.create(publication: self, email: email, executor: executor,  role: role)
     end
     
     
