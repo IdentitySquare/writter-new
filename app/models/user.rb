@@ -54,15 +54,15 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and 
 
-
+  attr_accessor :onboarding
   devise :invitable, :database_authenticatable, :registerable,
 
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
-  validates :username, length: {minimum: 4 }, on: :update
-  validates :name, presence: true, on: :update
+  validates :username, length: {minimum: 4 }, on: :update, if: -> { onboarding == true }
+  validates :name, presence: true, on: :update, if: -> { onboarding == true }
   validates :timezone, presence: true
-
+  before_update :check_if_onboarding
   before_save :set_time_zone
 
   has_many :posts, dependent: :destroy
@@ -89,6 +89,9 @@ class User < ApplicationRecord
 
   enum performance_notifications_freq: { daily: 0, weekly: 1, off: 2}, _suffix: :performance_notifications
 
+  def check_if_onboarding
+    self.onboarding = true if password.present?
+  end
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
