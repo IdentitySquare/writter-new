@@ -2,13 +2,19 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-  static targets = ["emailInput", 'form', 'editorEmails', 'newEmails', 'adminEmailInput','adminEmails' , 'newAdmins', 'svg']
+  static targets = ["emailInput", 'form', 'editorEmails', 'newEmails', 'adminEmailInput','adminEmails' , 'newAdmins', 'svg', 'errorMessageEditor', 'errorMessageAdmin']
 
-  
   addEditor() {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    
+    if (emailRegex.test(this.emailInputTarget.value) == false){
+      this.errorMessageEditorTarget.classList.remove("invisible");
+      return;
+    }
     
     // Create a new div element
     const newSpan = document.createElement("div");
+    this.errorMessageEditorTarget.classList.add("invisible")
 
     const textSpan = document.createElement("span");
     textSpan.classList.add("editor")
@@ -38,8 +44,16 @@ export default class extends Controller {
 
   addAdmin() {
     
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    
+    if (emailRegex.test(this.adminEmailInputTarget.value) == false){
+      this.errorMessageAdminTarget.classList.remove("invisible");
+      return;
+    }
+    
     
     // Create a new div element
+    this.errorMessageAdminTarget.classList.add("invisible");
     const newSpan = document.createElement("div");
 
     const textSpan = document.createElement("span");
