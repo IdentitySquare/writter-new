@@ -11,7 +11,7 @@
 #  current_sign_in_at             :datetime
 #  current_sign_in_ip             :string
 #  email                          :string           default(""), not null
-#  email_notifications            :boolean          default(FALSE)
+#  email_notifications            :boolean          default(TRUE)
 #  encrypted_password             :string           default(""), not null
 #  invitation_accepted_at         :datetime
 #  invitation_created_at          :datetime
@@ -25,7 +25,7 @@
 #  location                       :string
 #  name                           :string
 #  new_article_notifications_freq :integer          default("daily")
-#  notifications_freq             :integer          default("instantly")
+#  notifications_freq             :integer          default("daily")
 #  performance_notifications_freq :integer          default("daily")
 #  product_notifications          :boolean          default(TRUE)
 #  provider                       :string
