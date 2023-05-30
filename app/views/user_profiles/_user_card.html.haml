@@ -3,7 +3,9 @@
     #{@user.name}
 
   - if current_user.nil?
-    = link_to 'Follow', new_user_session_path,  class: 'btn-secondary'
+    .btn-secondary
+      .btn-secondary-inner
+        = link_to 'Follow', new_user_session_path
 
   - elsif current_user && current_user == @user
     .btn-secondary
