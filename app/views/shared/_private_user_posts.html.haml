@@ -10,11 +10,15 @@
 
 
   
+  
   .flex.flex-col.gap-3
-    
+    - if @posts.empty? || @posts.size == 1 && @posts.first.empty?
+      .text-bold.text-xl.text-center.mt-5
+        No posts here yet!
     - @posts.includes(:rich_text_draft_body).includes(:rich_text_published_body)&.each do |post|
 
       - next if post.empty?
+
       = link_to post do
         = render 'posts/card', post: post
       
