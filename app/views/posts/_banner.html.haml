@@ -16,7 +16,7 @@
             = "Published in&nbsp;#{link_to @post.publication.name, @post.publication,  class: 'text-black hover:underline'}&nbsp;&nbsp;&nbsp;|".html_safe
         
           
-        #{@post.created_at.strftime('%b %Y')}
+        #{@post.created_at.strftime("%b %d, %Y")}
 
     - if current_user.present? && (policy(@post).user_is_owner? || policy(@post).user_is_editing_member_of_publication?)
       = render 'dropdown', post: @post
