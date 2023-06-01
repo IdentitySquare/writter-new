@@ -1,9 +1,12 @@
 .div{id: "notification_#{notification.id}"}
   .flex.flex-row.px-3.drop-down-item.py-6.gap-3.text-sm.hover:bg-gray-50
-    - if notification.sender.present?
-      %img.w-10.h-10.rounded-full{ src: notification.sender.avatar_url, alt: "Avatar" }
-    - else
-      %img.w-10.h-10.rounded-full{ src: "sfd", alt: "Avatar" }
+    
+      
+    %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
+      %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
+        %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
+     
+
     .flex.flex-col
       - if notification.sender.present?
         %span.font-semibold.text-slate-700 #{notification.sender.name} 

@@ -3,7 +3,9 @@
     #{@user.name}
 
   - if current_user.nil?
-    = link_to 'Follow', new_user_session_path,  class: 'btn-secondary'
+    .btn-secondary
+      .btn-secondary-inner
+        = link_to 'Follow', new_user_session_path
 
   - elsif current_user && current_user == @user
     .btn-secondary
@@ -32,9 +34,7 @@
   -if @user.website.present?
     .flex.flex-row.gap-1
       %i{"data-feather" => "link-2",class: 'w-5'}
-      #{@user.website}
-
-
+      = link_to truncate(@user.website, length: 50), @user.website, target: "_blank"
 
 - if action_name != 'followers' && action_name != 'following'
   .flex.flex-row.text-slate-400.mb-3.gap-5

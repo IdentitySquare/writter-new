@@ -65,7 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    user_profile_path(resource)
+    user_profile_path(username: resource.username)
   end
 
   def update_resource(resource, params)

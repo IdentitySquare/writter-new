@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
   
   root to: "posts#index" 
-  
-  resources :user_profiles, only: [:update, :show] do
+    
+  devise_for :users,
+             controllers: {
+               registrations: 'users/registrations',
+               confirmations: 'users/confirmations',
+               sessions: 'users/sessions',
+               invitations: 'users/invitations',
+               omniauth_callbacks: "users/omniauth_callbacks",
+               invitations: 'devise/invitations'
+  }
+
+  resources :user_profiles, param: :username, only: [:update, :show], path: '/writers' do
     member do
       get 'followers', to: 'user_profiles#followers'
       get 'following', to: 'user_profiles#following'
@@ -15,16 +25,6 @@ Rails.application.routes.draw do
   get 'publications/:id/editor_view', to: 'publications#editor_view' , as: 'publication_editor_view'
     
   get 'settings/notifications', to: 'user_profiles#notifications_settings', as: :notifications_settings
-  
-  devise_for :users,
-             controllers: {
-               registrations: 'users/registrations',
-               confirmations: 'users/confirmations',
-               sessions: 'users/sessions',
-               invitations: 'users/invitations',
-               omniauth_callbacks: "users/omniauth_callbacks",
-               invitations: 'devise/invitations'
-  }
 
   resources :comments
   resources :notifications 

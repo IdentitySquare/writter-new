@@ -6,7 +6,7 @@
       .flex
         .-ml-2.mr-2.flex.items-center.md:hidden
           / Mobile menu button
-          %button.inline-flex.items-center.justify-center.rounded-md.p-2.text-gray-400.hover:bg-gray-100.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-inset.focus:ring-green-500{"aria-controls" => "mobile-menu", "aria-expanded" => "false", type: "button", 'data-action': 'click->dropdown#toggleDropdown'}
+          %button.inline-flex.items-center.justify-center.rounded-md.p-2.text-gray-400.hover:bg-gray-100.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-inset{"aria-controls" => "mobile-menu", "aria-expanded" => "false", type: "button", 'data-action': 'click->dropdown#toggleDropdown'}
             %span.sr-only Open main menu
             /
               Icon when menu is closed.
@@ -27,6 +27,12 @@
         .flex.flex-shrink-0.items-center
           = link_to root_path do
             = image_tag 'neo-logo.png', class: 'h-9 w-auto'
+
+        = link_to :back, class: 'flex flex-row items-center text-md text-blue-400 gap-1 ml-5' do
+          
+          %svg.w-6.h-6{:fill => "none", :stroke => "currentColor", "stroke-width" => "1.5", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+            %path{:d => "M15.75 19.5L8.25 12l7.5-7.5", "stroke-linecap" => "round", "stroke-linejoin" => "round"}
+          Back
       .flex.items-center
         - if controller_name == 'posts' && action_name == 'edit'
           .flex-shrink-0.mr-3
@@ -65,7 +71,7 @@
           - if current_user
             .relative.ml-3{"x-data" => "{ open: false }"}
               %div
-                %button.relative.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{type: "button", "x-on:click": "open = ! open",id: 'icon'}
+                %button.relative.rounded-full.bg-white.p-1.text-gray-400.hover:text-gray-500.focus:outline-none.focus:ring-2.focus:ring-offset-2{type: "button", "x-on:click": "open = ! open",id: 'icon'}
                   %span.sr-only View notifications
                   / Heroicon name: outline/bell-desktop
     
@@ -108,7 +114,7 @@
           / Profile dropdown desktop
           .relative.ml-3.hidden.md:block
             %div
-              %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-green-500.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
+              %button#user-menu-button.flex.rounded-full.bg-white.text-sm.focus:outline-none.focus:ring-2.focus:ring-offset-2{"aria-expanded" => "false", "aria-haspopup" => "true", type: "button",'data-action': 'click->dropdown#toggleDropdown'}
                 %span.inline-block.h-7.w-7.overflow-hidden.rounded-full.bg-gray-100
                   %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
                     %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
@@ -122,14 +128,13 @@
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
 
-            .absolute.hidden.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.pt-1.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", 'data-dropdown-target': 'dropdown'}
+            .absolute.hidden.right-0.z-10.mt-2.w-48.origin-top-right.rounded-md.bg-white.shadow-lg.ring-1.ring-black.ring-opacity-5.focus:outline-none{"aria-labelledby" => "user-menu-button", "aria-orientation" => "vertical", role: "menu", tabindex: "-1", 'data-dropdown-target': 'dropdown'}
               / Active: "bg-gray-100", Not Active: ""
               - if current_user
-                = link_to "Your Profile", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"
-                = link_to "Your Posts", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"
+                = link_to "Your Profile", user_profile_path(username: current_user.username), class: "dropdown-item", role: "menuitem", tabindex: "-1"
                 = link_to "Your Publications", publications_path, class: "dropdown-item", role: "menuitem", tabindex: "-1"
 
-                %hr.mt-2.mb-2
+                
                 = link_to "Settings", notifications_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
                 = link_to "Sign out", destroy_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
               - else            
@@ -146,7 +151,11 @@
         .flex.row.px-4.sm:px-6
 
           .flex-shrink-0
-            %img.w-10.h-10.rounded-full{ src: current_user.avatar_url, alt: "Avatar" }
+     
+
+            %span.inline-block.h-10.w-10.overflow-hidden.rounded-full.bg-gray-100
+              %svg.h-full.w-full.text-gray-300{:fill => "currentColor", :viewbox => "0 0 24 24"}
+                %path{:d => "M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"}
           .ml-3
             .text-base.font-medium.text-gray-800 #{current_user.name}
             .text-sm.font-medium.text-gray-500 #{current_user.email}
@@ -154,14 +163,13 @@
          
       .mt-3.space-y-1
         - if current_user 
-          = link_to "Your Profile", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"
-          = link_to "Your Posts", user_profile_path(current_user.id), class: "dropdown-item", role: "menuitem", tabindex: "-1"
+          = link_to "Your Posts", user_profile_path(current_user.username), class: "dropdown-item", role: "menuitem", tabindex: "-1"
           = link_to "Your Publications", publications_path, class: "dropdown-item", role: "menuitem", tabindex: "-1"
-          %hr.mt-2.mb-2
-            = link_to "Settings", notifications_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
-            = link_to "Sign out", destroy_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+         
+          = link_to "Settings", notifications_settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
+          = link_to "Sign out", destroy_user_session_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
         - else            
           = link_to 'Sign in', new_user_session_path,  class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "menuitem", tabindex: "-1"
 
 
-
+           

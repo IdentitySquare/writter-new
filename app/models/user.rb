@@ -11,7 +11,7 @@
 #  current_sign_in_at             :datetime
 #  current_sign_in_ip             :string
 #  email                          :string           default(""), not null
-#  email_notifications            :boolean          default(FALSE)
+#  email_notifications            :boolean          default(TRUE)
 #  encrypted_password             :string           default(""), not null
 #  invitation_accepted_at         :datetime
 #  invitation_created_at          :datetime
@@ -25,7 +25,7 @@
 #  location                       :string
 #  name                           :string
 #  new_article_notifications_freq :integer          default("daily")
-#  notifications_freq             :integer          default("instantly")
+#  notifications_freq             :integer          default("daily")
 #  performance_notifications_freq :integer          default("daily")
 #  product_notifications          :boolean          default(TRUE)
 #  provider                       :string
@@ -54,15 +54,15 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and 
 
-
+  attr_accessor :onboarding
   devise :invitable, :database_authenticatable, :registerable,
 
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
-  validates :username, length: {minimum: 4 }, on: :update
-  validates :name, presence: true, on: :update
+  validates :username, length: {minimum: 4 }, on: :update, if: -> { onboarding == true }
+  validates :name, presence: true, on: :update, if: -> { onboarding == true }
   validates :timezone, presence: true
-
+  before_update :check_if_onboarding
   before_save :set_time_zone
 
   has_many :posts, dependent: :destroy
@@ -89,6 +89,9 @@ class User < ApplicationRecord
 
   enum performance_notifications_freq: { daily: 0, weekly: 1, off: 2}, _suffix: :performance_notifications
 
+  def check_if_onboarding
+    self.onboarding = true if password.present?
+  end
   
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -124,10 +127,6 @@ class User < ApplicationRecord
   
   def publications_as_admin
     publications.where(publication_users: { role: "admin" })
-  end
-
-  def pending_invite?
-    invitation_created_at.present? && invitation_sent_at.blank? 
   end
 
   def pending_acceptance?

@@ -28,7 +28,7 @@ class Notification < ApplicationRecord
   belongs_to :sender, class_name: 'User', optional: true
   after_create_commit -> { broadcast_render_to("notifications_#{user.id}",partial: "notifications/create", locals: { notification: self, unread_count: user.notifications.unread.size }) }
 
-  after_create :send_email, if: -> { user.notifications_freq == 'instantly' }
+  after_create :send_email, if: -> { user.email_notifications == true &&  user.notifications_freq == 'instantly' }
   
   enum notification_type: { comment_added: 0, 
                             post_removed_from_publication: 1,
@@ -44,10 +44,10 @@ class Notification < ApplicationRecord
   def display_text
     display = {"comment_added"  => "left a comment on your post",
                "post_removed_from_publication" => "removed your post from a publication",
-               "editor_removed_from_publication" => "Someone removed you as an editor from the publication",
-               "editor_added_to_publication" => "Someone added you as an editor to the publication",
-               "admin_removed_from_publication" => "Someone removed you as an admin to the publication",
-               "admin_added_to_publication" => "Someone added you as an admin to the publication",
+               "editor_removed_from_publication" => "removed you as an editor from the publication",
+               "editor_added_to_publication" => "added you as an editor to the publication",
+               "admin_removed_from_publication" => "removed you as an admin to the publication",
+               "admin_added_to_publication" => "added you as an admin to the publication",
                "followed" => "started following you"
               }
 

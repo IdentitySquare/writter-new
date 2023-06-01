@@ -4,7 +4,8 @@
     
 %turbo-stream{:action => "replace", :target => "commentsForm"}
   %template
-    = render partial: 'comments/form', formats: [:html], locals: { post: @comment.post, comment: Comment.new }
+    .div#commentsForm
+      = render partial: 'comments/form', formats: [:html], locals: { post: @comment.post, comment: Comment.new , text_content: ''}
 
 
   

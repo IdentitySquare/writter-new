@@ -230,7 +230,11 @@
 
         .small-logo {
           height: 24px;
-          width: 42px;
+          padding: 25px;
+        }
+
+        .large-logo {
+          height: 40px;
           padding: 25px;
         }
 
@@ -467,8 +471,9 @@
                   / Body content
                   %tr
                     %td.email-masthead-logo
-                      = link_to root_url do
-                        = image_tag(url_for('/assets/logo_black.png'), skip_pipeline: true, class: 'email-brand-img')
+                      %a{:href => "#{root_url}"}
+                        = image_tag("/images/neo-logo.png",class: 'large-logo')
+                      
                   %tr
                     %td.content-cell
                       .text-32px.font-bolder.align-center= yield :email_title
@@ -483,8 +488,11 @@
                       %table.email-footer{:align => "center", :cellpadding => "0", :cellspacing => "0", :role => "presentation", :width => "600"}
                         %tr
                           %td.social{:align => "center"}
-                            =link_to image_tag(url_for('/assets/logo_black.png'), skip_pipeline: true, class: "small-logo"), ""
+                            %a{:href => "#{root_url}"}
+                              = image_tag("/images/neo-logo.png", skip_pipeline: true, class: 'small-logo')
+                            
                            
                         %tr
                           %td.social{:align => "center"}
                             %p.f-fallback.sub.align-center © #{Date.current.year} Writter
+ 

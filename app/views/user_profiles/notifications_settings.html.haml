@@ -2,7 +2,7 @@
 .flex.flex-col.mx-auto.max-w-3xl.mt-10.px-5
   = render 'settings_header', selected: 'notifications'
   .flex.flex-col.gap-3{"data-controller": "notifications"}
-    = form_for(current_user, url: user_profile_path(current_user), method: :put, html: { class: 'space-y-6 inline', "data-notifications-target": 'form'}) do |f|
+    = form_for(current_user, url: user_profile_path(username: current_user.username), method: :put, html: { class: 'space-y-6 inline', "data-notifications-target": 'form'}) do |f|
       %div
         .flex.flex-row.py-2.justify-between
           .flex-flex-col
@@ -49,7 +49,7 @@
           .flex.flex-row.py-2.justify-between
             %label.block.text-md.font-bold.text-gray-900 Be alerted when new product and feature updates are released
             .mt-1
-              = f.check_box :product_notifications, class: 'h-4 w-4 rounded border-gray-300 text-sky-500 disabled:opacity-25 focus:ring-sky-500{name: "product-notifications", type: "checkbox"}', "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
+              = f.check_box :product_notifications, class: 'h-5 w-5 rounded border-gray-300 text-sky-500 disabled:opacity-25 focus:ring-sky-500{name: "product-notifications", type: "checkbox"}', "data-action": "change->notifications#submitForm", disabled: !current_user.email_notifications
 
         %div
           = f.submit "Update Values", class: 'hidden {type: "submit"}'

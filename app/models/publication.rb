@@ -19,7 +19,7 @@ class Publication < ApplicationRecord
   has_many :received_follows, as: :followable, class_name: "Follow", dependent: :destroy
   has_many :followers, through: :received_follows, source: :user
 
-  attr_accessor :user_email, :editor_emails, :invited_by, :admin_emails
+  attr_accessor :user_email, :editor_emails, :executor, :admin_emails
 
   after_update :add_or_remove_users
 
@@ -34,18 +34,20 @@ class Publication < ApplicationRecord
 
   def update_publication_users(emails, role)
     
-    revised_emails = emails.present? ? emails.split(',') : []
+    revised_emails = emails.present? ? emails.split(',').map { |address| address.strip.downcase } : []
     existing_emails = send(role.pluralize).pluck(:email)
     removed_emails = existing_emails - revised_emails
     
     revised_emails.each do |email|
       next if publication_users.where(user: User.find_by(email: email.strip)).any?
-      
-      PublicationUser.create(publication: self, email: email, invited_by:,  role: role)
+      PublicationUser.create(publication: self, email: email, executor: executor,  role: role)
     end
     
+    
     removed_emails.each do |email|
-      publication_users.find_by(user: User.find_by(email: email.strip)).destroy
+      user_to_remove = publication_users.find_by(user: User.find_by(email: email.strip))
+      user_to_remove.executor = executor
+      user_to_remove.destroy
     end
   end
 

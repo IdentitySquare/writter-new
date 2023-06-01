@@ -4,17 +4,32 @@
       #{@publication.name}
     
     .flex.flex-row.gap-2 
-      - if policy(@publication).update?
-        .btn-secondary
+      - if policy(@publication).update? 
+        .btn-secondary.p-1
           .btn-secondary-inner
-            = link_to '// Edit', edit_publication_path(@publication)
+            = link_to 'Edit Publication', edit_publication_path(@publication)
+        
+      
        
          
       - if action_name == 'editor_view'
-        .btn-secondary
+        .btn-secondary.p-1
           .btn-secondary-inner
             = link_to  '↗ Public view', publication_path(@publication), class: 'btn-secondary-inner', target: :_blank
+      
+      - else
+        - if current_user.nil?
+          = link_to 'Follow', new_user_session_path,  class: 'btn-secondary'
 
+        - else
+          - if current_user.following.include?(@publication)
+            - follow = Follow.find_by(followable_id: @publication.id, followable_type: @publication.class.to_s, user: current_user.id)
+            = button_to '', follow_path(follow), method: :delete, class: "relative before:content-['Following']  hover:before:content-['Unfollow'] text-center items-center rounded-full border border-gray w-28 py-1 text-sm font-medium shadow-sm hover:text-red-500 hover:border-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" 
+          
+          - else
+            
+            = button_to "Follow", follows_path, params:{ follow: {followable_id: @publication.id, followable_type: @publication.class.to_s}}, method: :post, class: 'btn-primary py-1 text-sm '
+      
 
   .text-sm.text-slate-800 
     = @publication.bio

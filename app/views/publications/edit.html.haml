@@ -45,7 +45,7 @@
               -# this is where the new emails will be added
 
           - if policy(@publication).current_user_is_admin?
-            = f.hidden_field :invited_by, value: current_user.id
+            = f.hidden_field :executor, value: current_user.id
             = f.hidden_field :editor_emails, 'data-publication-users-target': 'editorEmails', value: []
 
          
@@ -59,7 +59,7 @@
                   
                   Add as Editor
 
-            
+            %div#username-taken.invisible.text-xs.mt-2.text-rose-500.pl-1{"data-publication-users-target" => "errorMessageEditor"} Please enter a valid email
            
         %div.mb-6
 
@@ -85,7 +85,7 @@
               -# this is where the new emails will be added
 
           - if policy(@publication).current_user_is_admin?
-            = f.hidden_field :invited_by, value: current_user.id
+            = f.hidden_field :executor, value: current_user.id
             = f.hidden_field :admin_emails, 'data-publication-users-target': 'adminEmails', value: []
 
             
@@ -97,7 +97,7 @@
                   %input#email.block.w-full.rounded-none.rounded-l-full.border-0.text-gray-900.ring-1.ring-inset.ring-gray-300.placeholder:text-gray-400.focus:ring-2.focus:ring-inset.focus:ring-sky-500.sm:text-sm.sm:leading-6{:class => "py-1.5", :name => "email", :placeholder => "Enter email...", :type => "email", 'data-publication-users-target': 'adminEmailInput'}/
                 %button.relative.-ml-px.inline-flex.items-center.rounded-r-full.px-3.py-2.text-sm.font-medium.text-gray-900.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#addAdmin"}               
                   Add as Admin
-
+            %div#username-taken.invisible.text-xs.mt-2.text-rose-500.pl-1{"data-publication-users-target" => "errorMessageAdmin"} Please enter a valid email
         - if policy(@publication).current_user_is_admin?
          
           %button.flex.ml-auto.btn-primary{:class => "gap-x-1.5", :type => "button", "data-action": "click->publication-users#getFinalEditors"}               
