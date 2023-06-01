@@ -12,7 +12,7 @@ Rails.application.routes.draw do
                invitations: 'devise/invitations'
   }
 
-  resources :user_profiles, param: :username, only: [:update, :show], path: '/users' do
+  resources :user_profiles, param: :username, only: [:update, :show], path: '/writers' do
     member do
       get 'followers', to: 'user_profiles#followers'
       get 'following', to: 'user_profiles#following'
